@@ -11,3 +11,9 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+
+# WindRiver:
+*.o
+*.out
+*.d
+ctdt.c
