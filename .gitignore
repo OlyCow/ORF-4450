@@ -1,0 +1,13 @@
+## Files that GitHub will ignore when committing, hopefully.
+## Probably not necessary for a small repo, but still.
+#########################
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Windows folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
