@@ -2,9 +2,7 @@
 #define __MyRobot_h__
 
 #include <WPILib.h>
-#include <string.h> // for sprintf()
-//#include "LCD.h"
-//#include "MyAutonomous.h"
+#include "InsightLT/InsightLT.h"
 
 /**
  * This is a demo program showing the use of the RobotBase class.
@@ -13,21 +11,26 @@
  * the driver station or the field controls.
  */ 
 
-#define CAMERA_IP "10.44.50.11"
+#define CAMERA_IP		"10.44.50.11"
+#define PROGRAM_NAME	"MyRobot3-1.0"
+#define LOW_BATTERY		10.0
+
+using namespace insight;
 
 class MyRobot : public SimpleRobot
 {
 public:
-	RobotDrive 	robotDrive; // robot drive system
-	Joystick 	stick, stick2; // joysticks
-	Encoder 	driveleftencoder;
+	RobotDrive 		robotDrive; 	// robot drive system
+	Joystick 		leftStick, rightStick; 	// joysticks
 	//AxisCamera 	&camera;
-	DriverStation *ds;
-		
-	char 	buffer[80];	// for displaying the current encoder value
-	int 	encoder_value;	// the current cumulative encoder value
+	DriverStation 	*ds;
+	InsightLT		insightLT;
+	DecimalData		displayBattery;
+	StringData		displayProgram;
+	Task			monitorBatteryTask;
+	
+	int 					startLocation;
 	DriverStation::Alliance alliance;
-	int 	startLocation;
 	
 	MyRobot(void);
 	
@@ -36,7 +39,7 @@ public:
 	void Disabled(void);
 
 	/**
-	 * Drive left & right motors for 2 seconds then stop
+	 * Drive left & right motors for 2 seconds then stop.
 	 */
 	void Autonomous(void);
 
@@ -44,6 +47,10 @@ public:
 	 * Runs the motors with arcade steering. 
 	 */
 	void OperatorControl(void);
+	
+private:
+	// Runs as task.
+	static void MonitorBattery(int dsPointer);
 };
 
 #endif // __MyRobot_h__

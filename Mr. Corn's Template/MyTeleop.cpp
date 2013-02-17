@@ -5,6 +5,20 @@
 #include "MyDiscShooterCmd.h"
 #include "MyClimber.h"
 
+// Joystick button numbers.
+
+#define	JSB_TOP_MIDDLE		3
+#define JSB_TOP_LEFT		4
+#define JSB_TOP_RIGHT		5
+#define JSB_TRIGGER			1
+#define JSB_TOP_BACK		2
+#define JSB_LEFT_FRONT		6
+#define JSB_LEFT_BACK		7
+#define JSB_RIGHT_FRONT		11
+#define JSB_RIGHT_BACK		10
+#define JSB_BACK_LEFT		8
+#define JSB_BACK_RIGHT		9
+
 MyTeleop::MyTeleop(MyRobot *MyRobot)
 {
 	LCD::ConsoleLog("MyTeleop.constructor");
@@ -14,75 +28,93 @@ MyTeleop::MyTeleop(MyRobot *MyRobot)
 	
 MyTeleop::~MyTeleop()
 {
+	LCD::ConsoleLog("MyTeleop.destructor");
 }
 	
 void MyTeleop::OperatorControl(void)
 {
-	int 			encoder_raw = 0;
-	bool 			checkBox1 = false, climbing = false, shootEnabled = false;
+	bool 			shootEnabled = false;
+	float			magnitude = 0, direction = 0, rotation = 0;
 	MyDiscShooter	shooter(myRobot);
 	MyClimber		climber(myRobot);
-	JoystickButton	topButton(&myRobot->stick, Joystick::kDefaultTopButton);
+	Talon			angularAdjustmentMotor(6), upperDeckTalon(5);
+	Jaguar			winchMotor1(7), winchMotor2(8);
+	JoystickButton	leftTopButton(&myRobot->leftStick, Joystick::kDefaultTopButton);
+	JoystickButton	leftTrigger(&myRobot->leftStick, Joystick::kDefaultTriggerButton);
+	
+	MyDiscShooterCmd	*discShooterCmd;
 	
 	LCD::ConsoleLog("MyTeleop.OperatorControl");
 	LCD::PrintLine(1, "Mode: OperatorControl");
 
 	LCD::PrintLine(4, "All: %d, Start=%d", myRobot->alliance, myRobot->startLocation);
 
-	topButton.WhenPressed(new MyDiscShooterCmd(myRobot));
+	// Sets command based disc shooter class to run when button pressed, as separate
+	// task from this one in the Command execution scheme. This depends on the command
+	// scheduler running and that is done below in the While loop.
+	// button class whenpressed requires a pointer to the command class instance we
+	// want to run so we use new to create the instance and return a pointer to
+	// that instance.
+	
+	discShooterCmd = new MyDiscShooterCmd(myRobot);
+	
+	leftTrigger.WhenPressed(discShooterCmd);
 	
 	myRobot->robotDrive.SetSafetyEnabled(true);
+
+	// Driving loop runs until teleop is over or climbing phase started.
 	
-	myRobot->driveleftencoder.Start();
-
-	SmartDashboard::PutBoolean("Checkbox 1", false);	
-	SmartDashboard::PutBoolean("End Wait", false);	
-
-	while (myRobot->IsEnabled() && myRobot->IsOperatorControl() && !climbing)
+	while (myRobot->IsEnabled() && myRobot->IsOperatorControl())
 	{
-		// Scheduler required to cause any 'commands' to run. If don't use any commands,
+		// Scheduler required to cause any 'commands' to run. If we don't use any commands,
 		// comment out following stmt.
 		Scheduler::GetInstance()->Run();
-		
-		if(myRobot->stick2.GetTrigger(myRobot->stick2.kRightHand))
-		{
-			//LCD::ConsoleLog("arcade drive");
-			myRobot->robotDrive.ArcadeDrive(myRobot->stick2); // drive with arcade style (use right stick with trigger)
-			SmartDashboard::PutBoolean("Arcade Drive", true);
-		}
-		else
-		{
-			//LCD::ConsoleLog("tank drive");
-			myRobot->robotDrive.TankDrive(myRobot->stick, myRobot->stick2); // drive tank both
-			SmartDashboard::PutBoolean("Arcade Drive", false);	
-		}
 
-		//LCD::ConsoleLog("left trigger=%d", myRobot->stick.GetTrigger(myRobot->stick.kLeftHand));
+		// set driving parameters.
+	
+		magnitude = myRobot->rightStick.GetMagnitude();
+		direction = myRobot->rightStick.GetDirectionDegrees();
 		
-		if (myRobot->stick.GetTrigger(myRobot->stick.kLeftHand)) shootEnabled = true;
+		// set rotation value.
 		
-		if (!myRobot->stick.GetTrigger(myRobot->stick.kLeftHand) && shootEnabled) 
+		if (myRobot->rightStick.GetRawButton(JSB_TOP_LEFT))
+			rotation = -.3;
+		else if (myRobot->rightStick.GetRawButton(JSB_TOP_RIGHT))
+			rotation = .3;
+		else
+			rotation = 0;
+
+		LCD::PrintLine(3, "m=%f d=%f r=%f", magnitude, direction, rotation);
+		LCD::PrintLine(4, "r=%f", rotation);
+				
+		myRobot->robotDrive.MecanumDrive_Polar(magnitude, direction, rotation);
+		
+		// This logic shoots disk on trigger release.
+		
+		if (myRobot->rightStick.GetTrigger(myRobot->rightStick.kLeftHand)) 
+			shootEnabled = true;
+		else if (shootEnabled)
 		{
 			shootEnabled = false;
 			shooter.Shoot();
 		}
 
-		if (myRobot->stick2.GetButton(myRobot->stick2.kTopButton))
+		// turn on/off AngularAdjustment motor.
+		
+		if (myRobot->leftStick.GetRawButton(JSB_TOP_MIDDLE))
+			angularAdjustmentMotor.Set(1);
+		else	
+			angularAdjustmentMotor.StopMotor();
+
+		// Starts climbing process, drops out of driving loop when climb done.
+		
+		if (myRobot->rightStick.GetButton(myRobot->rightStick.kTopButton))
 		{
 			climber.Climb();
-			break;
+			break; 					// ends the While loop
 		}
 		
 		Wait(0.020);				// wait for a motor update time
-		
-		myRobot->encoder_value = myRobot->driveleftencoder.GetRaw();
-
-		LCD::PrintLine(2, "Encoder Value: %d", myRobot->encoder_value);
-		LCD::PrintLine(3, "Encoder   Raw: %d", encoder_raw);
-		
-		checkBox1 = SmartDashboard::GetBoolean("Checkbox 3");
-
-		LCD::PrintLine(5, "Checkbox3 Value=%d", checkBox1);
 	}
 	
 	// wait for teleop period to end.
@@ -93,7 +125,12 @@ void MyTeleop::OperatorControl(void)
 	
 	myRobot->robotDrive.SetSafetyEnabled(false);
 	
-	while (myRobot->IsEnabled() && myRobot->IsOperatorControl()) Wait(0.010);
+	while (myRobot->IsEnabled() && myRobot->IsOperatorControl()) Wait(0.020);
+	
+	// delete pointer to MyDiscShooterCmd object we created earlier.
+	// this releases the object instance.
+	
+	delete discShooterCmd;
 	
 	LCD::ConsoleLog("MyTeleop.OperatorControl-end");
 }

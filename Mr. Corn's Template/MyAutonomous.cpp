@@ -10,6 +10,7 @@ MyAutonomous::MyAutonomous(MyRobot *MyRobot)
 	
 MyAutonomous::~MyAutonomous()
 {
+	LCD::ConsoleLog("MyAutonomous.destructor");
 }
 	
 void MyAutonomous::DoAutonomous(void)
@@ -22,9 +23,9 @@ void MyAutonomous::DoAutonomous(void)
 	
 	//while (IsEnabled() && IsAutonomous())
 	//{
-		LCD::ConsoleLog("doing autonomous task");
+		LCD::ConsoleLog("doing autonomous task %f", myRobot->ds->GetBatteryVoltage());
 
-		myRobot->robotDrive.Drive(0.5, 0.5); 	// drive forwards half speed
+		myRobot->robotDrive.Drive(0.5, 0.0); 	// drive forwards half speed
 	
 		Wait(2.0); 					// for 2 second
 		

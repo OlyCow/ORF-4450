@@ -105,14 +105,14 @@
         </mapAttribute>
     </attributes>
     <buildtargets>
-        <buildtarget buildtool="Linker" name="MyRobot2" passed="false" targetname="MyRobot2">
+        <buildtarget buildtool="Linker" name="MyRobot3" passed="false" targetname="MyRobot3">
             <contents>
-                <buildtargetreference name="/MyRobot2/MyRobot2_partialImage"/>
+                <buildtargetreference name="/MyRobot3/MyRobot3_partialImage"/>
             </contents>
         </buildtarget>
-        <buildtarget buildtool="Partial Image Linker" name="MyRobot2_partialImage" passed="true" targetname="MyRobot2_partialImage">
+        <buildtarget buildtool="Partial Image Linker" name="MyRobot3_partialImage" passed="true" targetname="MyRobot3_partialImage">
             <contents>
-                <folder name="/MyRobot2" recursive="true"/>
+                <folder name="/MyRobot3" recursive="true"/>
             </contents>
         </buildtarget>
     </buildtargets>

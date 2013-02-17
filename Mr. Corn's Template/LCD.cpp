@@ -4,9 +4,6 @@
 
 LCD::LCD(void)
 {
-//	ConsoleLog("LCD constructor");
-//	dsLcd = DriverStationLCD::GetInstance();
-//	dsLcd->Clear();
 }
 	
 LCD::~LCD()
