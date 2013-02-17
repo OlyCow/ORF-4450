@@ -8,6 +8,7 @@ class MyDiscShooter
 {
 private:
 	MyRobot *myRobot;
+	Talon 	launchMotor, shootMotor;
 	
 public:
 	MyDiscShooter(MyRobot *myRobot);
@@ -15,6 +16,7 @@ public:
 	virtual ~MyDiscShooter();
 	
 	void Shoot(void);
+	void SetThrottle(float ThrottleValue);
 };
 
 #endif // __MyDiscShooter_h__
