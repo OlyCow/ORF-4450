@@ -25,33 +25,8 @@ void MyAutonomous::DoAutonomous(void)
 	//{
 		LCD::ConsoleLog("doing autonomous task");
 
-		//myRobot->robotDrive.Drive(0.5, 0.0); 	// drive forwards half speed
+		myRobot->robotDrive.Drive(0.5, 0.0); 	// drive forwards half speed
 		
-		Solenoid *s[8];
-		
-		for (int i = 0; i < 8; i++)
-			s[i] = new Solenoid(i + 1); // allocate the Solenoid objects
-		
-		for (int i = 0; i < 8; i++)
-		{
-			s[i]->Set(true); // turn them all on
-		}
-		
-		Wait(1.0);
-		
-		for (int i = 0; i < 8; i++)
-		{
-			s[i]->Set(false); // turn them each off in turn
-			Wait(1.0);
-		}
-		
-		for (int i = 0; i < 8; i++)
-		{
-			s[i]->Set(true); // turn them back on in turn
-			Wait(1.0);
-			delete s[i]; // delete the objects
-		}
-	
 		Wait(2.0); 					// for 2 second
 		
 		LCD::ConsoleLog("out of autonomous wait");

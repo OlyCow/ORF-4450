@@ -37,12 +37,10 @@ void MyTeleop::OperatorControl(void)
 	float			magnitude = 0, direction = 0, rotation = 0;
 	MyDiscShooter	shooter(myRobot);
 	MyClimber		climber(myRobot);
-	Talon			angularAdjustmentMotor(6);
-	Jaguar			winchMotor1(7), winchMotor2(8);
 	JoystickButton	leftTopButton(&myRobot->leftStick, Joystick::kDefaultTopButton);
 	JoystickButton	leftTrigger(&myRobot->leftStick, Joystick::kDefaultTriggerButton);
 	
-	MyDiscShooterCmd	*discShooterCmd;
+	//MyDiscShooterCmd	*discShooterCmd;
 	
 	LCD::ConsoleLog("MyTeleop.OperatorControl");
 	LCD::PrintLine(1, "Mode: OperatorControl");
@@ -56,9 +54,9 @@ void MyTeleop::OperatorControl(void)
 	// want to run so we use new to create the instance and return a pointer to
 	// that instance.
 	
-	discShooterCmd = new MyDiscShooterCmd(myRobot);
+	//discShooterCmd = new MyDiscShooterCmd(myRobot);
 	
-	leftTrigger.WhenPressed(discShooterCmd);
+	//leftTrigger.WhenPressed(discShooterCmd);
 	
 	myRobot->robotDrive.SetSafetyEnabled(true);
 
@@ -68,7 +66,7 @@ void MyTeleop::OperatorControl(void)
 	{
 		// Scheduler required to cause any 'commands' to run. If we don't use any commands,
 		// comment out following stmt.
-		Scheduler::GetInstance()->Run();
+		//Scheduler::GetInstance()->Run();
 
 		// set driving parameters.
 	
@@ -99,26 +97,32 @@ void MyTeleop::OperatorControl(void)
 			shooter.Shoot();
 		}
 
-		// turn on/off AngularAdjustment motor.
+		// turn on/off climber Angular Adjustment (window) motor.
 		
 		if (myRobot->leftStick.GetRawButton(JSB_TOP_MIDDLE))
-			angularAdjustmentMotor.Set(1);
+			climber.AngularAdjustmentMotorOn(true);
 		else	
-			angularAdjustmentMotor.StopMotor();
+			climber.AngularAdjustmentMotorOn(false);
 
-		// turn on/off winch motor. Up/down depends on how the cord is
-		// wound on the winch spool.
-		// This code is here for testing purposes. The design assumes
-		// operation of the climbing winches would be in the MyClimber
-		// class.
+		// The design assumes operation of the climbing winches would be
+		// manually by JS buttons.
 		
 		if (myRobot->leftStick.GetRawButton(JSB_LEFT_FRONT))
-			winchMotor2.Set(1);		// up
+			climber.Winch2Up();
 		else if (myRobot->leftStick.GetRawButton(JSB_LEFT_REAR))
-			winchMotor2.Set(-1);	// down
+			climber.Winch2Down();
 		else	
-			winchMotor2.StopMotor();
-
+			climber.Winch2Stop();
+		
+		// control shooter ramp deployment.
+		
+		if (myRobot->leftStick.GetRawButton(JSB_BACK_LEFT))
+			shooter.RampUp();
+		else if (myRobot->leftStick.GetRawButton(JSB_BACK_RIGHT))
+			shooter.RampDown();	
+		else	
+			shooter.RampStop();
+		
 		// set shooter throttle value each loop.
 		
 		shooter.SetThrottle(myRobot->leftStick.GetThrottle());
@@ -147,7 +151,7 @@ void MyTeleop::OperatorControl(void)
 	// delete pointer to MyDiscShooterCmd object we created earlier.
 	// this releases the object instance.
 	
-	delete discShooterCmd;
+	//delete discShooterCmd;
 	
 	LCD::ConsoleLog("MyTeleop.OperatorControl-end");
 }
