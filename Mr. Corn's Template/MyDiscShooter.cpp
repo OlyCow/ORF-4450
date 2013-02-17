@@ -3,7 +3,9 @@
 
 MyDiscShooter::MyDiscShooter(MyRobot *MyRobot):
 	launchMotor(5),
-	shootMotor(9)
+	angleMotor(8),
+	feedSolenoid(1),
+	rampRelay(1, Relay::kBothDirections)
 {
 	LCD::ConsoleLog("MyDiscShooter.constructor");
 	
@@ -24,6 +26,34 @@ void MyDiscShooter::SetThrottle(float ThrottleValue)
 	
 	launchMotor.Set((ThrottleValue-1)/2);
 }
+
+void MyDiscShooter::ShooterUpDown(float speed)
+{
+//	LCD::ConsoleLog("MyDiscShooterThrottle.ShooterUpDown-%f", speed);
+	
+	angleMotor.Set(speed);
+}
+
+void MyDiscShooter::RampUp(void)
+{
+//	LCD::ConsoleLog("MyDiscShooterThrottle.RampUp");
+
+	rampRelay.Set(Relay::kForward);		// up
+}
+
+void MyDiscShooter::RampDown(void)
+{
+//	LCD::ConsoleLog("MyDiscShooterThrottle.RampDown");
+
+	rampRelay.Set(Relay::kReverse);		// down
+}
+
+void MyDiscShooter::RampStop(void)
+{
+//	LCD::ConsoleLog("MyDiscShooterThrottle.RampStop");
+
+	rampRelay.Set(Relay::kOff);		// stop
+}
 	
 void MyDiscShooter::Shoot(void)
 {
@@ -31,11 +61,11 @@ void MyDiscShooter::Shoot(void)
 
 	SmartDashboard::PutBoolean("Shoot Disc", true);	
 			
-	shootMotor.Set(1);
+	feedSolenoid.Set(true);
 
 	Wait(0.5); // wait long enough for one full revolution of shooter arm motor.
 	
-	shootMotor.StopMotor();
+	feedSolenoid.Set(false);
 
 	SmartDashboard::PutBoolean("Shoot Disc", false);	
 
