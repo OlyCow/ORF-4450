@@ -7,7 +7,7 @@ MyAutonomous::MyAutonomous(MyRobot *MyRobot)
 	
 	myRobot = MyRobot;
 }
-	
+
 MyAutonomous::~MyAutonomous()
 {
 	LCD::ConsoleLog("MyAutonomous.destructor");
