@@ -6,13 +6,14 @@
 
 //	camera(AxisCamera::GetInstance(CAMERA_IP)),
 
-// MyRobot class constructor.
+// MyRobot class constructor. Called when instance of MyRobot is created.
 
 MyRobot::MyRobot(void):
-	// robotdrive(frontL, rearL, frontR, rearR)
-	robotDrive(1, 3, 2, 4),		// initialize these in the
-	leftStick(1),				// same order as declared.
+	// robotdrive(front-left, rear-left, fr02ont-right, rear-right)
+	robotDrive(1, 3, 2, 4),		// these must be initialized in the same order
+	leftStick(1),					// as they are declared.
 	rightStick(2),
+	rotateStick(3),
 	ds(DriverStation::GetInstance()),
 	insightLT(insight::TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
@@ -40,10 +41,9 @@ MyRobot::MyRobot(void):
 		LCD::ConsoleLog("Constructor Exception: %s", e->what());
 	}
 }
-
-
-
+	
 // Called when MyRobot class started by cRio.
+
 void MyRobot::RobotInit(void)
 {
 	try
@@ -65,11 +65,10 @@ void MyRobot::RobotInit(void)
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
 }
-
-
-
+	
 // Called by cRio when driver station disables the robot and at
 // start-up, after constructor and Init method.
+
 void MyRobot::Disabled(void)
 {
 	try
@@ -103,9 +102,8 @@ void MyRobot::Disabled(void)
 	}
 }
 
-
-
 // Called by cRio when driver station enables autonomous mode.
+
 void MyRobot::Autonomous(void)
 {
 	MyAutonomous autonomous(this);
@@ -128,7 +126,8 @@ void MyRobot::Autonomous(void)
 
 		// Start autonomous process contained in the MyAutonomous class.
 		
-		autonomous.DoAutonomous();
+		autonomous.shoot();
+		//autonomous.reposition();
 		
 		SmartDashboard::PutBoolean("Autonomous Mode", false);	
 		LCD::ConsoleLog("Autonomous-end");
@@ -139,9 +138,8 @@ void MyRobot::Autonomous(void)
 	}
 }
 
+// Called by cRio when driver station enables teleop mode.
 
-
-// Called by cRio when driver station enables tele-op mode.
 void MyRobot::OperatorControl(void)
 {
 	MyTeleop teleOp(this);
@@ -170,10 +168,9 @@ void MyRobot::OperatorControl(void)
 	}
 }
 
+// Runs as a Task in separate thread from our MyRobot class. Runs until our
+// program is terminated from the cRio.
 
-
-// Runs as a Task in separate thread from current class,
-// until cRio terminates this program.
 void MyRobot::MonitorBattery(int dsPointer)
 {
 	DriverStation 	*ds;
@@ -220,3 +217,4 @@ void MyRobot::MonitorBattery(int dsPointer)
 }
 
 START_ROBOT_CLASS(MyRobot);
+

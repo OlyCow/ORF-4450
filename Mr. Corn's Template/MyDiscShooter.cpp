@@ -3,9 +3,10 @@
 
 MyDiscShooter::MyDiscShooter(MyRobot *MyRobot):
 	launchMotor(5),
-	angleMotor(8),
+	angleMotor(9),
 	feedSolenoid(1),
-	rampRelay(1, Relay::kBothDirections)
+	rampRelay(1, Relay::kBothDirections),
+	shooterSwich(1)
 {
 	LCD::ConsoleLog("MyDiscShooter.constructor");
 	
@@ -17,45 +18,33 @@ MyDiscShooter::~MyDiscShooter()
 	LCD::ConsoleLog("MyDiscShooter.destructor");
 }
 
-// Set motor speed for launcher wheel.
-
-void MyDiscShooter::SetThrottle(float ThrottleValue)
+void MyDiscShooter::SetThrottle(float ThrottleValue)//									Set Throttle
 {
-//	LCD::ConsoleLog("MyDiscShooterThrottle.SetThrottle- %f", (ThrottleValue-1)/2);
-//	LCD::ConsoleLog("Straight Throttle Value- %f", ThrottleValue);
-	
 	launchMotor.Set((ThrottleValue-1)/2);
 }
 
-void MyDiscShooter::ShooterUpDown(float speed)
-{
-//	LCD::ConsoleLog("MyDiscShooterThrottle.ShooterUpDown-%f", speed);
-	
+void MyDiscShooter::ShooterUpDown(float speed)//										Shoot Angle
+{	
 	angleMotor.Set(speed);
 }
 
-void MyDiscShooter::RampUp(void)
+void MyDiscShooter::RampUp(void)//														Reload Ramp Up
 {
-//	LCD::ConsoleLog("MyDiscShooterThrottle.RampUp");
 
-	rampRelay.Set(Relay::kForward);		// up
+	rampRelay.Set(Relay::kForward);
 }
 
-void MyDiscShooter::RampDown(void)
+void MyDiscShooter::RampDown(void)//													Reload Ramp Down
 {
-//	LCD::ConsoleLog("MyDiscShooterThrottle.RampDown");
-
-	rampRelay.Set(Relay::kReverse);		// down
+	rampRelay.Set(Relay::kReverse);
 }
 
-void MyDiscShooter::RampStop(void)
+void MyDiscShooter::RampStop(void)//													Reload Ramp Stop
 {
-//	LCD::ConsoleLog("MyDiscShooterThrottle.RampStop");
-
-	rampRelay.Set(Relay::kOff);		// stop
+	rampRelay.Set(Relay::kOff);
 }
 	
-void MyDiscShooter::Shoot(void)
+void MyDiscShooter::Shoot(void)//														Shoot a Frisbee
 {
 	LCD::ConsoleLog("MyDiscShooter.Shoot");
 
@@ -63,8 +52,12 @@ void MyDiscShooter::Shoot(void)
 			
 	feedSolenoid.Set(true);
 
-	Wait(0.5); // wait long enough for one full revolution of shooter arm motor.
+	Wait(0.4);
 	
+	while(shooterSwich.Get()==0)
+	{
+	Wait(0.1);
+	}
 	feedSolenoid.Set(false);
 
 	SmartDashboard::PutBoolean("Shoot Disc", false);	

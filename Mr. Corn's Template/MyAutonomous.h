@@ -8,13 +8,23 @@ class MyAutonomous
 {
 private:
 	MyRobot *myRobot;
+	Talon launchMotor;
+	Solenoid feedSolenoid;
+	DigitalInput shooterSwich;
+	Talon angleMotor;
+	Talon DFL;
+	Talon DBL;
+	Talon DBR;
+	Talon DFR;
 	
 public:
 	MyAutonomous(MyRobot *myRobot);
 	
 	virtual ~MyAutonomous();
 	
-	void DoAutonomous(void);
+	void backup(void);
+	void shoot(void);
+	void reposition (void);
 };
 
 #endif // __MyAutonomous_h__
