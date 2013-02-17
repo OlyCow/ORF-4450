@@ -13,9 +13,9 @@
 #define JSB_TRIGGER			1
 #define JSB_TOP_BACK		2
 #define JSB_LEFT_FRONT		6
-#define JSB_LEFT_BACK		7
+#define JSB_LEFT_REAR		7
 #define JSB_RIGHT_FRONT		11
-#define JSB_RIGHT_BACK		10
+#define JSB_RIGHT_REAR		10
 #define JSB_BACK_LEFT		8
 #define JSB_BACK_RIGHT		9
 
@@ -37,7 +37,7 @@ void MyTeleop::OperatorControl(void)
 	float			magnitude = 0, direction = 0, rotation = 0;
 	MyDiscShooter	shooter(myRobot);
 	MyClimber		climber(myRobot);
-	Talon			angularAdjustmentMotor(6), upperDeckTalon(5);
+	Talon			angularAdjustmentMotor(6);
 	Jaguar			winchMotor1(7), winchMotor2(8);
 	JoystickButton	leftTopButton(&myRobot->leftStick, Joystick::kDefaultTopButton);
 	JoystickButton	leftTrigger(&myRobot->leftStick, Joystick::kDefaultTriggerButton);
@@ -78,9 +78,9 @@ void MyTeleop::OperatorControl(void)
 		// set rotation value.
 		
 		if (myRobot->rightStick.GetRawButton(JSB_TOP_LEFT))
-			rotation = -.3;
+			rotation = -.2;
 		else if (myRobot->rightStick.GetRawButton(JSB_TOP_RIGHT))
-			rotation = .3;
+			rotation = .2;
 		else
 			rotation = 0;
 
@@ -91,7 +91,7 @@ void MyTeleop::OperatorControl(void)
 		
 		// This logic shoots disk on trigger release.
 		
-		if (myRobot->rightStick.GetTrigger(myRobot->rightStick.kLeftHand)) 
+		if (myRobot->leftStick.GetTrigger(myRobot->leftStick.kLeftHand)) 
 			shootEnabled = true;
 		else if (shootEnabled)
 		{
@@ -105,6 +105,23 @@ void MyTeleop::OperatorControl(void)
 			angularAdjustmentMotor.Set(1);
 		else	
 			angularAdjustmentMotor.StopMotor();
+
+		// turn on/off winch motor. Up/down depends on how the cord is
+		// wound on the winch spool.
+		// This code is here for testing purposes. The design assumes
+		// operation of the climbing winches would be in the MyClimber
+		// class.
+		
+		if (myRobot->leftStick.GetRawButton(JSB_LEFT_FRONT))
+			winchMotor2.Set(1);		// up
+		else if (myRobot->leftStick.GetRawButton(JSB_LEFT_REAR))
+			winchMotor2.Set(-1);	// down
+		else	
+			winchMotor2.StopMotor();
+
+		// set shooter throttle value each loop.
+		
+		shooter.SetThrottle(myRobot->leftStick.GetThrottle());
 
 		// Starts climbing process, drops out of driving loop when climb done.
 		
