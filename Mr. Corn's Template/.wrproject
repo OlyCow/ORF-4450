@@ -105,14 +105,22 @@
         </mapAttribute>
     </attributes>
     <buildtargets>
-        <buildtarget buildtool="Linker" name="MyRobot3" passed="false" targetname="MyRobot3">
+        <buildtarget buildtool="Linker" name="MrCornsTemplate" passed="false" targetname="MrCornsTemplate">
             <contents>
-                <buildtargetreference name="/MyRobot3/MyRobot3_partialImage"/>
+                <buildtargetreference name="/Mr. Corn's Template/MrCornsTemplate_partialImage"/>
             </contents>
         </buildtarget>
-        <buildtarget buildtool="Partial Image Linker" name="MyRobot3_partialImage" passed="true" targetname="MyRobot3_partialImage">
+        <buildtarget buildtool="Partial Image Linker" name="MrCornsTemplate_partialImage" passed="true" targetname="MrCornsTemplate_partialImage">
             <contents>
-                <folder name="/MyRobot3" recursive="true"/>
+                <folder name="/Mr. Corn's Template/InsightLT" recursive="true"/>
+                <file name="/Mr. Corn's Template/cRIO.cpp"/>
+                <file name="/Mr. Corn's Template/LCD.cpp"/>
+                <file name="/Mr. Corn's Template/MyAutonomous.cpp"/>
+                <file name="/Mr. Corn's Template/MyClimber.cpp"/>
+                <file name="/Mr. Corn's Template/MyDiscShooter.cpp"/>
+                <file name="/Mr. Corn's Template/MyDiscShooterCmd.cpp"/>
+                <file name="/Mr. Corn's Template/MyRobot.cpp"/>
+                <file name="/Mr. Corn's Template/MyTeleop.cpp"/>
             </contents>
         </buildtarget>
     </buildtargets>
