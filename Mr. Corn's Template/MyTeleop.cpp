@@ -72,16 +72,9 @@ void MyTeleop::OperatorControl(void)
 	
 		magnitude = myRobot->rightStick.GetMagnitude();
 		direction = myRobot->rightStick.GetDirectionDegrees();
-		
-		// set rotation value.
-		
-		if (myRobot->rightStick.GetRawButton(JSB_TOP_LEFT))
-			rotation = -.2;
-		else if (myRobot->rightStick.GetRawButton(JSB_TOP_RIGHT))
-			rotation = .2;
-		else
-			rotation = 0;
+		rotation = myRobot->rotateStick.GetX();
 
+		
 		LCD::PrintLine(3, "m=%f d=%f r=%f", magnitude, direction, rotation);
 		LCD::PrintLine(4, "r=%f", rotation);
 				
@@ -99,7 +92,7 @@ void MyTeleop::OperatorControl(void)
 
 		// turn on/off climber Angular Adjustment (window) motor.
 		
-		if (myRobot->leftStick.GetRawButton(JSB_TOP_MIDDLE))
+		if (myRobot->leftStick.GetRawButton(JSB_TOP_LEFT))
 			climber.AngularAdjustmentMotorOn(true);
 		else	
 			climber.AngularAdjustmentMotorOn(false);
@@ -116,9 +109,9 @@ void MyTeleop::OperatorControl(void)
 		
 		// control shooter ramp deployment.
 		
-		if (myRobot->leftStick.GetRawButton(JSB_BACK_LEFT))
+		if (myRobot->leftStick.GetRawButton(JSB_TOP_MIDDLE))
 			shooter.RampUp();
-		else if (myRobot->leftStick.GetRawButton(JSB_BACK_RIGHT))
+		else if (myRobot->leftStick.GetRawButton(JSB_TOP_BACK))
 			shooter.RampDown();	
 		else	
 			shooter.RampStop();
@@ -126,14 +119,16 @@ void MyTeleop::OperatorControl(void)
 		// set shooter throttle value each loop.
 		
 		shooter.SetThrottle(myRobot->leftStick.GetThrottle());
+		
+		shooter.ShooterUpDown(myRobot->leftStick.GetY());
 
 		// Starts climbing process, drops out of driving loop when climb done.
 		
-		if (myRobot->rightStick.GetButton(myRobot->rightStick.kTopButton))
-		{
-			climber.Climb();
-			break; 					// ends the While loop
-		}
+//		if (myRobot->rightStick.GetButton(myRobot->rightStick.kTopButton))
+//		{
+//			climber.Climb();
+//			break; 					// ends the While loop
+//		}
 		
 		Wait(0.020);				// wait for a motor update time
 	}
