@@ -4,9 +4,7 @@
 #include <WPILib.h>
 #include "InsightLT/InsightLT.h"
 
-#define CAMERA_IP		"10.44.50.11"
-#define PROGRAM_NAME	"MyRobot3-1.0"
-#define LOW_BATTERY		10.0
+
 
 using namespace insight;
 
@@ -15,7 +13,7 @@ class MyRobot : public SimpleRobot
 public:
 	RobotDrive 		robotDrive;
 	Joystick 		leftStick, rightStick, rotateStick;
-	//AxisCamera 	&camera;
+	//AxisCamera		&camera;
 	DriverStation 	*ds;
 	InsightLT		insightLT;
 	DecimalData		displayBattery;
@@ -26,13 +24,14 @@ public:
 	DriverStation::Alliance alliance;
 	
 	MyRobot();
+	
 	void RobotInit();
 	void Disabled();
 	void Autonomous();
 	void OperatorControl();
 	
 private:
-	// Runs as a task.
+	// This is a task.
 	static void MonitorBattery(int dsPointer);
 };
 
