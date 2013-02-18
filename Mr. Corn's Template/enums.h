@@ -1,14 +1,6 @@
 #ifndef _ENUMS_H_
 #define _ENUMS_H_
 
-enum AutonomousMode
-{
-	MODE_LEFT = 0,
-	MODE_RIGHT = 1,
-	MODE_CENTER = 2,
-	MODE_NUMBER,
-};
-
 enum Buttons
 {
 	BUTTON_TRIGGER =	1,

@@ -6,11 +6,12 @@
 
 const int g_InitDiscNum = 3;
 
-const AutonomousMode g_AutonomousMode = MODE_CENTER;
-
 const float g_LauncherPower = -0.67;
 const double g_LauncherInitTime = 6;
 
+const char g_CameraIP[] = {"10.44.50.11"};
+
+//// Below is a failed attempt at reassigning values to an array.
 //int g_LauncherPower[MODE_NUMBER] = { 0 };
 //g_LauncherPower[MODE_LEFT] = 0;
 //int array[7] = {1,2,3,0,0,0,0};

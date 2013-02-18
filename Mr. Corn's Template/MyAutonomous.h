@@ -10,7 +10,7 @@ private:
 	MyRobot *myRobot;
 	Talon launchMotor;
 	Solenoid feedSolenoid;
-	DigitalInput shooterSwich;
+	DigitalInput shooterSwitch;
 	Talon angleMotor;
 	Talon DFL;
 	Talon DBL;
@@ -19,12 +19,9 @@ private:
 	
 public:
 	MyAutonomous(MyRobot *myRobot);
-	
 	virtual ~MyAutonomous();
 	
-	void backup(void);
-	void shoot(void);
-	void reposition (void);
+	void shoot();
 };
 
 #endif // __MyAutonomous_h__

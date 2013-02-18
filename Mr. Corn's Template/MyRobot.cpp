@@ -4,16 +4,16 @@
 #include "MyTeleop.h"
 #include <exception>
 
-//	camera(AxisCamera::GetInstance(CAMERA_IP)),
 
-// MyRobot class constructor. Called when instance of MyRobot is created.
 
-MyRobot::MyRobot(void):
-	// robotdrive(front-left, rear-left, fr02ont-right, rear-right)
+// MyRobot constructor; called when MyRobot is instantiated.
+MyRobot::MyRobot():
+	// robotdrive(frontL, rearL, frontR, rearR)
 	robotDrive(1, 3, 2, 4),		// these must be initialized in the same order
 	leftStick(1),					// as they are declared.
 	rightStick(2),
 	rotateStick(3),
+	//camera(AxisCamera::GetInstance(CAMERA_IP)),
 	ds(DriverStation::GetInstance()),
 	insightLT(insight::TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
@@ -42,9 +42,10 @@ MyRobot::MyRobot(void):
 	}
 }
 	
-// Called when MyRobot class started by cRio.
 
-void MyRobot::RobotInit(void)
+
+// Called when MyRobot class is started by cRio.
+void MyRobot::RobotInit()
 {
 	try
 	{
@@ -65,11 +66,12 @@ void MyRobot::RobotInit(void)
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
 }
-	
-// Called by cRio when driver station disables the robot and at
-// start-up, after constructor and Init method.
 
-void MyRobot::Disabled(void)
+
+
+// Called by cRio when driver station disables the robot,
+// and at start-up, after constructor and Init method.
+void MyRobot::Disabled()
 {
 	try
 	{
@@ -102,9 +104,10 @@ void MyRobot::Disabled(void)
 	}
 }
 
-// Called by cRio when driver station enables autonomous mode.
 
-void MyRobot::Autonomous(void)
+
+// Called by cRio when driver station enters autonomous mode.
+void MyRobot::Autonomous()
 {
 	MyAutonomous autonomous(this);
 	
@@ -138,9 +141,10 @@ void MyRobot::Autonomous(void)
 	}
 }
 
-// Called by cRio when driver station enables teleop mode.
 
-void MyRobot::OperatorControl(void)
+
+// Called by cRio when driver station enters teleop mode.
+void MyRobot::OperatorControl()
 {
 	MyTeleop teleOp(this);
 
@@ -168,9 +172,10 @@ void MyRobot::OperatorControl(void)
 	}
 }
 
-// Runs as a Task in separate thread from our MyRobot class. Runs until our
-// program is terminated from the cRio.
 
+
+// Runs as a Task in separate thread from MyRobot,
+// Until program is terminated from cRio.
 void MyRobot::MonitorBattery(int dsPointer)
 {
 	DriverStation 	*ds;
@@ -184,20 +189,16 @@ void MyRobot::MonitorBattery(int dsPointer)
 
 		SmartDashboard::PutBoolean("Low Battery", false);
 		
-		// Check battery voltage every 10 seconds. Drop out when battery
-		// goes below the threshold.
-		
+		// Check battery voltage every 10 seconds.
+		// Drop out when battery goes below threshold.
 		while (batteryOk)
 		{
 			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-
 			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
-		
 			Wait(10.0);
 		}
 
-		// flash the battery warning led on driverstation.
-		
+		// flash the battery warning LED on driver station.
 		while (true)
 		{
 			if (alarmFlash)
@@ -206,7 +207,6 @@ void MyRobot::MonitorBattery(int dsPointer)
 				alarmFlash = true;
 
 			SmartDashboard::PutBoolean("Low Battery", alarmFlash);
-			
 			Wait(1.0);
 		}
 	}
