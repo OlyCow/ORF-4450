@@ -27,6 +27,13 @@ MyAutonomous::~MyAutonomous()
 
 
 
+void MyAutonomous::AutonomousProgram()
+{
+	this->shoot();
+}
+
+
+
 void MyAutonomous::shoot()
 {
 	myRobot->robotDrive.SetSafetyEnabled(false);

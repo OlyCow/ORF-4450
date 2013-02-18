@@ -8,7 +8,7 @@
 
 // MyRobot constructor; called when MyRobot is instantiated.
 MyRobot::MyRobot():
-	// robotdrive(frontL, rearL, frontR, rearR)
+	// robotDrive(frontL, rearL, frontR, rearR)
 	robotDrive(1, 3, 2, 4),		// these must be initialized in the same order
 	leftStick(1),					// as they are declared.
 	rightStick(2),
@@ -128,9 +128,7 @@ void MyRobot::Autonomous()
 		LCD::ConsoleLog("Auto Start: %d, Alliance: %d", startLocation, alliance);
 
 		// Start autonomous process contained in the MyAutonomous class.
-		
-		autonomous.shoot();
-		//autonomous.reposition();
+		autonomous.AutonomousProgram();
 		
 		SmartDashboard::PutBoolean("Autonomous Mode", false);	
 		LCD::ConsoleLog("Autonomous-end");
@@ -216,5 +214,6 @@ void MyRobot::MonitorBattery(int dsPointer)
 	}
 }
 
-START_ROBOT_CLASS(MyRobot);
 
+
+START_ROBOT_CLASS(MyRobot);
