@@ -1,3 +1,4 @@
+#include "Global_Vars.h"
 #include "MyRobot.h"
 #include "LCD.h"
 #include "MyAutonomous.h"
@@ -13,7 +14,7 @@ MyRobot::MyRobot():
 	leftStick(1),					// as they are declared.
 	rightStick(2),
 	rotateStick(3),
-	//camera(AxisCamera::GetInstance(CAMERA_IP)),
+	//camera(AxisCamera::GetInstance(g_CameraIP)),
 	ds(DriverStation::GetInstance()),
 	insightLT(insight::TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
@@ -28,7 +29,7 @@ MyRobot::MyRobot():
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
-		displayProgram.setData(PROGRAM_NAME);
+		displayProgram.setData(g_ProgramName);
 		insightLT.registerData(displayBattery, 2);
 
 		robotDrive.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
@@ -52,7 +53,7 @@ void MyRobot::RobotInit()
 		LCD::ConsoleLog("RobotInit");
 		LCD::PrintLine(1, "Mode: RobotInit");
 
-		SmartDashboard::PutString("Program", PROGRAM_NAME);	
+		SmartDashboard::PutString("Program", g_ProgramName);	
 		SmartDashboard::PutBoolean("Checkbox 1", false);	
 		
 		// Start the battery monitoring Task.
@@ -192,7 +193,7 @@ void MyRobot::MonitorBattery(int dsPointer)
 		while (batteryOk)
 		{
 			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
+			if (ds->GetBatteryVoltage() < g_LowBattery) batteryOk = false;
 			Wait(10.0);
 		}
 
