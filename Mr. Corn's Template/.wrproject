@@ -111,9 +111,7 @@
             </contents>
         </buildtarget>
         <buildtarget buildtool="Partial Image Linker" name="MyRobot3_partialImage" passed="true" targetname="MyRobot3_partialImage">
-            <contents>
-                <folder name="/MyRobot3" recursive="true"/>
-            </contents>
+            <contents/>
         </buildtarget>
     </buildtargets>
 </wrxml>
