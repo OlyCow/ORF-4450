@@ -1,0 +1,289 @@
+# Wind River Workbench generated Makefile.
+# Do not edit!!!
+#
+# The file ".wrmakefile" is the template used by the Wind River Workbench to
+# generate the makefiles of this project. Add user-specific build targets and
+# make rules only(!) in this project's ".wrmakefile" file. These will then be
+# automatically dumped into the makefiles.
+
+WIND_HOME := $(subst \,/,$(WIND_HOME))
+WIND_BASE := $(subst \,/,$(WIND_BASE))
+WIND_USR := $(subst \,/,$(WIND_USR))
+
+all : pre_build main_all post_build
+
+_clean ::
+	@echo "make: removing targets and objects of `pwd`"
+
+TRACE=0
+TRACEON=$(TRACE:0=@)
+TRACE_FLAG=$(TRACEON:1=)
+
+MAKEFILE := Makefile
+
+FLEXIBLE_BUILD := 1
+
+BUILD_SPEC = PPC603gnu
+DEBUG_MODE = 1
+ifeq ($(DEBUG_MODE),1)
+MODE_DIR := Debug
+else
+MODE_DIR := NonDebug
+endif
+OBJ_DIR := .
+WS_ROOT_DIR := C:/WindRiver/workspace
+PRJ_ROOT_DIR := $(WS_ROOT_DIR)/MyRobot3
+
+
+
+#Global Build Macros
+PROJECT_TYPE = DKM
+DEFINES = 
+EXPAND_DBG = 0
+
+
+#BuildSpec specific Build Macros
+VX_CPU_FAMILY = ppc
+CPU = PPC603
+TOOL_FAMILY = gnu
+TOOL = gnu
+TOOL_PATH = 
+CC_ARCH_SPEC = -mcpu=603 -mstrict-align -mno-implicit-fp -mlongcall
+LIBPATH = 
+LIBS = 
+
+IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+
+IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
+
+IDE_DEFINES = 
+
+
+
+#BuildTool flags
+ifeq ($(DEBUG_MODE),1)
+DEBUGFLAGS_C-Compiler = -g
+DEBUGFLAGS_C++-Compiler = -g
+DEBUGFLAGS_Linker = -g
+DEBUGFLAGS_Partial-Image-Linker = 
+DEBUGFLAGS_Librarian = 
+DEBUGFLAGS_Assembler = -g
+else
+DEBUGFLAGS_C-Compiler = -O2 -fstrength-reduce -fno-builtin
+DEBUGFLAGS_C++-Compiler = -O2 -fstrength-reduce -fno-builtin
+DEBUGFLAGS_Linker = -O2 -fstrength-reduce -fno-builtin
+DEBUGFLAGS_Partial-Image-Linker = 
+DEBUGFLAGS_Librarian = 
+DEBUGFLAGS_Assembler = -O2 -fstrength-reduce -fno-builtin
+endif
+
+
+#Project Targets
+PROJECT_TARGETS = MyRobot2/$(MODE_DIR)/MyRobot2.out \
+	 MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage.o
+
+
+#Rules
+
+# MyRobot2
+ifeq ($(DEBUG_MODE),1)
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_C-Compiler = -g
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_C++-Compiler = -g
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Linker = -g
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker = 
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -g
+else
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_C-Compiler = -O2 -fstrength-reduce -fno-builtin
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_C++-Compiler = -O2 -fstrength-reduce -fno-builtin
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Linker = -O2 -fstrength-reduce -fno-builtin
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker = 
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
+MyRobot2/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -O2 -fstrength-reduce -fno-builtin
+endif
+MyRobot2/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+MyRobot2/$(MODE_DIR)/% : IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
+MyRobot2/$(MODE_DIR)/% : IDE_DEFINES = 
+MyRobot2/$(MODE_DIR)/% : PROJECT_TYPE = DKM
+MyRobot2/$(MODE_DIR)/% : DEFINES = 
+MyRobot2/$(MODE_DIR)/% : EXPAND_DBG = 0
+MyRobot2/$(MODE_DIR)/% : VX_CPU_FAMILY = ppc
+MyRobot2/$(MODE_DIR)/% : CPU = PPC603
+MyRobot2/$(MODE_DIR)/% : TOOL_FAMILY = gnu
+MyRobot2/$(MODE_DIR)/% : TOOL = gnu
+MyRobot2/$(MODE_DIR)/% : TOOL_PATH = 
+MyRobot2/$(MODE_DIR)/% : CC_ARCH_SPEC = -mcpu=603 -mstrict-align -mno-implicit-fp -mlongcall
+MyRobot2/$(MODE_DIR)/% : LIBPATH = 
+MyRobot2/$(MODE_DIR)/% : LIBS = 
+MyRobot2/$(MODE_DIR)/% : OBJ_DIR := MyRobot2/$(MODE_DIR)
+
+OBJECTS_MyRobot2 = $(WS_ROOT_DIR)/MyRobot2/PPC603gnu/MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage.o
+
+MyRobot2/$(MODE_DIR)/MyRobot2.out : $(OBJECTS_MyRobot2)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@";rm -f "$@";nmppc $(OBJECTS_MyRobot2) $(IDE_LIBRARIES) | tclsh $(WIND_BASE)/host/resource/hutils/tcl/munch.tcl -c ppc > $(OBJ_DIR)/ctdt.c; $(TOOL_PATH)ccppc $(DEBUGFLAGS_Linker) $(CC_ARCH_SPEC) -fdollars-in-identifiers -Wall $(ADDED_CFLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES)  -o $(OBJ_DIR)/ctdt.o -c $(OBJ_DIR)/ctdt.c; $(TOOL_PATH)ccppc -r -nostdlib -Wl,-X -T $(WIND_BASE)/target/h/tool/gnu/ldscripts/link.OUT -o "$@" $(OBJ_DIR)/ctdt.o $(OBJECTS_MyRobot2) $(IDE_LIBRARIES) $(LIBPATH) $(LIBS)  $(ADDED_LIBPATH) $(ADDED_LIBS) && if [ "$(EXPAND_DBG)" = "1" ]; then plink "$@";fi
+
+MyRobot2/$(MODE_DIR)/MyRobot2_compile_file : $(FILE) ;
+
+_clean :: MyRobot2/$(MODE_DIR)/MyRobot2_clean
+
+MyRobot2/$(MODE_DIR)/MyRobot2_clean : 
+	$(TRACE_FLAG)if [ -d "MyRobot2" ]; then cd "MyRobot2"; rm -rf $(MODE_DIR); fi
+
+
+# MyRobot2_partialImage
+ifeq ($(DEBUG_MODE),1)
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_C-Compiler = -g
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_C++-Compiler = -g
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Linker = -g
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker = 
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -g
+else
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_C-Compiler = -O2 -fstrength-reduce -fno-builtin
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_C++-Compiler = -O2 -fstrength-reduce -fno-builtin
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Linker = -O2 -fstrength-reduce -fno-builtin
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker = 
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
+MyRobot2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -O2 -fstrength-reduce -fno-builtin
+endif
+MyRobot2_partialImage/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+MyRobot2_partialImage/$(MODE_DIR)/% : IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
+MyRobot2_partialImage/$(MODE_DIR)/% : IDE_DEFINES = 
+MyRobot2_partialImage/$(MODE_DIR)/% : PROJECT_TYPE = DKM
+MyRobot2_partialImage/$(MODE_DIR)/% : DEFINES = 
+MyRobot2_partialImage/$(MODE_DIR)/% : EXPAND_DBG = 0
+MyRobot2_partialImage/$(MODE_DIR)/% : VX_CPU_FAMILY = ppc
+MyRobot2_partialImage/$(MODE_DIR)/% : CPU = PPC603
+MyRobot2_partialImage/$(MODE_DIR)/% : TOOL_FAMILY = gnu
+MyRobot2_partialImage/$(MODE_DIR)/% : TOOL = gnu
+MyRobot2_partialImage/$(MODE_DIR)/% : TOOL_PATH = 
+MyRobot2_partialImage/$(MODE_DIR)/% : CC_ARCH_SPEC = -mcpu=603 -mstrict-align -mno-implicit-fp -mlongcall
+MyRobot2_partialImage/$(MODE_DIR)/% : LIBPATH = 
+MyRobot2_partialImage/$(MODE_DIR)/% : LIBS = 
+MyRobot2_partialImage/$(MODE_DIR)/% : OBJ_DIR := MyRobot2_partialImage/$(MODE_DIR)
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DecimalData.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/DecimalData.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DisplayData.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/DisplayData.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/InsightLT.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/InsightLT.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/IntegerData.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/IntegerData.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/StringData.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/StringData.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/Zone.o : $(WS_ROOT_DIR)/MyRobot2/InsightLT/Zone.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/LCD.o : $(WS_ROOT_DIR)/MyRobot2/LCD.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyAutonomous.o : $(WS_ROOT_DIR)/MyRobot2/MyAutonomous.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyClimber.o : $(WS_ROOT_DIR)/MyRobot2/MyClimber.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooter.o : $(WS_ROOT_DIR)/MyRobot2/MyDiscShooter.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooterCmd.o : $(WS_ROOT_DIR)/MyRobot2/MyDiscShooterCmd.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyRobot.o : $(WS_ROOT_DIR)/MyRobot2/MyRobot.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyTeleop.o : $(WS_ROOT_DIR)/MyRobot2/MyTeleop.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
+OBJECTS_MyRobot2_partialImage = MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DecimalData.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DisplayData.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/InsightLT.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/IntegerData.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/StringData.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/Zone.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/LCD.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyAutonomous.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyClimber.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooter.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooterCmd.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyRobot.o \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyTeleop.o
+
+MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage.o : $(OBJECTS_MyRobot2_partialImage)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc -r -nostdlib -Wl,-X  -o "$@" $(OBJECTS_MyRobot2_partialImage) $(LIBPATH) $(LIBS) $(ADDED_LIBPATH) $(ADDED_LIBS)  && if [ "$(EXPAND_DBG)" = "1" ]; then plink "$@";fi
+
+MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage_compile_file : $(FILE) ;
+
+_clean :: MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage_clean
+
+MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage_clean : 
+	$(TRACE_FLAG)if [ -d "MyRobot2_partialImage" ]; then cd "MyRobot2_partialImage"; rm -rf $(MODE_DIR); fi
+
+$(WS_ROOT_DIR)/MyRobot2/PPC603gnu/MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage.o : force_referenced_rebuilds_MyRobot2 ;
+
+force_referenced_rebuilds_MyRobot2 : 
+	$(TRACE_FLAG)cd $(WS_ROOT_DIR)/MyRobot2/PPC603gnu;\
+	make --no-print-directory BUILD_SPEC=PPC603gnu DEBUG_MODE=1 MyRobot2_partialImage/$(MODE_DIR)/MyRobot2_partialImage.o
+
+force : 
+
+DEP_FILES := MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DecimalData.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/DisplayData.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/InsightLT.d \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/IntegerData.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/StringData.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/InsightLT/Zone.d \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/LCD.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyAutonomous.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyClimber.d \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooter.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyDiscShooterCmd.d MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyRobot.d \
+	 MyRobot2_partialImage/$(MODE_DIR)/Objects/MyRobot2/MyTeleop.d
+-include $(DEP_FILES)
+
+
+
+-include $(PRJ_ROOT_DIR)/*.makefile
+
+-include *.makefile
+
+main_all : external_build $(PROJECT_TARGETS)
+	@echo "make: built targets of `pwd`"
+
+# entry point for extending the build
+external_build ::
+	@echo ""
+
+# main entry point for pre processing prior to the build
+pre_build :: $(PRE_BUILD_STEP) generate_sources
+	@echo ""
+
+# entry point for generating sources prior to the build
+generate_sources ::
+	@echo ""
+
+# main entry point for post processing after the build
+post_build :: $(POST_BUILD_STEP) deploy_output
+	@echo ""
+
+# entry point for deploying output after the build
+deploy_output ::
+	@echo ""
+
+clean :: external_clean $(CLEAN_STEP) _clean
+
+# entry point for extending the build clean
+external_clean ::
+	@echo ""
