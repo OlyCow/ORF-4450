@@ -6,7 +6,7 @@
 #include <WPIlib.h>
 
 #include <iostream>
-#include <exception>
+#include <exception>	// <- doesn't seem necessary?
 #include <string>
 
 #include "InsightLT/InsightLT.h"

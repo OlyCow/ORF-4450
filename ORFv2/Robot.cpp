@@ -55,10 +55,10 @@ void Robot::RobotInit(void)
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
 }
-	
+
+
 // Called by cRio when driver station disables the robot and at
 // start-up, after constructor and Init method.
-
 void Robot::Disabled(void)
 {
 	try
@@ -116,20 +116,18 @@ void Robot::MonitorBattery(int dsPointer)
 
 		SmartDashboard::PutBoolean("Low Battery", false);
 
-		// Check battery voltage every 10 seconds. Drop out when battery
-		// goes below the threshold.
 
+		// Checks battery voltage every 10 seconds.
+		// Drops out when battery goes below the threshold.
 		while (batteryOk)
 		{
 			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-
 			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
-
 			Wait(10.0);
 		}
 
-		// flash the battery warning led on driverstation.
-
+		
+		// Flashes the battery warning LED on driverstation.
 		while (true)
 		{
 			if (alarmFlash)
