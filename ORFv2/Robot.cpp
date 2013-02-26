@@ -151,4 +151,3 @@ void Robot::MonitorBattery(int dsPointer)
 
 
 START_ROBOT_CLASS(Robot);
-
