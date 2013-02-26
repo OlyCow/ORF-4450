@@ -23,6 +23,8 @@
 #include "Modes/Autonomous.h"
 #include "Modes/Teleop.h"
 
+using namespace insight;
+
 
 
 // Macro #defines are evil. I'll get rid of these...
@@ -30,6 +32,17 @@
 #define PROGRAM_NAME	"ORFv2"
 #define CAMERA_IP		"10.44.50.11"
 #define LOW_BATTERY		10.0
+#define	JSB_TOP_MIDDLE		3
+#define JSB_TOP_LEFT		4
+#define JSB_TOP_RIGHT		5
+#define JSB_TRIGGER			1
+#define JSB_TOP_BACK		2
+#define JSB_LEFT_FRONT		6
+#define JSB_LEFT_REAR		7
+#define JSB_RIGHT_FRONT		11
+#define JSB_RIGHT_REAR		10
+#define JSB_BACK_LEFT		8
+#define JSB_BACK_RIGHT		9
 
 
 

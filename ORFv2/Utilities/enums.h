@@ -1,6 +1,10 @@
 #ifndef _ENUMS_H_
 #define _ENUMS_H_
 
+#include "../Includes.h"
+
+
+
 enum Buttons
 {
 	BUTTON_TRIGGER		= 1,
@@ -16,4 +20,6 @@ enum Buttons
 	BUTTON_RIGHT_REAR	= 10,
 };
 
-#endif //_ENUMS_H_
+
+
+#endif // _ENUMS_H_

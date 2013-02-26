@@ -3,8 +3,6 @@
 
 #include "Includes.h"
 
-using namespace insight;
-
 
 
 class Robot : public SimpleRobot
