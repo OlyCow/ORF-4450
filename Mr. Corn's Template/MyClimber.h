@@ -8,9 +8,9 @@ class MyClimber
 {
 private:
 	MyRobot *myRobot;
-	Jaguar	winchMotor1;
+	//Jaguar	winchMotor1;
 	Jaguar	winchMotor2;
-	Talon	angularAdjustmentMotor;
+	//Talon	angularAdjustmentMotor;
 
 public:
 	MyClimber(MyRobot *myRobot);

@@ -8,10 +8,9 @@ class MyDiscShooter
 {
 private:
 	MyRobot 	*myRobot;
-	Talon 		launchMotor, angleMotor;
-	Solenoid	feedSolenoid;
-	Relay		rampRelay;
-	DigitalInput shooterSwich;
+	Talon 		launchMotor, angleMotor, feederRamp, shootMotor;
+	//Relay		rampRelay;
+	DigitalInput shooterSwitch, shooterAngleSwitch;
 
 public:
 	MyDiscShooter(MyRobot *myRobot);
@@ -24,6 +23,7 @@ public:
 	void RampDown(void);
 	void RampStop(void);
 	void ShooterUpDown(float speed);
+	void ShootHalf(void);
 };
 
 #endif // __MyDiscShooter_h__
