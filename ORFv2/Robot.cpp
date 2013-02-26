@@ -1,8 +1,8 @@
 #include <exception>
 #include "WPILib.h"
-#include "LCD.h"
+#include "Utilities/LCD.h"
 #include "Robot.h"
-#include "wiring.h"
+#include "Utilities/wiring.h"
 #include "InsightLT/InsightLT.h"
 
 #define PROGRAM_NAME	"ORFv2"
@@ -11,21 +11,25 @@
 
 
 Robot::Robot():
-	cRIO()
+	insightLT(insight::TWO_ONE_LINE_ZONES),
+	displayBattery("Battery: "),
+	displayProgram("Pgm: "),
+	ds(DriverStation::GetInstance()),
+	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
 	try
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
 
-		cRIO.driveSystem.SetExpiration(0.1);
+		//driveSystem.SetExpiration(0.1);
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
 		displayProgram.setData(PROGRAM_NAME);
 		insightLT.registerData(displayBattery, 2);
 
-		robotDrive.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-		robotDrive.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
+		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
 		LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
 	}

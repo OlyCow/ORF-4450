@@ -3,9 +3,10 @@
 
 #include <exception>
 #include <WPILib.h>
-#include "LCD.h"
-#include "wiring.h"
+#include "Utilities/LCD.h"
+#include "Utilities/wiring.h"
 #include "InsightLT/InsightLT.h"
+
 using namespace insight;
 
 
@@ -13,7 +14,14 @@ using namespace insight;
 class Robot : public SimpleRobot
 {
 public:
-	wiring	cRIO;
+	InsightLT		insightLT;
+	DecimalData		displayBattery;
+	StringData		displayProgram;
+	DriverStation	*ds;
+		int							startLocation;
+		DriverStation::Alliance		alliance;
+	//AxisCamera	&camera;
+	Task			monitorBatteryTask;
 
 	Robot();
 	void RobotInit();
