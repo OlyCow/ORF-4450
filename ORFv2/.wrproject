@@ -244,24 +244,14 @@
         </mapAttribute>
     </attributes>
     <buildtargets>
-        <buildtarget buildtool="Linker" name="SimpleTemplate" passed="false" targetname="SimpleTemplate">
+        <buildtarget buildtool="Partial Image Linker" name="ORFv2_partialImage" passed="true" targetname="ORFv2_partialImage">
             <contents>
-                <buildtargetreference name="/SimpleTemplate/SimpleTemplate_partialImage"/>
+                <folder name="/ORFv2" recursive="true"/>
             </contents>
         </buildtarget>
-        <buildtarget buildtool="Partial Image Linker" name="SimpleTemplate_partialImage" passed="true" targetname="SimpleTemplate_partialImage">
+        <buildtarget buildtool="Linker" name="ORFv2" passed="false" targetname="ORFv2">
             <contents>
-                <folder name="/SimpleTemplate" recursive="true">
-                    <contents>
-                        <file name="/SimpleTemplate/MyRobot.cpp">
-                            <attributes>
-                                <mapAttribute>
-                                    <stringAttribute key="BLD::Info|Tool|C++-Compiler|flags|PPC603gnu" value="$(CC_ARCH_SPEC) -ansi -Wall -MD -MP -mlongcall"/>
-                                </mapAttribute>
-                            </attributes>
-                        </file>
-                    </contents>
-                </folder>
+                <buildtargetreference name="/ORFv2/ORFv2_partialImage"/>
             </contents>
         </buildtarget>
     </buildtargets>

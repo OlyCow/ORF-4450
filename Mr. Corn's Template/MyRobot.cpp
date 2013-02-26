@@ -1,20 +1,19 @@
-#include "Global_Vars.h"
 #include "MyRobot.h"
 #include "LCD.h"
 #include "MyAutonomous.h"
 #include "MyTeleop.h"
 #include <exception>
 
+//	camera(AxisCamera::GetInstance(CAMERA_IP)),
 
+// MyRobot class constructor. Called when instance of MyRobot is created.
 
-// MyRobot constructor; called when MyRobot is instantiated.
-MyRobot::MyRobot():
-	// robotDrive(frontL, rearL, frontR, rearR)
+MyRobot::MyRobot(void):
+	// robotdrive(front-left, rear-left, front-right, rear-right)
 	robotDrive(1, 3, 2, 4),		// these must be initialized in the same order
 	leftStick(1),					// as they are declared.
 	rightStick(2),
 	rotateStick(3),
-	//camera(AxisCamera::GetInstance(g_CameraIP)),
 	ds(DriverStation::GetInstance()),
 	insightLT(insight::TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
@@ -29,7 +28,7 @@ MyRobot::MyRobot():
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
-		displayProgram.setData(g_ProgramName);
+		displayProgram.setData(PROGRAM_NAME);
 		insightLT.registerData(displayBattery, 2);
 
 		robotDrive.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
@@ -43,17 +42,16 @@ MyRobot::MyRobot():
 	}
 }
 	
+// Called when MyRobot class started by cRio.
 
-
-// Called when MyRobot class is started by cRio.
-void MyRobot::RobotInit()
+void MyRobot::RobotInit(void)
 {
 	try
 	{
 		LCD::ConsoleLog("RobotInit");
 		LCD::PrintLine(1, "Mode: RobotInit");
 
-		SmartDashboard::PutString("Program", g_ProgramName);	
+		SmartDashboard::PutString("Program", PROGRAM_NAME);	
 		SmartDashboard::PutBoolean("Checkbox 1", false);	
 		
 		// Start the battery monitoring Task.
@@ -67,12 +65,11 @@ void MyRobot::RobotInit()
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
 }
+	
+// Called by cRio when driver station disables the robot and at
+// start-up, after constructor and Init method.
 
-
-
-// Called by cRio when driver station disables the robot,
-// and at start-up, after constructor and Init method.
-void MyRobot::Disabled()
+void MyRobot::Disabled(void)
 {
 	try
 	{
@@ -105,10 +102,9 @@ void MyRobot::Disabled()
 	}
 }
 
+// Called by cRio when driver station enables autonomous mode.
 
-
-// Called by cRio when driver station enters autonomous mode.
-void MyRobot::Autonomous()
+void MyRobot::Autonomous(void)
 {
 	MyAutonomous autonomous(this);
 	
@@ -129,7 +125,9 @@ void MyRobot::Autonomous()
 		LCD::ConsoleLog("Auto Start: %d, Alliance: %d", startLocation, alliance);
 
 		// Start autonomous process contained in the MyAutonomous class.
-		autonomous.AutonomousProgram();
+		
+		autonomous.shoot();
+		//autonomous.reposition();
 		
 		SmartDashboard::PutBoolean("Autonomous Mode", false);	
 		LCD::ConsoleLog("Autonomous-end");
@@ -140,10 +138,9 @@ void MyRobot::Autonomous()
 	}
 }
 
+// Called by cRio when driver station enables teleop mode.
 
-
-// Called by cRio when driver station enters teleop mode.
-void MyRobot::OperatorControl()
+void MyRobot::OperatorControl(void)
 {
 	MyTeleop teleOp(this);
 
@@ -171,10 +168,9 @@ void MyRobot::OperatorControl()
 	}
 }
 
+// Runs as a Task in separate thread from our MyRobot class. Runs until our
+// program is terminated from the cRio.
 
-
-// Runs as a Task in separate thread from MyRobot,
-// Until program is terminated from cRio.
 void MyRobot::MonitorBattery(int dsPointer)
 {
 	DriverStation 	*ds;
@@ -188,16 +184,20 @@ void MyRobot::MonitorBattery(int dsPointer)
 
 		SmartDashboard::PutBoolean("Low Battery", false);
 		
-		// Check battery voltage every 10 seconds.
-		// Drop out when battery goes below threshold.
+		// Check battery voltage every 10 seconds. Drop out when battery
+		// goes below the threshold.
+		
 		while (batteryOk)
 		{
 			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-			if (ds->GetBatteryVoltage() < g_LowBattery) batteryOk = false;
+
+			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
+		
 			Wait(10.0);
 		}
 
-		// flash the battery warning LED on driver station.
+		// flash the battery warning led on driverstation.
+		
 		while (true)
 		{
 			if (alarmFlash)
@@ -206,6 +206,7 @@ void MyRobot::MonitorBattery(int dsPointer)
 				alarmFlash = true;
 
 			SmartDashboard::PutBoolean("Low Battery", alarmFlash);
+			
 			Wait(1.0);
 		}
 	}
@@ -215,6 +216,5 @@ void MyRobot::MonitorBattery(int dsPointer)
 	}
 }
 
-
-
 START_ROBOT_CLASS(MyRobot);
+
