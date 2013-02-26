@@ -1,12 +1,7 @@
 #ifndef _WIRING_H_
 #define _WIRING_H_
 
-#include <exception>
-#include <WPIlib.h>
-#include "Utilities/LCD.h"
-#include "InsightLT/InsightLT.h"
-
-using namespace insight;
+#include "../Includes.h"
 
 
 

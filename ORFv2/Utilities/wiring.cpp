@@ -1,10 +1,5 @@
-#include <exception>
-#include <WPIlib.h>
-#include "Utilities/LCD.h"
+#include "../Includes.h"
 #include "wiring.h"
-#include "InsightLT/InsightLT.h"
-
-using namespace insight;
 
 
 

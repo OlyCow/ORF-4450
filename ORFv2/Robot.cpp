@@ -1,13 +1,7 @@
-#include <exception>
-#include "WPILib.h"
-#include "Utilities/LCD.h"
+#include "Includes.h"
 #include "Robot.h"
-#include "Utilities/wiring.h"
-#include "InsightLT/InsightLT.h"
 
-#define PROGRAM_NAME	"ORFv2"
-#define CAMERA_IP		"10.44.50.11"
-#define LOW_BATTERY		10.0
+
 
 
 Robot::Robot():

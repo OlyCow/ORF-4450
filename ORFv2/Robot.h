@@ -1,11 +1,7 @@
 #ifndef _ROBOT_H_
 #define _ROBOT_H_
 
-#include <exception>
-#include <WPILib.h>
-#include "Utilities/LCD.h"
-#include "Utilities/wiring.h"
-#include "InsightLT/InsightLT.h"
+#include "Includes.h"
 
 using namespace insight;
 
