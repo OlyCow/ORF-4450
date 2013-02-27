@@ -1,35 +1,29 @@
-#include <exception>
-#include "WPILib.h"
-#include "Utilities/LCD.h"
+#include "Includes.h"
 #include "Robot.h"
-#include "Utilities/wiring.h"
-#include "InsightLT/InsightLT.h"
 
-#define PROGRAM_NAME	"ORFv2"
-#define CAMERA_IP		"10.44.50.11"
-#define LOW_BATTERY		10.0
 
 
 Robot::Robot():
-	insightLT(insight::TWO_ONE_LINE_ZONES),
+	insightLT(TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
 	displayProgram("Pgm: "),
 	ds(DriverStation::GetInstance()),
+	cRIO(),
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
 	try
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
 
-		//driveSystem.SetExpiration(0.1);
+		cRIO->driveSystem.SetExpiration(g_expiration);
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
 		displayProgram.setData(PROGRAM_NAME);
 		insightLT.registerData(displayBattery, 2);
 
-		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+		cRIO->driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
+		cRIO->driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
 		LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
 	}
@@ -54,6 +48,8 @@ void Robot::RobotInit(void)
 		
 		monitorBatteryTask.Start((UINT32) ds);
 		
+		
+		
 		LCD::ConsoleLog("RobotInit-end");
 	}
 	catch (exception *e)
@@ -61,10 +57,10 @@ void Robot::RobotInit(void)
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
 }
-	
+
+
 // Called by cRio when driver station disables the robot and at
 // start-up, after constructor and Init method.
-
 void Robot::Disabled(void)
 {
 	try
@@ -122,20 +118,18 @@ void Robot::MonitorBattery(int dsPointer)
 
 		SmartDashboard::PutBoolean("Low Battery", false);
 
-		// Check battery voltage every 10 seconds. Drop out when battery
-		// goes below the threshold.
 
+		// Checks battery voltage every 10 seconds.
+		// Drops out when battery goes below the threshold.
 		while (batteryOk)
 		{
 			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-
 			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
-
 			Wait(10.0);
 		}
 
-		// flash the battery warning led on driverstation.
-
+		
+		// Flashes the battery warning LED on driverstation.
 		while (true)
 		{
 			if (alarmFlash)
@@ -157,4 +151,3 @@ void Robot::MonitorBattery(int dsPointer)
 
 
 START_ROBOT_CLASS(Robot);
-

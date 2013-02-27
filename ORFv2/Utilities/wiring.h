@@ -1,22 +1,35 @@
 #ifndef _WIRING_H_
 #define _WIRING_H_
 
-#include <exception>
-#include <WPIlib.h>
-#include "Utilities/LCD.h"
-#include "InsightLT/InsightLT.h"
-
-using namespace insight;
+#include "../Includes.h"
 
 
 
 class wiring
 {
 public:
+	// Will get rid of this stuff soon.
 	RobotDrive		driveSystem;
-	Joystick		positionStick, rotateStick, launcherStick;
+	
+	Joystick		positionStick,
+					rotateStick,
+					launcherStick;
+	
+	Talon			driveMotorFrontL,
+					driveMotorFrontR,
+					driveMotorRearL,
+					driveMotorRearR,
+					launchMotor,
+					heightMotor,
+					rampMotor,
+					feederMotor;
+	
+	DigitalInput	topHeightLimitSwitch,
+					bottomHeightLimitSwitch,
+					feederLimitSwitch;
 	
 	wiring();
+	~wiring();
 	
 	
 private:
@@ -24,4 +37,4 @@ private:
 
 
 
-#endif //_WIRING_H_
+#endif // _WIRING_H_

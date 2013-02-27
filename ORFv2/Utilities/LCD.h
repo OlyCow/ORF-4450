@@ -1,7 +1,9 @@
-#ifndef __LCD_h__
-#define __LCD_h__
+#ifndef _LCD_H_
+#define _LCD_H_
 
-#include <WPILib.h>
+#include "../Includes.h"
+
+
 
 class LCD
 {
@@ -24,4 +26,6 @@ public:
 	static void ClearLine(INT32 line);
 };
 
-#endif // __LCD_h__
+
+
+#endif // _LCD_H_
