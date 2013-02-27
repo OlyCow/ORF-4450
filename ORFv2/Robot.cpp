@@ -34,7 +34,7 @@ Robot::Robot():
 }
 
 
-void Robot::RobotInit(void)
+void Robot::RobotInit()
 {
 	try
 	{
@@ -61,7 +61,7 @@ void Robot::RobotInit(void)
 
 // Called by cRio when driver station disables the robot and at
 // start-up, after constructor and Init method.
-void Robot::Disabled(void)
+void Robot::Disabled()
 {
 	try
 	{
@@ -97,17 +97,25 @@ void Robot::Disabled(void)
 
 void Robot::Autonomous()
 {
+	AutonomousMode();
 }
 
 
 void Robot::OperatorControl()
 {
+	TeleopMode();
+}
+
+
+void Robot::Test()
+{
+	TestMode();
 }
 
 
 void Robot::MonitorBattery(int dsPointer)
 {
-	DriverStation 	*ds;
+	DriverStation	*ds;
 	bool			batteryOk = true, alarmFlash = false;
 
 	try

@@ -3,4 +3,11 @@
 
 
 
+void AutonomousMode();
+
+void AutonomousModeInit();
+void AutonomousModeMain();
+
+
+
 #endif // _AUTONOMOUS_H_

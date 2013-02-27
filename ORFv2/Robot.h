@@ -21,6 +21,7 @@ public:
 	void Disabled();
 	void Autonomous();
 	void OperatorControl();
+	void Test();
 
 
 private:

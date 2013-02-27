@@ -3,4 +3,11 @@
 
 
 
+void TeleopMode();
+
+void TeleopModeInit();
+void TeleopModeMain();
+
+
+
 #endif // _TELEOP_H_

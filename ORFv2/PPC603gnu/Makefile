@@ -149,6 +149,10 @@ ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Teleop.o : $(PRJ_ROOT_DIR)/Mo
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
 
 
+ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Test.o : $(PRJ_ROOT_DIR)/Modes/Test.cpp $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
+
+
 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Robot.o : $(PRJ_ROOT_DIR)/Robot.cpp $(FORCE_FILE_BUILD)
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)ccppc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -ansi -Wall  -MD -MP -mlongcall $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -DCPU=$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL   $(DEFINES) -o "$@" -c "$<"
 
@@ -181,6 +185,7 @@ OBJECTS_ORFv2_partialImage = ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Insigh
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/Zone.o \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Autonomous.o \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Teleop.o \
+	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Test.o \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Robot.o \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/Climber.o \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/DriveBase.o \
@@ -247,9 +252,9 @@ force :
 
 DEP_FILES := ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/DecimalData.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/DisplayData.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/InsightLT.d \
 	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/IntegerData.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/StringData.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/InsightLT/Zone.d \
-	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Autonomous.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Teleop.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Robot.d \
-	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/Climber.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/DriveBase.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/Launcher.d \
-	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Utilities/LCD.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Utilities/wiring.d
+	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Autonomous.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Teleop.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Modes/Test.d \
+	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Robot.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/Climber.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/DriveBase.d \
+	 ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Systems/Launcher.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Utilities/LCD.d ORFv2_partialImage/$(MODE_DIR)/Objects/ORFv2/Utilities/wiring.d
 -include $(DEP_FILES)
 
 

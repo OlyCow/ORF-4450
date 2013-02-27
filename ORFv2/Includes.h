@@ -24,6 +24,7 @@ using namespace insight;
 
 #include "Modes/Autonomous.h"
 #include "Modes/Teleop.h"
+#include "Modes/Test.h"
 
 #include "Robot.h"
 
