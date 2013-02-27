@@ -15,15 +15,17 @@ Robot::Robot():
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
 
-		cRIO.driveSystem.SetExpiration(0.1);
+		(*cRIO).driveSystem.SetExpiration(0.1);
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
 		displayProgram.setData(PROGRAM_NAME);
 		insightLT.registerData(displayBattery, 2);
 
-		cRIO.driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-		cRIO.driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+		(*cRIO).driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
+		(*cRIO).driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+		
+		Launcher launcher(this);
 
 		LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
 	}
@@ -47,6 +49,8 @@ void Robot::RobotInit(void)
 		// Start the battery monitoring Task.
 		
 		monitorBatteryTask.Start((UINT32) ds);
+		
+		
 		
 		LCD::ConsoleLog("RobotInit-end");
 	}

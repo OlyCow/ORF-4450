@@ -21,6 +21,7 @@ public:
 	
 	bool getTopLimitSwitchState();
 	bool getBottomLimitSwitchState();
+	bool getFeederLimitSwitchState();
 	
 	float getLaunchMotorPower();
 	float getHeightMotorPower();

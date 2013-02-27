@@ -13,7 +13,7 @@ public:
 		int							startLocation;
 		DriverStation::Alliance		alliance;
 	//AxisCamera	&camera;
-	wiring			cRIO;
+	wiring			*cRIO;
 	Task			monitorBatteryTask;
 
 	Robot();
