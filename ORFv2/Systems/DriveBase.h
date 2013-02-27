@@ -8,12 +8,12 @@
 class DriveBase
 {
 public:
-	DriveBase(Robot *ORFius);
+	DriveBase(Robot *robot);
 	~DriveBase();
 	
 	
 private:
-	Robot *ORFius;
+	Robot *robot;
 };
 
 

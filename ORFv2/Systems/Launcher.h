@@ -8,7 +8,7 @@
 class Launcher
 {
 public:
-	Launcher(Robot *ORFius);
+	Launcher(Robot *robot);
 	~Launcher();
 	
 	void shoot(float power=1.00, int shots=1);
@@ -31,7 +31,7 @@ public:
 	
 	
 private:
-	Robot *ORFius;
+	Robot *robot;
 	
 	void setFeederMotor(float power);
 };

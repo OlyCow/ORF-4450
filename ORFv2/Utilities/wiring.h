@@ -8,10 +8,28 @@
 class wiring
 {
 public:
+	// Will get rid of this stuff soon.
 	RobotDrive		driveSystem;
-	Joystick		positionStick, rotateStick, launcherStick;
+	
+	Joystick		positionStick,
+					rotateStick,
+					launcherStick;
+	
+	Talon			driveMotorFrontL,
+					driveMotorFrontR,
+					driveMotorRearL,
+					driveMotorRearR,
+					launchMotor,
+					heightMotor,
+					rampMotor,
+					feederMotor;
+	
+	DigitalInput	topHeightLimitSwitch,
+					bottomHeightLimitSwitch,
+					feederLimitSwitch;
 	
 	wiring();
+	~wiring();
 	
 	
 private:

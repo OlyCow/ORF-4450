@@ -8,12 +8,12 @@
 class Climber
 {
 public:
-	Climber(Robot *ORFius);
+	Climber(Robot *robot);
 	~Climber();
 	
 	
 private:
-	Robot *ORFius;
+	Robot *robot;
 };
 
 

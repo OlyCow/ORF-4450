@@ -3,7 +3,7 @@
 
 
 
-Launcher::Launcher(Robot *ORFius)
+Launcher::Launcher(Robot *robot):
+	robot(robot)
 {
-	;
 }
