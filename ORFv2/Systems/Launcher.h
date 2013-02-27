@@ -1,18 +1,14 @@
 #ifndef _LAUNCHER_H_
 #define _LAUNCHER_H_
 
+#include "../Robot.h"
+
 
 
 class Launcher
 {
-private:
-	Robot Robot;
-	wiring *cRIO;
-	// Add variables you might need here.
-	
-	
 public:
-	Launcher(Robot *Robot);
+	Launcher(Robot *ORFius);
 	~Launcher();
 	
 	void shoot(float power=1.00, int shots=1);
@@ -23,11 +19,20 @@ public:
 	void setHeightMotor(float power);
 	void setRampMotor(float power);
 	
-	void setFeederMotor(float power);
+	bool getTopLimitSwitchState();
+	bool getBottomLimitSwitchState();
 	
-	// Whatever this will be called. Need to ask Ian about this.
-	// These will be the "getters" for the switches.
-	//bool getLimitSwitch();
+	float getLaunchMotorPower();
+	float getHeightMotorPower();
+	float getRampMotorPower();
+	
+	float getFeederMotorPower();
+	
+	
+private:
+	Robot *ORFius;
+	
+	void setFeederMotor(float power);
 };
 
 

@@ -3,27 +3,27 @@
 
 
 
-
 Robot::Robot():
 	insightLT(insight::TWO_ONE_LINE_ZONES),
 	displayBattery("Battery: "),
 	displayProgram("Pgm: "),
 	ds(DriverStation::GetInstance()),
+	cRIO(),
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
 	try
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
 
-		//driveSystem.SetExpiration(0.1);
+		cRIO.driveSystem.SetExpiration(0.1);
 
 		// Set the InsightLT display.
 		insightLT.registerData(displayProgram, 1);
 		displayProgram.setData(PROGRAM_NAME);
 		insightLT.registerData(displayBattery, 2);
 
-		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-		//cRIO.driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+		cRIO.driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
+		cRIO.driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
 		LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
 	}

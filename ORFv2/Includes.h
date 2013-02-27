@@ -8,8 +8,10 @@
 #include <iostream>
 #include <exception>	// <- doesn't seem necessary?
 #include <string>
+#include <cmath>
 
 #include "InsightLT/InsightLT.h"
+using namespace insight;
 
 #include "Utilities/enums.h"
 #include "Utilities/global_vars.h"
@@ -23,7 +25,7 @@
 #include "Modes/Autonomous.h"
 #include "Modes/Teleop.h"
 
-using namespace insight;
+#include "Robot.h"
 
 
 

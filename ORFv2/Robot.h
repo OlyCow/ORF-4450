@@ -1,8 +1,6 @@
 #ifndef _ROBOT_H_
 #define _ROBOT_H_
 
-#include "Includes.h"
-
 
 
 class Robot : public SimpleRobot
@@ -15,6 +13,7 @@ public:
 		int							startLocation;
 		DriverStation::Alliance		alliance;
 	//AxisCamera	&camera;
+	wiring			cRIO;
 	Task			monitorBatteryTask;
 
 	Robot();
