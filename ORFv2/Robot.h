@@ -1,14 +1,6 @@
 #ifndef _ROBOT_H_
 #define _ROBOT_H_
 
-#include <exception>
-#include <WPILib.h>
-#include "Utilities/LCD.h"
-#include "Utilities/wiring.h"
-#include "InsightLT/InsightLT.h"
-
-using namespace insight;
-
 
 
 class Robot : public SimpleRobot
@@ -21,6 +13,7 @@ public:
 		int							startLocation;
 		DriverStation::Alliance		alliance;
 	//AxisCamera	&camera;
+	wiring			*cRIO;
 	Task			monitorBatteryTask;
 
 	Robot();
