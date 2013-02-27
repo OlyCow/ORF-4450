@@ -1,6 +1,9 @@
+#include "../Includes.h"
 #include "LCD.h"
 
-	DriverStationLCD* LCD::dsLcd = 0;
+
+
+DriverStationLCD* LCD::dsLcd = 0;
 
 LCD::LCD(void)
 {
