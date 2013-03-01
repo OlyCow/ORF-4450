@@ -2,14 +2,14 @@
 
 
 
-void TeleopModeInit()
+void TestModeInit()
 {
 	;
 }
 
 
 
-void TeleopModeMain()
+void TestModeMain()
 {
 	;
 }
