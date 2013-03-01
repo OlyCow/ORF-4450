@@ -6,6 +6,18 @@
 Launcher::Launcher(Robot *robot):
 	robot(robot)
 {
+	setLaunchMotor(0.0);
+	setHeightMotor(0.0);
+	setRampMotor(0.0);
+	setFeederMotor(0.0);
+}
+
+Launcher::~Launcher()
+{
+	setLaunchMotor(0.0);
+	setHeightMotor(0.0);
+	setRampMotor(0.0);
+	setFeederMotor(0.0);
 }
 
 

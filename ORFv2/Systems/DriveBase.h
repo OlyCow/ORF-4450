@@ -13,14 +13,14 @@ public:
 	
 	void drive(float time, float power, float heading);
 
-	void polarSetDriveBase(	float angle,
-							float magnitude,
-							float rotation,
-							float heading=0	);
 	void rectangularSetDriveBase(	float x,
 									float y,
 									float rotation,
 									float heading=0	);
+	void polarSetDriveBase(	float angle,
+							float magnitude,
+							float rotation,
+							float heading=0	);
 
 	float getDriveXMagnitude();
 	float getDriveYMagnitude();
