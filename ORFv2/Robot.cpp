@@ -14,6 +14,9 @@ Robot::Robot():
 	try
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
+		
+		static DriveBase driveBase(this);
+		static Launcher launcher(this);
 
 		cRIO->driveSystem.SetExpiration(g_expiration);
 
@@ -45,10 +48,7 @@ void Robot::RobotInit()
 		SmartDashboard::PutBoolean("Checkbox 1", false);	
 		
 		// Start the battery monitoring Task.
-		
 		monitorBatteryTask.Start((UINT32) ds);
-		
-		
 		
 		LCD::ConsoleLog("RobotInit-end");
 	}

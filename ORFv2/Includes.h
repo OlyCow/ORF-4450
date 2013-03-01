@@ -6,9 +6,16 @@
 #include <WPIlib.h>
 
 #include <iostream>
-#include <exception>	// <- doesn't seem necessary?
-#include <string>
+#include <cstdlib>
+#include <exception>
 #include <cmath>
+#include <string>
+#include <cstring>
+#include <iomanip>
+#include <cstdio>
+#include <ctime>
+#include <fstream>
+#include <vector>
 
 #include "InsightLT/InsightLT.h"
 using namespace insight;
@@ -17,10 +24,10 @@ using namespace insight;
 #include "Utilities/global_vars.h"
 #include "Utilities/LCD.h"
 #include "Utilities/wiring.h"
+#include "Utilities/externs.h"
 
 #include "Systems/DriveBase.h"
 #include "Systems/Launcher.h"
-#include "Systems/Climber.h"
 
 #include "Modes/Autonomous.h"
 #include "Modes/Teleop.h"
