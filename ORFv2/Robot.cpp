@@ -14,6 +14,9 @@ Robot::Robot():
 	try
 	{
 		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
+		
+		static DriveBase driveBase(this);
+		static Launcher launcher(this);
 
 		cRIO->driveSystem.SetExpiration(g_expiration);
 
@@ -34,34 +37,33 @@ Robot::Robot():
 }
 
 
-void Robot::RobotInit(void)
+
+void Robot::RobotInit()
 {
 	try
 	{
 		LCD::ConsoleLog("RobotInit");
 		LCD::PrintLine(1, "Mode: RobotInit");
 
-		SmartDashboard::PutString("Program", PROGRAM_NAME);	
-		SmartDashboard::PutBoolean("Checkbox 1", false);	
-		
+		SmartDashboard::PutString("Program", PROGRAM_NAME);
+		SmartDashboard::PutBoolean("Checkbox 1", false);
+
 		// Start the battery monitoring Task.
-		
+
 		monitorBatteryTask.Start((UINT32) ds);
-		
-		
-		
+
 		LCD::ConsoleLog("RobotInit-end");
 	}
 	catch (exception *e)
 	{
 		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
 	}
+	RunMode(MODE_INIT, false);
 }
 
 
-// Called by cRio when driver station disables the robot and at
-// start-up, after constructor and Init method.
-void Robot::Disabled(void)
+
+void Robot::Disabled()
 {
 	try
 	{
@@ -92,22 +94,35 @@ void Robot::Disabled(void)
 	{
 		LCD::ConsoleLog("Disabled Exception: %s", e->what());
 	}
+	RunMode(MODE_DISABLED, false);
 }
+
 
 
 void Robot::Autonomous()
 {
+	RunMode(MODE_AUTONOMOUS, true);
 }
+
 
 
 void Robot::OperatorControl()
 {
+	RunMode(MODE_TELEOP, true);
 }
+
+
+
+void Robot::Test()
+{
+	RunMode(MODE_TEST, true);
+}
+
 
 
 void Robot::MonitorBattery(int dsPointer)
 {
-	DriverStation 	*ds;
+	DriverStation	*ds;
 	bool			batteryOk = true, alarmFlash = false;
 
 	try

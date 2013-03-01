@@ -11,6 +11,33 @@ public:
 	DriveBase(Robot *robot);
 	~DriveBase();
 	
+	void drive(float time, float power, float heading);
+
+	void rectangularSetDriveBase(	float x,
+									float y,
+									float rotation,
+									float heading=0	);
+	void polarSetDriveBase(	float angle,
+							float magnitude,
+							float rotation,
+							float heading=0	);
+
+	float getDriveXMagnitude();
+	float getDriveYMagnitude();
+	float getDriveAngle();
+	float getDrivePower();
+	float getDriveRotation();
+
+	void setFrontLMotor(float power);
+	void setFrontRMotor(float power);
+	void setRearLMotor(float power);
+	void setRearRMotor(float power);
+
+	float getFrontLMotor();
+	float getFrontRMotor();
+	float getRearLMotor();
+	float getRearRMotor();
+
 	
 private:
 	Robot *robot;

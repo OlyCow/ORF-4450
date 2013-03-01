@@ -15,10 +15,10 @@ public:
 					rotateStick,
 					launcherStick;
 	
-	Talon			driveMotorFrontL,
-					driveMotorFrontR,
-					driveMotorRearL,
-					driveMotorRearR,
+	Talon			driveFrontLMotor,
+					driveFrontRMotor,
+					driveRearLMotor,
+					driveRearRMotor,
 					launchMotor,
 					heightMotor,
 					rampMotor,
