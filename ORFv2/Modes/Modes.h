@@ -3,8 +3,7 @@
 
 
 
-// (mode=MODE_DISABLED, isLoop=true)
-void RunMode(Modes mode, bool isLoop);
+void RunMode(Modes mode=MODE_DISABLED, bool isLoop=true);
 
 void InitModeInit();
 void InitModeMain();

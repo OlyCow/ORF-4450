@@ -3,7 +3,7 @@
 
 
 
-void RunMode(Modes mode=MODE_DISABLED, bool isLoop=true)
+void RunMode(Modes mode, bool isLoop)
 {
 	switch (mode)
 	{

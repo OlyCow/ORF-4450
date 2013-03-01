@@ -11,17 +11,17 @@ public:
 	Launcher(Robot *robot);
 	~Launcher();
 	
-	void shoot(float power=1.00, int shots=1);
-	void maxHeight();
-	void minHeight();
+	void shoot(float power=g_maxPower, int shots=1);
+	void maxHeight(float power=g_halfPower);
+	void minHeight(float power=g_halfPower);
 	
 	void setLaunchPower(float power);
 	void setHeightMotor(float power);
 	void setRampMotor(float power);
 	
-	bool getTopLimitSwitchState();
-	bool getBottomLimitSwitchState();
-	bool getFeederLimitSwitchState();
+	bool getTopLimitSwitch();
+	bool getBottomLimitSwitch();
+	bool getFeederLimitSwitch();
 	
 	float getLaunchMotorPower();
 	float getHeightMotorPower();
@@ -32,8 +32,11 @@ public:
 	
 private:
 	Robot *robot;
-	
+
 	void setFeederMotor(float power);
+
+	void feedDiscs(	int discNumber=1,
+					float interval=g_shootInterval );
 };
 
 
