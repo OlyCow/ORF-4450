@@ -30,11 +30,6 @@ using namespace insight;
 #include "Systems/Launcher.h"
 
 #include "Modes/Modes.h"
-#include "Modes/Init.h"
-#include "Modes/Disabled.h"
-#include "Modes/Autonomous.h"
-#include "Modes/Teleop.h"
-#include "Modes/Test.h"
 
 #include "Robot.h"
 
