@@ -18,3 +18,4 @@ $RECYCLE.BIN/
 *.d
 ctdt.c
 .metadata/*
+WPILib/
