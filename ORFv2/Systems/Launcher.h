@@ -26,7 +26,7 @@ public:
 	float getLaunchMotorPower();
 	float getHeightMotorPower();
 	float getRampMotorPower();
-	
+
 	float getFeederMotorPower();
 	
 	

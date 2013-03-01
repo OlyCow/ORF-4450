@@ -63,8 +63,6 @@ void Robot::RobotInit()
 
 
 
-// Called by cRio when driver station disables the robot and at
-// start-up, after constructor and Init method.
 void Robot::Disabled()
 {
 	try
