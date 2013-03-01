@@ -12,10 +12,10 @@ wiring::wiring():
 	rotateStick(2),
 	launcherStick(3),
 	
-	driveMotorFrontL(1),
-	driveMotorFrontR(2),
-	driveMotorRearL(3),
-	driveMotorRearR(4),
+	driveFrontLMotor(1),
+	driveFrontRMotor(2),
+	driveRearLMotor(3),
+	driveRearRMotor(4),
 	launchMotor(5),
 	heightMotor(9),
 	rampMotor(6),
@@ -27,10 +27,10 @@ wiring::wiring():
 
 // This zero-ing is just to be safe.
 {
-	driveMotorFrontL.Set(0);
-	driveMotorFrontR.Set(0);
-	driveMotorRearL.Set(0);
-	driveMotorRearR.Set(0);
+	driveFrontLMotor.Set(0);
+	driveFrontRMotor.Set(0);
+	driveRearLMotor.Set(0);
+	driveRearRMotor.Set(0);
 	
 	launchMotor.Set(0);
 	heightMotor.Set(0);
@@ -43,10 +43,10 @@ wiring::wiring():
 wiring::~wiring()
 // This zero-ing is just to be safe.
 {
-	driveMotorFrontL.Set(0);
-	driveMotorFrontR.Set(0);
-	driveMotorRearL.Set(0);
-	driveMotorRearR.Set(0);
+	driveFrontLMotor.Set(0);
+	driveFrontRMotor.Set(0);
+	driveRearLMotor.Set(0);
+	driveRearRMotor.Set(0);
 	
 	launchMotor.Set(0);
 	heightMotor.Set(0);

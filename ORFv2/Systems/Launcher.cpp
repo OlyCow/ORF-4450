@@ -12,10 +12,10 @@ Launcher::Launcher(Robot *robot):
 
 void Launcher::shoot(float power, int shots)
 {
-	float originalLaunchPower = getLaunchMotorPower();
-	setLaunchPower(power);
+	float originalLaunchPower = getLaunchMotor();
+	setLaunchMotor(power);
 	feedDiscs(shots);
-	setLaunchPower(originalLaunchPower);
+	setLaunchMotor(originalLaunchPower);
 }
 
 void Launcher::maxHeight(float power)
@@ -36,7 +36,7 @@ void Launcher::minHeight(float power)
 
 
 
-void Launcher::setLaunchPower(float power)
+void Launcher::setLaunchMotor(float power)
 {
 	robot->cRIO->launchMotor.SetSpeed(power);
 }
@@ -75,24 +75,24 @@ bool Launcher::getFeederLimitSwitch()
 
 
 
-float Launcher::getLaunchMotorPower()
+float Launcher::getLaunchMotor()
 {
 	return robot->cRIO->launchMotor.Get();
 }
 
-float Launcher::getHeightMotorPower()
+float Launcher::getHeightMotor()
 {
 	return robot->cRIO->heightMotor.Get();
 }
 
-float Launcher::getRampMotorPower()
+float Launcher::getRampMotor()
 {
 	return robot->cRIO->rampMotor.Get();
 }
 
 
 
-float Launcher::getFeederMotorPower()
+float Launcher::getFeederMotor()
 {
 	return robot->cRIO->feederMotor.Get();
 }

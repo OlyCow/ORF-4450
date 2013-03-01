@@ -15,7 +15,7 @@ public:
 	void maxHeight(float power=g_halfPower);
 	void minHeight(float power=g_halfPower);
 	
-	void setLaunchPower(float power);
+	void setLaunchMotor(float power);
 	void setHeightMotor(float power);
 	void setRampMotor(float power);
 	
@@ -23,11 +23,11 @@ public:
 	bool getBottomLimitSwitch();
 	bool getFeederLimitSwitch();
 	
-	float getLaunchMotorPower();
-	float getHeightMotorPower();
-	float getRampMotorPower();
+	float getLaunchMotor();
+	float getHeightMotor();
+	float getRampMotor();
 
-	float getFeederMotorPower();
+	float getFeederMotor();
 	
 	
 private:
