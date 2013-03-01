@@ -3,8 +3,6 @@
 
 
 
-void AutonomousMode();
-
 void AutonomousModeInit();
 void AutonomousModeMain();
 

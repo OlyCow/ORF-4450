@@ -3,18 +3,11 @@
 
 
 
-void TeleopMode()
-{
-	TeleopModeInit();
-	while (true)
-		TeleopModeMain();
-}
-
-
 void TeleopModeInit()
 {
 	;
 }
+
 
 
 void TeleopModeMain()

@@ -20,6 +20,15 @@ enum Buttons
 	BUTTON_RIGHT_REAR	= 10,
 };
 
+enum Modes
+{
+	MODE_INIT		= 0,
+	MODE_DISABLED	= 1,
+	MODE_AUTONOMOUS	= 2,
+	MODE_TELEOP		= 3,
+	MODE_TEST		= 4,
+};
+
 
 
 #endif // _ENUMS_H_

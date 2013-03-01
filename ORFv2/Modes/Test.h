@@ -3,8 +3,6 @@
 
 
 
-void TestMode();
-
 void TestModeInit();
 void TestModeMain();
 

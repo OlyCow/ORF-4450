@@ -3,8 +3,6 @@
 
 
 
-void TeleopMode();
-
 void TeleopModeInit();
 void TeleopModeMain();
 

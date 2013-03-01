@@ -3,17 +3,11 @@
 
 
 
-void AutonomousMode()
-{
-	AutonomousModeInit();
-	AutonomousModeMain();
-}
-
-
 void AutonomousModeInit()
 {
 	;
 }
+
 
 
 void AutonomousModeMain()
