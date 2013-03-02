@@ -23,7 +23,11 @@ wiring::wiring():
 	
 	topHeightLimitSwitch(3),
 	bottomHeightLimitSwitch(1),
-	feederLimitSwitch(2)
+	feederLimitSwitch(2),
+
+	insight(TWO_ONE_LINE_ZONES),
+	insightProgram(g_programHeader),
+	insightBattery(g_batteryHeader)
 
 // This zero-ing is just to be safe.
 {
@@ -36,6 +40,12 @@ wiring::wiring():
 	heightMotor.Set(0);
 	rampMotor.Set(0);
 	feederMotor.Set(0);
+	
+	insight.startDisplay();
+	insight.registerData(insightProgram, 1);
+	insight.registerData(insightBattery, 2);
+	insightProgram.setData(g_programName);
+	insightBattery.setPrecision(3);
 }
 
 

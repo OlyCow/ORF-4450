@@ -22,8 +22,8 @@ using namespace insight;
 
 #include "Utilities/enums.h"
 #include "Utilities/global_vars.h"
-#include "Utilities/LCD.h"
 #include "Utilities/wiring.h"
+#include "Utilities/LCD.h"
 #include "Utilities/externs.h"
 
 #include "Systems/DriveBase.h"

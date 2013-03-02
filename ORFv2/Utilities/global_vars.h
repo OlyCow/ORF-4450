@@ -15,4 +15,11 @@ const float g_shootInterval = 3.0; //seconds
 
 
 
+const string g_programHeader = "Program: ";
+const string g_batteryHeader = "Battery: ";
+
+const string g_programName = "ORFv2";
+
+
+
 #endif // _GLOBAL_VARS_H_

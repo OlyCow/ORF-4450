@@ -28,6 +28,10 @@ public:
 					bottomHeightLimitSwitch,
 					feederLimitSwitch;
 	
+	InsightLT		insight;
+	StringData		insightProgram;
+	DecimalData		insightBattery;
+	
 	wiring();
 	~wiring();
 	
