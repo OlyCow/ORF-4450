@@ -4,7 +4,7 @@ First things first. The source code is provided to help you modify the way the
 display functions. Should you have a creative use feel free to modify the code.
 This is encouraged. If you have an idea and would like some support to implement 
 it feel free to contact us at support@bitbuilttech.com. If you have fixed a bug
-feel free to fix it and issue a pull request on github.com.
+feel free to fix it and issue a pull request on GitHub.
 
 Display Zones:
 --------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ The formation looks as below:
 2)ONE_TWO_LINE_ZONE
 This configuration gives the user 2 20 character zone. This allows for longer,
 more readable data display.
-The information looks as below:
+The formation looks as below:
 11111111111111111111
 11111111111111111111
 
@@ -42,7 +42,7 @@ To create the display with a different configuration pass one of
 FOUR_ZONES
 ONE_TWO_LINE_ZONE
 TWO_ONE_LINE_ZONES
-to the constructor like
+to the constructor like so:
 
 InsightLT display(FOUR_ZONES);
 display.startDisplay();
@@ -51,10 +51,10 @@ display.startDisplay();
 Adding Data to the zones
 --------------------------------------------------------------------------------
 To add display data on the display, you need to create DisplayData objects. This
-allows you to specify the header value(a string) and the data as well as other
-formatting. For an example, lets say we want to display the battery voltage.
-First we need to create the data object. for battery voltage we want to display 
-a decimal value so we need to use the DecimalData object.
+allows you to specify the header value (a string) and the data as well as other
+formatting. For example, let's say we want to display the battery voltage.
+First we need to create the data object. For battery voltage we want to display 
+a decimal value, so we need to use the DecimalData object.
 
 DecimalData disp_batteryVoltage("Batt:");
 
@@ -76,9 +76,9 @@ The result of this should resemble the below:
 ----------Batt:12.98
 --------------------
 
-This format is the same the other data types, string and integer.
+This format is the same as the other data types, string and integer.
 (DecimalData also allows you to specify the number of decimal places, which is
-by default 2)
+by default 2.)
 
 
 Scrolling

@@ -22,7 +22,8 @@ DriveBase::~DriveBase()
 
 
 
-void DriveBase::drive(float time, float power, float angle, float rotation)
+void DriveBase::drive(	float time,		float power,
+						float angle,	float rotation	)
 {
 	float originalPowerFL = getFrontLMotor();
 	float originalPowerFR = getFrontRMotor();
@@ -40,11 +41,16 @@ void DriveBase::drive(float time, float power, float angle, float rotation)
 
 
 
-
-void DriveBase::rectangularSetDriveBase(float x, float y, float rotation, float heading)
+void DriveBase::rectangularSetDriveBase(	float x,
+											float y,
+											float rotation,
+											float heading	)
 {
 }
-void DriveBase::polarSetDriveBase(float angle, float magnitude, float rotation, float heading)
+void DriveBase::polarSetDriveBase(	float angle,
+									float magnitude,
+									float rotation,
+									float heading	)
 {
 }
 
@@ -52,22 +58,27 @@ void DriveBase::polarSetDriveBase(float angle, float magnitude, float rotation, 
 
 float DriveBase::getDriveXMagnitude()
 {
+	return 0;
 }
 
 float DriveBase::getDriveYMagnitude()
 {
+	return 0;
 }
 
 float DriveBase::getDriveAngle()
 {
+	return 0;
 }
 
 float DriveBase::getDrivePower()
 {
+	return 0;
 }
 
 float DriveBase::getDriveRotation()
 {
+	return 0;
 }
 
 
