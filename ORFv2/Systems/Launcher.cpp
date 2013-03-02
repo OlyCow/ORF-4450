@@ -55,13 +55,18 @@ void Launcher::setLaunchMotor(float power)
 
 void Launcher::setHeightMotor(float power)
 {
-	robot->cRIO->heightMotor.SetSpeed(power);
+	if( (getTopLimitSwitch()||getBottomLimitSwitch()) ==true )
+		robot->cRIO->heightMotor.SetSpeed(0);
+	else
+		robot->cRIO->heightMotor.SetSpeed(power);
 }
 
 void Launcher::setRampMotor(float power)
 {
 	robot->cRIO->rampMotor.SetSpeed(power);
 }
+
+
 
 void Launcher::setFeederMotor(float power)
 {
