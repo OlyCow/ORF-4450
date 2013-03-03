@@ -20,13 +20,10 @@ enum Buttons
 	BUTTON_RIGHT_REAR	= 10,
 };
 
-enum Modes
+enum MotorConnection
 {
-	MODE_INIT		= 0,
-	MODE_DISABLED	= 1,
-	MODE_AUTONOMOUS	= 2,
-	MODE_TELEOP		= 3,
-	MODE_TEST		= 4,
+	MOTOR_NORMAL	= 0,	//isInverted = false
+	MOTOR_INVERTED	= 1,	//isInverted = true
 };
 
 

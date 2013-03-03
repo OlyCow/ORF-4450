@@ -11,14 +11,17 @@ public:
 	DriveBase(Robot *robot);
 	~DriveBase();
 	
-	void drive(float time, float power, float heading);
+	void drive(	float time,
+				float power,
+				float angle,
+				float rotation=0	);
 
 	void rectangularSetDriveBase(	float x,
 									float y,
 									float rotation,
 									float heading=0	);
 	void polarSetDriveBase(	float angle,
-							float magnitude,
+							float power,
 							float rotation,
 							float heading=0	);
 
