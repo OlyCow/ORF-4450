@@ -25,6 +25,8 @@ Launcher::~Launcher()
 void Launcher::shoot(float power, int shots)
 {
 	float originalLaunchPower = getLaunchMotor();
+	if (power-originalLaunchPower>g_launchInitRequired)
+		Wait(g_launchInitTime);
 	setLaunchMotor(power);
 	feedDiscs(shots);
 	setLaunchMotor(originalLaunchPower);

@@ -29,15 +29,12 @@ using namespace insight;
 #include "Systems/DriveBase.h"
 #include "Systems/Launcher.h"
 
-#include "Modes/Modes.h"
-
 #include "Robot.h"
 
 
 
 // Macro #defines are evil. I'll get rid of these...
 // sometime. Though they are handy, I'll admit.
-#define PROGRAM_NAME	"ORFv2"
 #define CAMERA_IP		"10.44.50.11"
 #define LOW_BATTERY		10.0
 #define	JSB_TOP_MIDDLE		3

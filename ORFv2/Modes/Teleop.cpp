@@ -2,14 +2,6 @@
 
 
 
-void TeleopModeInit()
+void Robot::OperatorControl()
 {
-	;
-}
-
-
-
-void TeleopModeMain()
-{
-	;
 }

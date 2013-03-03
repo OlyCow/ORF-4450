@@ -8,7 +8,7 @@ Robot::Robot():
 	cRIO(),
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
-	LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
+	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
 	
 	static DriveBase driveBase(this);
 	static Launcher launcher(this);
@@ -18,7 +18,7 @@ Robot::Robot():
 	cRIO->driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
 	cRIO->driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
-	LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
+	LCD::ConsoleLog("%s Constructor-end", g_programName.c_str());
 }
 
 
@@ -28,20 +28,13 @@ void Robot::RobotInit()
 	LCD::ConsoleLog("RobotInit");
 	LCD::PrintLine(1, "Mode: RobotInit");
 
-	SmartDashboard::PutString("Program", PROGRAM_NAME);
+	SmartDashboard::PutString("Program", g_programName);
 	SmartDashboard::PutBoolean("Checkbox 1", false);
 
 	// Start the battery monitoring Task.
-
 	monitorBatteryTask.Start((UINT32) ds);
 
 	LCD::ConsoleLog("RobotInit-end");
-	
-	
-	
-	
-	
-	RunMode(MODE_INIT, false);
 }
 
 
@@ -69,33 +62,6 @@ void Robot::Disabled()
 	cRIO->insightBattery.setData(ds->GetBatteryVoltage());
 
 	LCD::ConsoleLog("Disabled-end");
-	
-	
-	
-	
-	
-	RunMode(MODE_DISABLED, false);
-}
-
-
-
-void Robot::Autonomous()
-{
-	RunMode(MODE_AUTONOMOUS, true);
-}
-
-
-
-void Robot::OperatorControl()
-{
-	RunMode(MODE_TELEOP, true);
-}
-
-
-
-void Robot::Test()
-{
-	RunMode(MODE_TEST, true);
 }
 
 
@@ -103,7 +69,8 @@ void Robot::Test()
 void Robot::MonitorBattery(int dsPointer)
 {
 	DriverStation	*ds;
-	bool			batteryOk = true, alarmFlash = false;
+	bool			batteryOk = true,
+					alarmFlash = false;
 
 	LCD::ConsoleLog("Start MonitorBattery");
 
@@ -122,7 +89,7 @@ void Robot::MonitorBattery(int dsPointer)
 	}
 
 	
-	// Flashes the battery warning LED on driverstation.
+	// Flashes the battery warning LED on driver station.
 	while (true)
 	{
 		if (alarmFlash)
