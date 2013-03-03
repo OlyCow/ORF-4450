@@ -48,7 +48,7 @@ void DriveBase::rectangularSetDriveBase(	float x,
 {
 }
 void DriveBase::polarSetDriveBase(	float angle,
-									float magnitude,
+									float power,
 									float rotation,
 									float heading	)
 {

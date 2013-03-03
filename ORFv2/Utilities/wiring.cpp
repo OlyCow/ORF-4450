@@ -3,29 +3,26 @@
 
 
 
-wiring::wiring():
-	// Will get rid of this stuff soon.
-	// robotdrive(frontL, rearL, frontR, rearR)
-	driveSystem(1, 3, 2, 4),
-	
+wiring::wiring():	
 	positionStick(1),
 	rotateStick(2),
-	launcherStick(3),
+	launcherHeightStick(3),
+	launcherPowerStick(4),
 	
-	driveFrontLMotor(1),
-	driveFrontRMotor(2),
-	driveRearLMotor(3),
-	driveRearRMotor(4),
-	launchMotor(5),
-	heightMotor(9),
-	rampMotor(6),
-	feederMotor(7),
+	driveFrontLMotor	(1, MOTOR_NORMAL),
+	driveFrontRMotor	(2, MOTOR_INVERTED),
+	driveRearLMotor		(3, MOTOR_NORMAL),
+	driveRearRMotor		(4, MOTOR_INVERTED),
+	launchMotor	(5, MOTOR_NORMAL),
+	heightMotor	(9, MOTOR_NORMAL),
+	rampMotor	(6, MOTOR_NORMAL),
+	feederMotor	(7, MOTOR_NORMAL),
 	
 	topHeightLimitSwitch(3),
 	bottomHeightLimitSwitch(1),
 	feederLimitSwitch(2),
 
-	insight(TWO_ONE_LINE_ZONES),
+	insight(insight::TWO_ONE_LINE_ZONES),
 	insightProgram(g_programHeader),
 	insightBattery(g_batteryHeader)
 

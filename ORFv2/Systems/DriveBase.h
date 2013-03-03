@@ -21,7 +21,7 @@ public:
 									float rotation,
 									float heading=0	);
 	void polarSetDriveBase(	float angle,
-							float magnitude,
+							float power,
 							float rotation,
 							float heading=0	);
 

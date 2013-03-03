@@ -1,6 +1,8 @@
 #include "../Includes.h"
 #include "Motor.h"
 
+//using namespace math;
+
 
 
 Motor::Motor(UINT32 channel, bool isInverted):
@@ -17,10 +19,11 @@ void Motor::Invert()
 
 void Motor::Set(float value, UINT8 syncGroup)
 {
+	using namespace math;
 	if(isInverted==true)
-		Talon::Set(-value, syncGroup);
+		Talon::Set(limitMin(-value, g_maxPower), syncGroup);
 	else
-		Talon::Set(value, syncGroup);
+		Talon::Set(limitMax(value, g_maxPower), syncGroup);
 }
 
 float Motor::Get()

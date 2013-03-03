@@ -5,17 +5,6 @@
 
 
 
-enum Modes
-{
-	MODE_INIT		= 0,
-	MODE_DISABLED	= 1,
-	MODE_AUTONOMOUS	= 2,
-	MODE_TELEOP		= 3,
-	MODE_TEST		= 4,
-};
-
-
-
 enum Buttons
 {
 	BUTTON_TRIGGER		= 1,
@@ -29,6 +18,12 @@ enum Buttons
 	BUTTON_REAR_RIGHT	= 9,
 	BUTTON_RIGHT_FRONT	= 11,
 	BUTTON_RIGHT_REAR	= 10,
+};
+
+enum MotorConnection
+{
+	MOTOR_NORMAL	= 0,	//isInverted = false
+	MOTOR_INVERTED	= 1,	//isInverted = true
 };
 
 

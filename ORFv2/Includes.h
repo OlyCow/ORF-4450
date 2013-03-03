@@ -18,8 +18,8 @@
 #include <vector>
 
 #include "InsightLT/InsightLT.h"
-using namespace insight;
 
+#include "Utilities/math.h"
 #include "Utilities/Motor.h"
 #include "Utilities/enums.h"
 #include "Utilities/global_vars.h"

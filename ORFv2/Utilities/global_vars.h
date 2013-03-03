@@ -7,9 +7,15 @@
 
 const float g_expiration = 0.10; //seconds
 
-const float g_maxPower = 1.00;
-const float g_halfPower = 0.50;
-const float g_feederPower = 0.50;
+const float g_teleopLoopInterval = 0.05; //seconds
+
+const float g_joystickDeadZone = 0.01; //motor power (?)
+
+const float g_rampJoystickThreshold = 0.2; //motor power (?)
+
+const float g_maxPower = 1.00; //motor power
+const float g_halfPower = 0.50; //motor power
+const float g_feederPower = 0.50; //motor power
 
 const float g_shootInterval = 3.0; //seconds
 

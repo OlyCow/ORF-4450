@@ -4,6 +4,9 @@
 
 void Robot::Autonomous()
 {
+	cRIO->insight.pauseDisplay();
+	alliance = ds->GetAlliance();
+	startLocation = ds->GetLocation();
 	// This is a test.
 	driveBase.drive(1.0, 1.0, 0.0, 0.0);
 	driveBase.drive(1.0, 0.0, 0.0, 1.0);

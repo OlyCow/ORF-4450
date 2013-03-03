@@ -10,19 +10,11 @@ Robot::Robot():
 {
 	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
 	
-	cRIO->driveSystem.SetExpiration(g_expiration);
-	
-	cRIO->driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-	cRIO->driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
-	
 	LCD::ConsoleLog("%s Constructor-end", g_programName.c_str());
 	
 	
 	
 	
-	
-	cRIO->driveFrontRMotor.Invert();
-	cRIO->driveRearRMotor.Invert();
 	
 	static DriveBase driveBase(this);
 	static Launcher launcher(this);
@@ -80,15 +72,12 @@ void Robot::Disabled()
 void Robot::MonitorBattery(int dsPointer)
 {
 	DriverStation	*ds;
+	ds = (DriverStation*) dsPointer;
 	bool			batteryOk = true,
 					alarmFlash = false;
 	
 	LCD::ConsoleLog("Start MonitorBattery");
-	
-	ds = (DriverStation*) dsPointer;
-	
 	SmartDashboard::PutBoolean("Low Battery", false);
-	
 	
 	// Checks battery voltage every 10 seconds.
 	// Drops out when battery goes below the threshold.
@@ -99,7 +88,6 @@ void Robot::MonitorBattery(int dsPointer)
 		Wait(10.0);
 	}
 	
-	
 	// Flashes the battery warning LED on driver station.
 	while (true)
 	{
@@ -109,7 +97,6 @@ void Robot::MonitorBattery(int dsPointer)
 			alarmFlash = true;
 		
 		SmartDashboard::PutBoolean("Low Battery", alarmFlash);
-		
 		Wait(1.0);
 	}
 }
