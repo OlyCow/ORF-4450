@@ -84,7 +84,8 @@ void Robot::MonitorBattery(int dsPointer)
 	while (batteryOk)
 	{
 		//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-		if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
+		if (ds->GetBatteryVoltage() < g_lowBatteryThreshold)
+			batteryOk = false;
 		Wait(10.0);
 	}
 	

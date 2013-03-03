@@ -22,12 +22,16 @@ const float g_shootInterval = 3.0; //seconds
 const float g_launchInitRequired = 0.2; //motor power
 const float g_launchInitTime = 1.0; //seconds
 
+const float g_lowBatteryThreshold = 10.0; //volts (?)
+
 
 
 const string g_programHeader = "Program: ";
 const string g_batteryHeader = "Battery: ";
 
 const string g_programName = "ORFv2";
+
+const string g_cameraIP = "10.44.50.11";
 
 
 
