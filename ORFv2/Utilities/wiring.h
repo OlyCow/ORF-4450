@@ -7,15 +7,13 @@
 
 class wiring
 {
-public:
-	// Will get rid of this stuff soon.
-	RobotDrive		driveSystem;
-	
+public:	
 	Joystick		positionStick,
 					rotateStick,
-					launcherStick;
+					launcherHeightStick,
+					launcherPowerStick;
 	
-	Talon			driveFrontLMotor,
+	Motor			driveFrontLMotor,
 					driveFrontRMotor,
 					driveRearLMotor,
 					driveRearRMotor,
@@ -27,6 +25,10 @@ public:
 	DigitalInput	topHeightLimitSwitch,
 					bottomHeightLimitSwitch,
 					feederLimitSwitch;
+	
+	insight::InsightLT		insight;
+	insight::StringData		insightProgram;
+	insight::DecimalData	insightBattery;
 	
 	wiring();
 	~wiring();

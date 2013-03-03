@@ -6,9 +6,6 @@
 class Robot : public SimpleRobot
 {
 public:
-	InsightLT		insightLT;
-	DecimalData		displayBattery;
-	StringData		displayProgram;
 	DriverStation	*ds;
 		int							startLocation;
 		DriverStation::Alliance		alliance;

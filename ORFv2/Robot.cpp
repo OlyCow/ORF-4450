@@ -4,118 +4,67 @@
 
 
 Robot::Robot():
-	insightLT(TWO_ONE_LINE_ZONES),
-	displayBattery("Battery: "),
-	displayProgram("Pgm: "),
 	ds(DriverStation::GetInstance()),
 	cRIO(),
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
-	try
-	{
-		LCD::ConsoleLog("%s Constructor", PROGRAM_NAME);
-		
-		static DriveBase driveBase(this);
-		static Launcher launcher(this);
-
-		cRIO->driveSystem.SetExpiration(g_expiration);
-
-		// Set the InsightLT display.
-		insightLT.registerData(displayProgram, 1);
-		displayProgram.setData(PROGRAM_NAME);
-		insightLT.registerData(displayBattery, 2);
-
-		cRIO->driveSystem.SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
-		cRIO->driveSystem.SetInvertedMotor(RobotDrive::kRearRightMotor, true);
-
-		LCD::ConsoleLog("%s Constructor-end", PROGRAM_NAME);
-	}
-	catch (exception *e)
-	{
-		LCD::ConsoleLog("Constructor Exception: %s", e->what());
-	}
+	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
+	
+	LCD::ConsoleLog("%s Constructor-end", g_programName.c_str());
+	
+	
+	
+	
+	
+	static DriveBase driveBase(this);
+	static Launcher launcher(this);
 }
 
 
 
 void Robot::RobotInit()
 {
-	try
-	{
-		LCD::ConsoleLog("RobotInit");
-		LCD::PrintLine(1, "Mode: RobotInit");
-
-		SmartDashboard::PutString("Program", PROGRAM_NAME);
-		SmartDashboard::PutBoolean("Checkbox 1", false);
-
-		// Start the battery monitoring Task.
-
-		monitorBatteryTask.Start((UINT32) ds);
-
-		LCD::ConsoleLog("RobotInit-end");
-	}
-	catch (exception *e)
-	{
-		LCD::ConsoleLog("RobotInit Exception: %s", e->what());
-	}
-	RunMode(MODE_INIT, false);
+	LCD::ConsoleLog("RobotInit");
+	LCD::PrintLine(1, "Mode: RobotInit");
+	
+	SmartDashboard::PutString("Program", g_programName);
+	SmartDashboard::PutBoolean("Checkbox 1", false);
+	
+	LCD::ConsoleLog("RobotInit-end");
+	
+	
+	
+	
+	
+	// Start the battery monitoring Task.
+	monitorBatteryTask.Start((UINT32) ds);
 }
 
 
 
 void Robot::Disabled()
 {
-	try
-	{
-		LCD::ConsoleLog("Disabled");
-		LCD::PrintLine(1, "Mode: Disabled");
-		
-		// Reset driver station LEDs.
-		
-		SmartDashboard::PutBoolean("Disabled", true);	
-		SmartDashboard::PutBoolean("Autonomous Mode", false);	
-		SmartDashboard::PutBoolean("Teleop Mode", false);	
-		SmartDashboard::PutBoolean("End Wait", false);	
-		SmartDashboard::PutBoolean("Arcade Drive", false);	
-		SmartDashboard::PutBoolean("Shoot Disc", false);	
-		SmartDashboard::PutBoolean("Climb Mode", false);	
-		SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());	
-
-		// the following loads current battery voltage into the
-		// InsightLT display. We can plug in the InsightLT when robot is
-		// disabled to check voltage. Display turned off on entry to
-		// other modes.
-		insightLT.startDisplay();
-		displayBattery.setData(ds->GetBatteryVoltage());
-
-		LCD::ConsoleLog("Disabled-end");
-	}
-	catch (exception *e)
-	{
-		LCD::ConsoleLog("Disabled Exception: %s", e->what());
-	}
-	RunMode(MODE_DISABLED, false);
-}
-
-
-
-void Robot::Autonomous()
-{
-	RunMode(MODE_AUTONOMOUS, true);
-}
-
-
-
-void Robot::OperatorControl()
-{
-	RunMode(MODE_TELEOP, true);
-}
-
-
-
-void Robot::Test()
-{
-	RunMode(MODE_TEST, true);
+	LCD::ConsoleLog("Disabled");
+	LCD::PrintLine(1, "Mode: Disabled");
+	
+	// Reset driver station LEDs.
+	
+	SmartDashboard::PutBoolean("Disabled", true);	
+	SmartDashboard::PutBoolean("Autonomous Mode", false);	
+	SmartDashboard::PutBoolean("Teleop Mode", false);	
+	SmartDashboard::PutBoolean("End Wait", false);	
+	SmartDashboard::PutBoolean("Arcade Drive", false);	
+	SmartDashboard::PutBoolean("Shoot Disc", false);	
+	SmartDashboard::PutBoolean("Climb Mode", false);	
+	SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());	
+	
+	LCD::ConsoleLog("Disabled-end");
+	
+	
+	
+	
+	
+	cRIO->insightBattery.setData(ds->GetBatteryVoltage());
 }
 
 
@@ -123,43 +72,33 @@ void Robot::Test()
 void Robot::MonitorBattery(int dsPointer)
 {
 	DriverStation	*ds;
-	bool			batteryOk = true, alarmFlash = false;
-
-	try
+	ds = (DriverStation*) dsPointer;
+	bool			batteryOk = true,
+					alarmFlash = false;
+	
+	LCD::ConsoleLog("Start MonitorBattery");
+	SmartDashboard::PutBoolean("Low Battery", false);
+	
+	// Checks battery voltage every 10 seconds.
+	// Drops out when battery goes below the threshold.
+	while (batteryOk)
 	{
-		LCD::ConsoleLog("Start MonitorBattery");
-
-		ds = (DriverStation*) dsPointer;
-
-		SmartDashboard::PutBoolean("Low Battery", false);
-
-
-		// Checks battery voltage every 10 seconds.
-		// Drops out when battery goes below the threshold.
-		while (batteryOk)
-		{
-			//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-			if (ds->GetBatteryVoltage() < LOW_BATTERY) batteryOk = false;
-			Wait(10.0);
-		}
-
-		
-		// Flashes the battery warning LED on driverstation.
-		while (true)
-		{
-			if (alarmFlash)
-				alarmFlash = false;
-			else
-				alarmFlash = true;
-
-			SmartDashboard::PutBoolean("Low Battery", alarmFlash);
-
-			Wait(1.0);
-		}
+		//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
+		if (ds->GetBatteryVoltage() < g_lowBatteryThreshold)
+			batteryOk = false;
+		Wait(10.0);
 	}
-	catch (exception *e)
+	
+	// Flashes the battery warning LED on driver station.
+	while (true)
 	{
-		LCD::ConsoleLog("Monitor Battery Exception: %s", e->what());
+		if (alarmFlash)
+			alarmFlash = false;
+		else
+			alarmFlash = true;
+		
+		SmartDashboard::PutBoolean("Low Battery", alarmFlash);
+		Wait(1.0);
 	}
 }
 
