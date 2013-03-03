@@ -64,7 +64,7 @@ void Zone::removeDataElement(DisplayData *item)
 	vector<DisplayData*>::iterator iter = std::find(m_infoItems.begin(), m_infoItems.end(), item);
 	if(iter != m_infoItems.end())
 	{
-		//std::cout << "Removing item by destructor" << endl;
+		std::cout << "Removing item by destructor" << endl;
 		m_infoItems.erase(iter);
 	}
 }
@@ -136,7 +136,7 @@ void Zone::update()
 		if(milliSecs > m_displayTime)
 		{
 			advanceZoneDown();
-			//cout << "Class: " << this << " - scroll:" << m_scrollPosition << endl;
+			cout << "Class: " << this << " - scroll:" << m_scrollPosition << endl;
 			clock_gettime(CLOCK_REALTIME, &m_scrollTimer);
 		}
 	}

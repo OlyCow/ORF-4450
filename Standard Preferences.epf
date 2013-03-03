@@ -1,4 +1,4 @@
-#Fri Mar 01 08:47:01 PST 2013
+#Fri Mar 01 18:00:24 PST 2013
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_paren_in_cast=insert
 @org.eclipse.ui.editors=3.6.1.r361_v20100825-0800
 @org.eclipse.debug.ui=3.6.3.wr
@@ -59,7 +59,6 @@
 /instance/org.eclipse.cdt.ui/formatter_profile=org.eclipse.cdt.ui.default.kandr_profile
 /instance/org.eclipse.cdt.ui/semanticHighlighting.enum.enabled=true
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_for=insert
-/instance/org.eclipse.cdt.ui/removeTrailingWhitespace=true
 /instance/org.eclipse.cdt.ui/editor_folding_preprocessor_enabled=true
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_enum_declarations=insert
 /instance/org.eclipse.cdt.ui/semanticHighlighting.namespace.color=103,140,177
@@ -72,6 +71,7 @@
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_cast=do not insert
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_brackets=do not insert
 /instance/org.eclipse.cdt.core/indexer/skipImplicitReferences=true
+/instance/org.eclipse.cdt.ui/markOccurrences=false
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_angle_bracket_in_template_arguments=do not insert
 /instance/org.eclipse.ui.workbench/org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<org.eclipse.ui.commands>\r\n<activeKeyConfiguration keyConfigurationId\="org.eclipse.cdt.ui.visualstudio"/>\r\n<keyBinding contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="CTRL+B"/>\r\n<keyBinding commandId\="org.eclipse.ui.project.buildAll" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.cdt.ui.visualstudio" keySequence\="F7"/>\r\n<keyBinding contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="CTRL+B CTRL+B"/>\r\n<keyBinding commandId\="org.eclipse.ui.project.buildAll" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.cdt.ui.visualstudio" keySequence\="F7 F7"/>\r\n<keyBinding contextId\="org.eclipse.debug.ui.debugging" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="F7"/>\r\n<keyBinding contextId\="org.eclipse.debug.ui.debugging" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="F7"/>\r\n</org.eclipse.ui.commands>
 /instance/org.eclipse.cdt.ui/semanticHighlighting.macroDefinition.color=38,139,210
@@ -126,8 +126,8 @@
 /instance/org.eclipse.cdt.ui/asm_directive=181,137,0
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_angle_bracket_in_template_parameters=do not insert
 /instance/org.eclipse.cdt.ui/semanticHighlighting.function.color=103,140,177
-/instance/org.eclipse.ui.editors/showWhitespaceCharacters=true
 @org.eclipse.core.resources=3.6.2.R36x_v20110302
+/instance/org.eclipse.ui.editors/showWhitespaceCharacters=true
 @com.windriver.ide.debug=3.3.1.20110527-1139
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_angle_bracket_in_template_parameters=do not insert
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_block=end_of_line
@@ -162,8 +162,8 @@
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_body_declarations_compare_to_access_specifier=true
 /instance/org.eclipse.cdt.ui/semanticHighlighting.enum.color=224,226,228
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indentation.size=4
-/instance/org.eclipse.ui.editors/AbstractTextEditor.Color.FindScope=224,226,228
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_brace_in_block=insert
+/instance/org.eclipse.ui.editors/AbstractTextEditor.Color.FindScope=224,226,228
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_base_clause_in_type_declaration=80
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_exception_specification=do not insert
 /instance/org.eclipse.ui.editors/filteredSearchResultIndicationColor=7,54,66
@@ -194,8 +194,8 @@
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_while=insert
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_prefix_operator=do not insert
 /instance/org.eclipse.cdt.ui/c_keyword=181,137,0
-/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_access_specifier_compare_to_type_header=false
 /instance/org.eclipse.core.resources/description.filestatelongevity=691200000
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_access_specifier_compare_to_type_header=false
 /instance/org.eclipse.cdt.ui/semanticHighlighting.field.enabled=true
 /instance/org.eclipse.cdt.ui/editor_folding_statements=true
 /instance/org.eclipse.cdt.ui/semanticHighlighting.namespace.enabled=true
@@ -204,8 +204,8 @@
 /instance/org.eclipse.ui.editors/deletionIndicationColor=224,226,228
 /instance/com.windriver.ide.common.core/license.ask.before.checkout=true
 /instance/org.eclipse.ui.editors/undoHistorySize=1024
-/instance/org.eclipse.ui.editors/writeOccurrenceIndicationColor=7,54,66
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_angle_bracket_in_template_arguments=do not insert
+/instance/org.eclipse.ui.editors/writeOccurrenceIndicationColor=7,54,66
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_parameters_in_method_declaration=16
 /instance/org.eclipse.cdt.core/indexer/useHeuristicIncludeResolution=true
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_at_end_of_file_if_missing=do not insert
@@ -221,8 +221,8 @@
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_if=insert
 /instance/org.eclipse.cdt.ui/semanticHighlighting.method.enabled=true
 /instance/org.eclipse.ui.editors/AbstractTextEditor.Color.SelectionBackground.SystemDefault=false
-/instance/org.eclipse.ui/KEY_CONFIGURATION_ID=org.eclipse.cdt.ui.visualstudio
 /instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_expression_list=0
+/instance/org.eclipse.ui/KEY_CONFIGURATION_ID=org.eclipse.cdt.ui.visualstudio
 /instance/org.eclipse.cdt.ui/closeBraces=false
 @org.eclipse.wst.sse.core=1.1.504.v201102160550
 /instance/org.eclipse.ui.editors/lineNumberColor=101,123,131

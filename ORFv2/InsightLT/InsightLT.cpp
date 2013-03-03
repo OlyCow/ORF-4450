@@ -147,7 +147,7 @@ bool InsightLT::registerData(DisplayData &data, int zoneNumber)
  */
 void InsightLT::initializeDisplay()
 {	
-	//std::cout << "Initializing the display " << std::endl;		
+	std::cout << "Initializing the display " << std::endl;		
 	UINT8 buffer[6];
 	
 	buffer[0] = 0x00;		
@@ -213,11 +213,11 @@ void InsightLT::writeMessage(std::string message, int line, int position)
  */
 void InsightLT::welcomeMessage()
 {
-	std::string message("Bit Built Tech");
-	std::string message2("Robot Diagnostics");
+	std::string messageA("ORF: FRC Team 4450");
+	std::string messageB("This is ORFius. Hi.");
 	
-	writeMessage(message, LINE_1, 0);
-	writeMessage(message2, LINE_2, 3);
+	writeMessage(messageA, LINE_1, 0);
+	writeMessage(messageB, LINE_2, 0);
 }
 
 /* startDisplay initiates the display background task or restarts
