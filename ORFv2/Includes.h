@@ -20,6 +20,7 @@
 #include "InsightLT/InsightLT.h"
 using namespace insight;
 
+#include "Utilities/Motor.h"
 #include "Utilities/enums.h"
 #include "Utilities/global_vars.h"
 #include "Utilities/wiring.h"
