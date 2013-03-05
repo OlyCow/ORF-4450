@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wrxml>
     <properties platform="VxWorks" platform_name="vxworks-6.3" root="1" type="DownloadableKernelModuleProject"/>
-    <subprojects>
-        <subproject project="/WPILib"/>
-    </subprojects>
     <attributes>
         <mapAttribute>
             <listAttribute key="BLD::Info|GlobalMacros">
@@ -28,9 +25,10 @@
                 <stringAttribute value="-I$(WIND_BASE)/target/h/wrn/coreip"/>
             </listAttribute>
             <listAttribute key="BLD::Info|Incl|PPC603gnu">
-                <stringAttribute value="-I$(WIND_BASE)/target/h"/>
-                <stringAttribute value="-I$(WIND_BASE)/target/h/WPILib"/>
                 <stringAttribute value="-I$(WIND_BASE)/target/h/wrn/coreip"/>
+                <stringAttribute value="-I$(WIND_BASE)/target/h/WPILib"/>
+                <stringAttribute value="-I$(WIND_BASE)/target/h"/>
+                <stringAttribute value="-I$(WIND_BASE)/host"/>
             </listAttribute>
             <listAttribute key="BLD::Info|Libs|PPC32diab">
                 <stringAttribute value="$(WIND_BASE)/target/lib/WPILib.a"/>

@@ -34,9 +34,4 @@
 
 
 
-// Macro #defines are evil. I'll get rid of these...
-// sometime. Though they are handy, I'll admit.
-
-
-
 #endif // _INCLUDES_H_
