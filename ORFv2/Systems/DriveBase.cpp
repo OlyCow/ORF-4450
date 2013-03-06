@@ -1,6 +1,8 @@
 #include "../Includes.h"
 #include "DriveBase.h"
 
+using namespace math;
+
 
 
 DriveBase::DriveBase(Robot *robot):
@@ -46,12 +48,48 @@ void DriveBase::rectangularSetDriveBase(	float x,
 											float rotation,
 											float heading	)
 {
+	rotateVector(x, y, rotation);
+	
+	float powerFL = 0;
+	float powerFR = 0;
+	float powerRL = 0;
+	float powerRR = 0;
+	
+	// Forward and backward
+	powerFL = limitMax(powerFL+y, g_maxPower);
+	powerFR = limitMax(powerFR+y, g_maxPower);
+	powerRL = limitMax(powerRL+y, g_maxPower);
+	powerRR = limitMax(powerRR+y, g_maxPower);
+	
+	// Left and right
+	powerFL = limitMin(powerFL-x, -g_maxPower);
+	powerFR = limitMax(powerFR+x, g_maxPower);
+	powerRL = limitMax(powerRL+x, g_maxPower);
+	powerRR = limitMin(powerRR-x, -g_maxPower);
+	
+	// Clockwise and counter-clockwise
+	powerFL = limitMin(powerFL-rotation, -g_maxPower);
+	powerFR = limitMax(powerFR+rotation, g_maxPower);
+	powerRL = limitMin(powerRL-rotation, -g_maxPower);
+	powerRR = limitMax(powerRR+rotation, g_maxPower);
+	
+	setFrontLMotor(powerFL);
+	setFrontRMotor(powerFR);
+	setRearLMotor(powerRL);
+	setRearRMotor(powerRR);
 }
 void DriveBase::polarSetDriveBase(	float angle,
 									float power,
 									float rotation,
 									float heading	)
 {
+	float x = 0;
+	float y = 0;
+	
+	x = power*cos(angle);
+	y = power*sin(angle);
+	
+	rectangularSetDriveBase(x, y, rotation, heading);
 }
 
 

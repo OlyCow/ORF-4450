@@ -31,7 +31,7 @@ else
 MODE_DIR := NonDebug
 endif
 OBJ_DIR := .
-WS_ROOT_DIR := C:/Users/thoward3200/Documents/012_GitHub/ORF-4450
+WS_ROOT_DIR := C:/Users/guex/Documents/GitHub/ORF-4450
 PRJ_ROOT_DIR := $(WS_ROOT_DIR)/ORFv2
 
 
@@ -52,7 +52,7 @@ CC_ARCH_SPEC = -mcpu=603 -mstrict-align -mno-implicit-fp -mlongcall
 LIBPATH = 
 LIBS = 
 
-IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+IDE_INCLUDES = -I$(WIND_BASE)/target/h/wrn/coreip -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h -I$(WIND_BASE)/host 
 
 IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
 
@@ -101,7 +101,7 @@ ORFv2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker =
 ORFv2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
 ORFv2_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -O2 -fstrength-reduce -fno-builtin
 endif
-ORFv2_partialImage/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+ORFv2_partialImage/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h/wrn/coreip -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h -I$(WIND_BASE)/host 
 ORFv2_partialImage/$(MODE_DIR)/% : IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
 ORFv2_partialImage/$(MODE_DIR)/% : IDE_DEFINES = 
 ORFv2_partialImage/$(MODE_DIR)/% : PROJECT_TYPE = DKM
@@ -225,7 +225,7 @@ ORFv2/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker =
 ORFv2/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
 ORFv2/$(MODE_DIR)/% : DEBUGFLAGS_Assembler = -O2 -fstrength-reduce -fno-builtin
 endif
-ORFv2/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h/wrn/coreip 
+ORFv2/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h/wrn/coreip -I$(WIND_BASE)/target/h/WPILib -I$(WIND_BASE)/target/h -I$(WIND_BASE)/host 
 ORFv2/$(MODE_DIR)/% : IDE_LIBRARIES = $(WIND_BASE)/target/lib/WPILib.a 
 ORFv2/$(MODE_DIR)/% : IDE_DEFINES = 
 ORFv2/$(MODE_DIR)/% : PROJECT_TYPE = DKM
