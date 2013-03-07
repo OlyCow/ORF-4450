@@ -5,19 +5,19 @@ using namespace math;
 
 
 
-template <typename Type>
-Type limit(Type input, Type limiter)
+//template <typename Type>
+float limit(float input, float limiter)
 {
 	if (input>0)
-		limitMax(input, limiter);
+		return limitMax(input, limiter);
 	else if (input<0)
-		limitMin(input, limiter);
+		return limitMin(input, limiter);
 	else
 		return 0;
 }
 
-template <typename Type>
-Type limitMax(Type input, Type limiter)
+//template <typename Type>
+float limitMax(float input, float limiter)
 {
 	if (input<limiter)
 		return input;
@@ -25,8 +25,8 @@ Type limitMax(Type input, Type limiter)
 		return limiter;
 }
 
-template <typename Type>
-Type limitMin(Type input, Type limiter)
+//template <typename Type>
+float limitMin(float input, float limiter)
 {
 	if (input>limiter)
 		return input;
@@ -37,7 +37,9 @@ Type limitMin(Type input, Type limiter)
 template <typename Type>
 Type prune(Type input, Type deadZone)
 {
-	if (input>deadZone)
+	if (input > deadZone)
+		return input;
+	else if (input < -deadZone)
 		return input;
 	else
 		return 0;
@@ -51,6 +53,6 @@ Type normalize(	Type input,
 }
 
 template <typename Type>
-Type rotateVector(Type x, Type y, Type degrees)
+void rotateVector(Type x, Type y, Type degrees)
 {
 }
