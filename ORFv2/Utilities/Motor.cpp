@@ -1,13 +1,18 @@
 #include "../Includes.h"
 #include "Motor.h"
 
-//using namespace math;
+using namespace math;
 
 
 
 Motor::Motor(UINT32 channel, bool isInverted):
 	Talon(channel),
 	isInverted(isInverted)
+{
+	Set(0);
+}
+
+Motor::~Motor()
 {
 	Set(0);
 }

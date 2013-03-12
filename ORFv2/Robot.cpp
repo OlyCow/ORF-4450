@@ -69,6 +69,14 @@ void Robot::Disabled()
 
 
 
+void Robot::ModeInit()
+{
+	static DriveBase driveBase(this);
+	static Launcher launcher(this);
+}
+
+
+
 void Robot::MonitorBattery(int dsPointer)
 {
 	DriverStation	*ds;

@@ -22,7 +22,8 @@ public:
 
 
 private:
-	// Runs as task.
+	void ModeInit();
+	// Runs as a task.
 	static void MonitorBattery(int dsPointer);
 };
 

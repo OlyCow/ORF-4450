@@ -48,9 +48,11 @@ Type normalize(	Type input,
 				Type currentHigh,
 				Type normalizedHigh	)
 {
+	;
 }
 
 template <typename Type>
 Type rotateVector(Type x, Type y, Type degrees)
 {
+	;
 }

@@ -3,7 +3,7 @@
 
 
 
-class Motor: public Talon
+class Motor : public Talon
 {
 public:
 	Motor(UINT32 channel, bool isInverted=false);

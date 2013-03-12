@@ -4,6 +4,8 @@
 
 void Robot::Test()
 {
+	DriveBase driveBase(this);
+	Launcher launcher(this);
 	// This is a test.
 	driveBase.drive(1.0, 1.0, 0.0, 0.0);
 	driveBase.drive(1.0, 0.0, 0.0, 1.0);

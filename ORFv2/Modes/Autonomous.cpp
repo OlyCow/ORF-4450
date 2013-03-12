@@ -4,6 +4,8 @@
 
 void Robot::Autonomous()
 {
+	DriveBase driveBase(this);
+	Launcher launcher(this);
 	cRIO->insight.pauseDisplay();
 	alliance = ds->GetAlliance();
 	startLocation = ds->GetLocation();
@@ -15,5 +17,5 @@ void Robot::Autonomous()
 	launcher.shoot(1.0, 4);
 	launcher.setRampMotor(0.5);
 	Wait(1.0);
-	launcher.setRampMotor(0.0);
+//	launcher.setRampMotor(0.0);
 }

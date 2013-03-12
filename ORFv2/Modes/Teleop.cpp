@@ -4,6 +4,8 @@
 
 void Robot::OperatorControl()
 {
+	DriveBase driveBase(this);
+	Launcher launcher(this);
 	cRIO->insight.pauseDisplay();
 	alliance = ds->GetAlliance();
 	startLocation = ds->GetLocation();
