@@ -4,6 +4,12 @@
 
 void Robot::OperatorControl()
 {
+	this->mode_name = "Teleop";
+	
+	
+	
+	
+	
 	cRIO->insight.pauseDisplay();
 	alliance = ds->GetAlliance();
 	startLocation = ds->GetLocation();

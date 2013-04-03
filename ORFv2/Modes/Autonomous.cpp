@@ -4,6 +4,12 @@
 
 void Robot::Autonomous()
 {
+	this->mode_name = "Autonomous";
+	
+	
+	
+	
+	
 	cRIO->insight.pauseDisplay();
 	alliance = ds->GetAlliance();
 	startLocation = ds->GetLocation();

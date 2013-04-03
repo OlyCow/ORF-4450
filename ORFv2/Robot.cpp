@@ -5,11 +5,17 @@
 
 Robot::Robot():
 	ds(DriverStation::GetInstance()),
+	camera(AxisCamera::GetInstance(g_cameraIP.c_str())),
 	cRIO(),
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
-	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
+	this->mode_name = "Constructor";
 	
+	
+	
+	
+	
+	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
 	LCD::ConsoleLog("%s Constructor-end", g_programName.c_str());
 	
 	
@@ -20,12 +26,11 @@ Robot::Robot():
 	static Launcher launcher(this);
 }
 
-
-
 void Robot::RobotInit()
 {
-	LCD::ConsoleLog("RobotInit");
-	LCD::PrintLine(1, "Mode: RobotInit");
+	this->mode_name = "RobotInit";
+	ModeStart();
+	
 	
 	SmartDashboard::PutString("Program", g_programName);
 	SmartDashboard::PutBoolean("Checkbox 1", false);
@@ -38,66 +43,106 @@ void Robot::RobotInit()
 	
 	// Start the battery monitoring Task.
 	monitorBatteryTask.Start((UINT32) ds);
+	
+	ModeEnd();
 }
-
-
 
 void Robot::Disabled()
 {
-	LCD::ConsoleLog("Disabled");
-	LCD::PrintLine(1, "Mode: Disabled");
+	this->mode_name = "Disabled";
+	ModeStart();
+	
+	
+	
+	
 	
 	// Reset driver station LEDs.
-	
-	SmartDashboard::PutBoolean("Disabled", true);	
-	SmartDashboard::PutBoolean("Autonomous Mode", false);	
-	SmartDashboard::PutBoolean("Teleop Mode", false);	
-	SmartDashboard::PutBoolean("End Wait", false);	
-	SmartDashboard::PutBoolean("Arcade Drive", false);	
-	SmartDashboard::PutBoolean("Shoot Disc", false);	
-	SmartDashboard::PutBoolean("Climb Mode", false);	
-	SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());	
-	
-	LCD::ConsoleLog("Disabled-end");
+	SmartDashboard::PutBoolean("Disabled", true);
+	SmartDashboard::PutBoolean("Autonomous Mode", false);
+	SmartDashboard::PutBoolean("Teleop Mode", false);
+	SmartDashboard::PutBoolean("End Wait", false);
+	SmartDashboard::PutBoolean("Arcade Drive", false);
+	SmartDashboard::PutBoolean("Shoot Disc", false);
+	SmartDashboard::PutBoolean("Climb Mode", false);
+	SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());
 	
 	
 	
 	
 	
 	cRIO->insightBattery.setData(ds->GetBatteryVoltage());
+	ModeEnd();
 }
 
-
+void Robot::ModeStart()
+{
+	string console = "Start: ";
+	console.append(this->mode_name);
+	LCD::ConsoleLog( (char*)console.c_str() );
+	
+	string LCD = "Mode: ";
+	LCD.append(this->mode_name);
+	LCD::PrintLine(LINE_MODE, LCD.c_str());
+}
+void Robot::ModeEnd()
+{
+	string console = "End: ";
+	console.append(this->mode_name);
+	LCD::ConsoleLog( (char*)console.c_str() );
+	
+	LCD::ClearLine(LINE_MODE);
+}
 
 void Robot::MonitorBattery(int dsPointer)
 {
 	DriverStation	*ds;
 	ds = (DriverStation*) dsPointer;
-	bool			batteryOk = true,
-					alarmFlash = false;
+	bool batteryOK = true;
+	bool alarmFlash = false;
+	float voltage = ds->GetBatteryVoltage();
+	string message = "Voltage: ";
+	
+	
+	
+	
 	
 	LCD::ConsoleLog("Start MonitorBattery");
 	SmartDashboard::PutBoolean("Low Battery", false);
 	
-	// Checks battery voltage every 10 seconds.
+	
+	
+	
+	
+	// Checks battery voltage every 5 seconds.
 	// Drops out when battery goes below the threshold.
-	while (batteryOk)
+	while (batteryOK)
 	{
-		//LCD::ConsoleLog("Battery Check %f", ds->GetBatteryVoltage());
-		if (ds->GetBatteryVoltage() < g_lowBatteryThreshold)
-			batteryOk = false;
-		Wait(10.0);
+		voltage = ds->GetBatteryVoltage();
+		if (voltage < g_lowBatteryThreshold)
+			batteryOK = false;
+		message.append(math::stringify(voltage));
+		
+		LCD::PrintLine(LINE_BATTERY, message.c_str());
+		Wait(5.0);
 	}
 	
-	// Flashes the battery warning LED on driver station.
+	// Flashes the battery warning "LED" on driver station.
+	
+	
+	
+	
+	
+	SmartDashboard::PutBoolean("Low Battery", alarmFlash);
+	
+	
+	
+	
+	
 	while (true)
 	{
-		if (alarmFlash)
-			alarmFlash = false;
-		else
-			alarmFlash = true;
-		
-		SmartDashboard::PutBoolean("Low Battery", alarmFlash);
+		alarmFlash = true;
+		Wait(1.0);
+		alarmFlash = false;
 		Wait(1.0);
 	}
 }

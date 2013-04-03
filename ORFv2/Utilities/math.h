@@ -39,6 +39,9 @@ namespace math
 	
 	template <typename Type>
 	void rotateVector(Type x, Type y, Type degrees);
+	
+	template <typename Type>
+	string stringify(Type input);
 }
 
 

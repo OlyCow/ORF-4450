@@ -3,24 +3,15 @@
 
 
 
-DriverStationLCD* LCD::dsLcd = 0;
+DriverStationLCD* LCD::dsLCD = 0;
 
-LCD::LCD(void)
+LCD::LCD()
 {
 }
-	
 LCD::~LCD()
 {
 }
-	
-void LCD::InitLcd()
-{
-	ConsoleLog("LCD.InitLcd");
-	dsLcd = DriverStationLCD::GetInstance();
-	ConsoleLog("LCD.InitLcd %d", dsLcd);
-	dsLcd->Clear();
-}
-	
+
 void LCD::ConsoleLog(char *message, ...)
 {
 	char messageBuf[128];
@@ -28,136 +19,67 @@ void LCD::ConsoleLog(char *message, ...)
 	va_list vl;
 	va_start(vl, message);
 	
-	vsprintf(messageBuf, message, vl);
-		
-	printf("robot: %s\n", messageBuf);
+	vsprintf(messageBuf, message, vl);	
+	printf("Robot: %s\n", messageBuf);
 }
-	
-void LCD::Print(INT32 line, INT32 column, const char *message, ...)
+void LCD::PrintLine(int line, const char *message, ...)
 {
-	DriverStationLCD::Line lcdLine;
-		
-	if (dsLcd == 0) InitLcd();
-		
-	switch (line)
-	{
-		case 1:
-			lcdLine = DriverStationLCD::kUser_Line1;
-			break;
-
-		case 2:
-			lcdLine = DriverStationLCD::kUser_Line2;
-			break;
-
-		case 3:
-			lcdLine = DriverStationLCD::kUser_Line3;
-			break;
-
-		case 4:
-			lcdLine = DriverStationLCD::kUser_Line4;
-			break;
-
-		case 5:
-			lcdLine = DriverStationLCD::kUser_Line5;
-			break;
-
-		case 6:
-			lcdLine = DriverStationLCD::kUser_Line6;
-			break;
-	}
+	DriverStationLCD::Line lcdLine = SwitchLine(line);
 	
-	va_list vl;
-	va_start(vl, message);
-	
-	dsLcd->VPrintf(lcdLine, column, message, vl);
-		
-	dsLcd->UpdateLCD();
-}
-	
-void LCD::PrintLine(INT32 line, const char *message, ...)
-{
-	DriverStationLCD::Line lcdLine;
-	
-	//consoleLog("printLine %d, %d", line, dsLcd);
-	
-	if (dsLcd == 0) InitLcd();
+	if (dsLCD == 0) InitLCD();
 	
 	ClearLine(line);
-
-	switch (line)
-	{
-		case 1:
-			lcdLine = DriverStationLCD::kUser_Line1;
-			break;
-
-		case 2:
-			lcdLine = DriverStationLCD::kUser_Line2;
-			break;
-
-		case 3:
-			lcdLine = DriverStationLCD::kUser_Line3;
-			break;
-
-		case 4:
-			lcdLine = DriverStationLCD::kUser_Line4;
-			break;
-
-		case 5:
-			lcdLine = DriverStationLCD::kUser_Line5;
-			break;
-
-		case 6:
-			lcdLine = DriverStationLCD::kUser_Line6;
-			break;
-	}
-		
+	
+	// All this ellipsis stuff is never used.
+	// I just can't get rid of it w/out breaking something.
 	va_list vl;
 	va_start(vl, message);
-	
-	//consoleLog("printLine %d, %d: %s", line, dsLcd, message);
 
-	dsLcd->VPrintfLine(lcdLine, message, vl);
+	dsLCD->VPrintfLine(lcdLine, message, vl);
+	dsLCD->UpdateLCD();
+}
+void LCD::ClearLine(int line)
+{
+	// 42 spaces.
+	const char *blankLine =
+			"                                          ";
+	DriverStationLCD::Line lcdLine = SwitchLine(line);
+	
+	if (dsLCD == 0) InitLCD();
 		
-	dsLcd->UpdateLCD();
+	dsLCD->PrintfLine(lcdLine, blankLine);		
+	dsLCD->UpdateLCD();
 }
 
-void LCD::ClearLine(INT32 line)
+void LCD::InitLCD()
 {
-	const char *blankLine = "                                          ";
-	DriverStationLCD::Line lcdLine;
-	
-	//consoleLog("clearLine %d, %d", line, dsLcd);
-		
-	if (dsLcd == 0) InitLcd();
+	ConsoleLog("LCD.InitLcd");
+	dsLCD = DriverStationLCD::GetInstance();
+	ConsoleLog("LCD.InitLcd %d", dsLCD);
+	dsLCD->Clear();
+}
 
+DriverStationLCD::Line SwitchLine(int line)
+{
 	switch (line)
 	{
 	case 1:
-		lcdLine = DriverStationLCD::kUser_Line1;
+		return DriverStationLCD::kUser_Line1;
 		break;
-
 	case 2:
-		lcdLine = DriverStationLCD::kUser_Line2;
+		return DriverStationLCD::kUser_Line2;
 		break;
-
 	case 3:
-		lcdLine = DriverStationLCD::kUser_Line3;
+		return DriverStationLCD::kUser_Line3;
 		break;
-
 	case 4:
-		lcdLine = DriverStationLCD::kUser_Line4;
+		return DriverStationLCD::kUser_Line4;
 		break;
-
 	case 5:
-		lcdLine = DriverStationLCD::kUser_Line5;
+		return DriverStationLCD::kUser_Line5;
 		break;
-
 	case 6:
-		lcdLine = DriverStationLCD::kUser_Line6;
+		return DriverStationLCD::kUser_Line6;
 		break;
 	}
-		
-	dsLcd->PrintfLine(lcdLine, blankLine);		
-		
-	dsLcd->UpdateLCD();
 }

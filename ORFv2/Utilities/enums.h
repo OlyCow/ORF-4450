@@ -26,6 +26,12 @@ enum MotorConnection
 	MOTOR_INVERTED	= 1,	//isInverted = true
 };
 
+enum LineNumber
+{
+	LINE_BATTERY	= 1,
+	LINE_MODE		= 2,
+};
+
 
 
 #endif // _ENUMS_H_

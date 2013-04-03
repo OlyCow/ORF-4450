@@ -31,7 +31,7 @@ else
 MODE_DIR := NonDebug
 endif
 OBJ_DIR := .
-WS_ROOT_DIR := C:/Users/guex/Documents/GitHub/ORF-4450
+WS_ROOT_DIR := C:/Users/thoward3200/Documents/012_GitHub/ORF-4450
 PRJ_ROOT_DIR := $(WS_ROOT_DIR)/ORFv2
 
 
