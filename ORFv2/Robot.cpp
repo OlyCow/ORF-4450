@@ -23,19 +23,30 @@ void Robot::RobotInit()
 	this->mode_name = "RobotInit";
 	ModeStart();
 	
-	// Start the battery monitoring Task.
+	
+	SmartDashboard::PutBoolean(" Disabled ", false);
+	SmartDashboard::PutBoolean("Autonomous", false);
+	SmartDashboard::PutBoolean("  Teleop  ", false);
+	SmartDashboard::PutBoolean("   Test   ", false);
+	
+	SmartDashboard::PutNumber(	"Launch Speed",
+								launcher.getLaunchMotor() );
+	SmartDashboard::PutNumber(	"Total Power",
+								driveBase.getDrivePower() );
+	SmartDashboard::PutNumber(	"Total Rotation",
+								driveBase.getDriveRotation() );
+	
+	bool hasFMS = ds->IsFMSAttached();
+	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
+	SmartDashboard::PutBoolean("Feeding Disc", false);
+	
+	//THIS IS A TEST!
+	SmartDashboard::GetBoolean("Test: bool input");
+	SmartDashboard::GetString("Test: string input");
+	SmartDashboard::GetNumber("Test: double input");
+	
+	
 	monitorBatteryTask.Start((UINT32) ds);
-	
-	
-	
-	
-	
-	SmartDashboard::PutString("Program", g_programName);
-	SmartDashboard::PutBoolean("Checkbox 1", false);
-	
-	
-	
-	
 	
 	ModeEnd();
 }
@@ -46,21 +57,21 @@ void Robot::Disabled()
 	ModeStart();
 	
 	
-	
-	
-	
-	// Reset driver station LEDs.
-	SmartDashboard::PutBoolean("Disabled", true);
-	SmartDashboard::PutBoolean("Autonomous Mode", false);
-	SmartDashboard::PutBoolean("Teleop Mode", false);
-	SmartDashboard::PutBoolean("End Wait", false);
-	SmartDashboard::PutBoolean("Arcade Drive", false);
-	SmartDashboard::PutBoolean("Shoot Disc", false);
-	SmartDashboard::PutBoolean("Climb Mode", false);
-	SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());
-	
-	
-	
+	SmartDashboard::PutBoolean(" Disabled ", true);
+	SmartDashboard::PutBoolean("Autonomous", false);
+	SmartDashboard::PutBoolean("  Teleop  ", false);
+	SmartDashboard::PutBoolean("   Test   ", false);
+
+	SmartDashboard::PutNumber(	"Launch Speed",
+								launcher.getLaunchMotor() );
+	SmartDashboard::PutNumber(	"Total Power",
+								driveBase.getDrivePower() );
+	SmartDashboard::PutNumber(	"Total Rotation",
+								driveBase.getDriveRotation() );
+
+	bool hasFMS = ds->IsFMSAttached();
+	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
+	SmartDashboard::PutBoolean("Feeding Disc", false);
 	
 	
 	cRIO->insightBattery.setData(ds->GetBatteryVoltage());
