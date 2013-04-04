@@ -5,10 +5,10 @@
 void Robot::Test()
 {
 	this->mode_name = "Test";
+	ModeStart();
 	
-	
-	
-	
+	ClearModeLEDs();
+	SmartDashboard::PutBoolean(g_testMode, true);
 	
 	// This is a test.
 	driveBase.drive(1.0, 1.0, 0.0, 0.0);
@@ -21,4 +21,6 @@ void Robot::Test()
 	launcher.setRampMotor(0.0);
 	Wait(1.0);
 	this->OperatorControl();
+	
+	ModeEnd();
 }

@@ -94,6 +94,16 @@ void DriveBase::polarSetDriveBase(	float angle,
 
 
 
+void DriveBase::zeroMotors()
+{
+	setFrontLMotor(0.0);
+	setFrontRMotor(0.0);
+	setRearLMotor(0.0);
+	setRearRMotor(0.0);
+}
+
+
+
 float DriveBase::getDriveXMagnitude()
 {
 	float xMagnitude = 0.0;

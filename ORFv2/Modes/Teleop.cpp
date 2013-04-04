@@ -5,14 +5,15 @@
 void Robot::OperatorControl()
 {
 	this->mode_name = "Teleop";
+	ModeStart();
 	
-	
-	
-	
+	ClearModeLEDs();
+	SmartDashboard::PutBoolean(g_teleopMode, true);
 	
 	cRIO->insight.pauseDisplay();
 	alliance = ds->GetAlliance();
 	startLocation = ds->GetLocation();
+	
 	
 	// This is (more than?) a test.
 	float angle = 0;
@@ -111,4 +112,6 @@ void Robot::OperatorControl()
 		
 		Wait(g_teleopLoopInterval);
 	}
+	
+	ModeEnd();
 }

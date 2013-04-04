@@ -25,6 +25,8 @@ public:
 							float rotation,
 							float heading=0	);
 
+	void zeroMotors();
+	
 	float getDriveXMagnitude();
 	float getDriveYMagnitude();
 	float getDriveAngle();

@@ -19,6 +19,8 @@ public:
 	void setHeightMotor(float power);
 	void setRampMotor(float power);
 	
+	void zeroMotors();
+	
 	bool getTopLimitSwitch();
 	bool getBottomLimitSwitch();
 	bool getFeederLimitSwitch();

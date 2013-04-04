@@ -22,12 +22,8 @@ void Robot::RobotInit()
 {
 	this->mode_name = "RobotInit";
 	ModeStart();
+	ClearModeLEDs();
 	
-	
-	SmartDashboard::PutBoolean(" Disabled ", false);
-	SmartDashboard::PutBoolean("Autonomous", false);
-	SmartDashboard::PutBoolean("  Teleop  ", false);
-	SmartDashboard::PutBoolean("   Test   ", false);
 	
 	SmartDashboard::PutNumber(	"Launch Speed",
 								launcher.getLaunchMotor() );
@@ -55,12 +51,9 @@ void Robot::Disabled()
 {
 	this->mode_name = "Disabled";
 	ModeStart();
-	
-	
-	SmartDashboard::PutBoolean(" Disabled ", true);
-	SmartDashboard::PutBoolean("Autonomous", false);
-	SmartDashboard::PutBoolean("  Teleop  ", false);
-	SmartDashboard::PutBoolean("   Test   ", false);
+	ClearModeLEDs();
+	SmartDashboard::PutBoolean(g_disabledMode, true);
+
 
 	SmartDashboard::PutNumber(	"Launch Speed",
 								launcher.getLaunchMotor() );
@@ -78,6 +71,14 @@ void Robot::Disabled()
 	ModeEnd();
 }
 
+void Robot::ClearModeLEDs()
+{
+	SmartDashboard::PutBoolean(g_disabledMode, false);
+	SmartDashboard::PutBoolean(g_autonomousMode, false);
+	SmartDashboard::PutBoolean(g_teleopMode, false);
+	SmartDashboard::PutBoolean(g_testMode, false);
+}
+
 void Robot::ModeStart()
 {
 	string console = "Start: ";
@@ -92,6 +93,11 @@ void Robot::ModeStart()
 }
 void Robot::ModeEnd()
 {
+	ClearModeLEDs();
+	
+	driveBase.zeroMotors();
+	launcher.zeroMotors();
+	
 	string console = "End: ";
 	console.append(this->mode_name);
 	LCD::ConsoleLog( (char*)console.c_str() );

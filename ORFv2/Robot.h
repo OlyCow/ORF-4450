@@ -23,6 +23,7 @@ public:
 
 
 private:
+	void ClearModeLEDs();
 	void ModeStart();
 	void ModeEnd();
 	// Runs as task.
