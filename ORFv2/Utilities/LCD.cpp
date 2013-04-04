@@ -51,6 +51,12 @@ void LCD::ClearLine(int line)
 	dsLCD->UpdateLCD();
 }
 
+void LCD::PrintEasterEgg()
+{
+	string easter_egg = "";
+	LCD::PrintLine(LINE_EASTER_EGG, easter_egg.c_str());
+}
+
 void LCD::InitLCD()
 {
 	ConsoleLog("LCD.InitLcd");
@@ -61,25 +67,30 @@ void LCD::InitLCD()
 
 DriverStationLCD::Line SwitchLine(int line)
 {
+	DriverStationLCD::Line output =
+			DriverStationLCD::kMain_Line6;
+	
 	switch (line)
 	{
 	case 1:
-		return DriverStationLCD::kUser_Line1;
+		output = DriverStationLCD::kUser_Line1;
 		break;
 	case 2:
-		return DriverStationLCD::kUser_Line2;
+		output = DriverStationLCD::kUser_Line2;
 		break;
 	case 3:
-		return DriverStationLCD::kUser_Line3;
+		output = DriverStationLCD::kUser_Line3;
 		break;
 	case 4:
-		return DriverStationLCD::kUser_Line4;
+		output = DriverStationLCD::kUser_Line4;
 		break;
 	case 5:
-		return DriverStationLCD::kUser_Line5;
+		output = DriverStationLCD::kUser_Line5;
 		break;
 	case 6:
-		return DriverStationLCD::kUser_Line6;
+		output = DriverStationLCD::kUser_Line6;
 		break;
 	}
+	
+	return output;
 }

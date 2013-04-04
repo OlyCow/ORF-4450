@@ -15,7 +15,7 @@ public:
 	static void PrintLine(int line, const char *message, ...);
 	static void ClearLine(int line);
 	
-	static void PrintMode();
+	static void PrintEasterEgg();
 	
 	
 private:

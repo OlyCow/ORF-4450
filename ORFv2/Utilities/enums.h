@@ -30,6 +30,10 @@ enum LineNumber
 {
 	LINE_MODE		= 1,
 	LINE_BATTERY	= 2,
+	LINE_NET_OUTPUT	= 3,
+	LINE_MOTORS_F	= 4,
+	LINE_MOTORS_R	= 5,
+	LINE_EASTER_EGG	= 6,
 };
 
 
