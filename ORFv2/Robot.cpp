@@ -10,20 +10,12 @@ Robot::Robot():
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
 	this->mode_name = "Constructor";
-	
-	
-	
-	
-	
-	LCD::ConsoleLog("%s Constructor", g_programName.c_str());
-	LCD::ConsoleLog("%s Constructor-end", g_programName.c_str());
-	
-	
-	
-	
+	ModeStart();
 	
 	static DriveBase driveBase(this);
 	static Launcher launcher(this);
+	
+	ModeEnd();
 }
 
 void Robot::RobotInit()
@@ -31,18 +23,19 @@ void Robot::RobotInit()
 	this->mode_name = "RobotInit";
 	ModeStart();
 	
+	// Start the battery monitoring Task.
+	monitorBatteryTask.Start((UINT32) ds);
+	
+	
+	
+	
 	
 	SmartDashboard::PutString("Program", g_programName);
 	SmartDashboard::PutBoolean("Checkbox 1", false);
 	
-	LCD::ConsoleLog("RobotInit-end");
 	
 	
 	
-	
-	
-	// Start the battery monitoring Task.
-	monitorBatteryTask.Start((UINT32) ds);
 	
 	ModeEnd();
 }
@@ -80,7 +73,9 @@ void Robot::ModeStart()
 	console.append(this->mode_name);
 	LCD::ConsoleLog( (char*)console.c_str() );
 	
-	string LCD = "Mode: ";
+	string LCD = "Program: ";
+	LCD.append(g_programName);
+	LCD.append(" -- Mode: ");
 	LCD.append(this->mode_name);
 	LCD::PrintLine(LINE_MODE, LCD.c_str());
 }
@@ -95,22 +90,17 @@ void Robot::ModeEnd()
 
 void Robot::MonitorBattery(int dsPointer)
 {
+	LCD::ConsoleLog("Start: MonitorBattery");
+	
 	DriverStation	*ds;
 	ds = (DriverStation*) dsPointer;
-	bool batteryOK = true;
-	bool alarmFlash = false;
-	float voltage = ds->GetBatteryVoltage();
-	string message = "Voltage: ";
 	
+	bool batteryOK		= true;
+	bool isAlarmLEDOn	= false;
+	float voltage		= ds->GetBatteryVoltage();
+	string message		= "Voltage: ";
 	
-	
-	
-	
-	LCD::ConsoleLog("Start MonitorBattery");
-	SmartDashboard::PutBoolean("Low Battery", false);
-	
-	
-	
+	SmartDashboard::PutBoolean("Low Battery", !(batteryOK));
 	
 	
 	// Checks battery voltage every 5 seconds.
@@ -126,23 +116,14 @@ void Robot::MonitorBattery(int dsPointer)
 		Wait(5.0);
 	}
 	
-	// Flashes the battery warning "LED" on driver station.
-	
-	
-	
-	
-	
-	SmartDashboard::PutBoolean("Low Battery", alarmFlash);
-	
-	
-	
-	
-	
 	while (true)
 	{
-		alarmFlash = true;
+		LCD::ConsoleLog("***WARNING***: LOW BATTERY!!!");
+		isAlarmLEDOn = true;
+		SmartDashboard::PutBoolean("Low Battery", isAlarmLEDOn);
 		Wait(1.0);
-		alarmFlash = false;
+		isAlarmLEDOn = false;
+		SmartDashboard::PutBoolean("Low Battery", isAlarmLEDOn);
 		Wait(1.0);
 	}
 }

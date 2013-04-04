@@ -28,8 +28,8 @@ enum MotorConnection
 
 enum LineNumber
 {
-	LINE_BATTERY	= 1,
-	LINE_MODE		= 2,
+	LINE_MODE		= 1,
+	LINE_BATTERY	= 2,
 };
 
 
