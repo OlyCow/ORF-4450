@@ -4,17 +4,13 @@
 
 void Robot::Autonomous()
 {
-	this->mode_name = "Autonomous";
-	ModeStart();
-	
-	ClearModeLEDs();
-	SmartDashboard::PutBoolean(g_autonomousMode, true);
-
+	this->mode_name = g_autonomousMode;
+	ModeStart(true);
 	cRIO->insight.pauseDisplay();
-	alliance = ds->GetAlliance();
-	startLocation = ds->GetLocation();
 	
 	
+	
+	// CODE
 	
 	
 	

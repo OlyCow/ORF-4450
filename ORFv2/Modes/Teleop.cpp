@@ -4,15 +4,11 @@
 
 void Robot::OperatorControl()
 {
-	this->mode_name = "Teleop";
-	ModeStart();
-	
-	ClearModeLEDs();
-	SmartDashboard::PutBoolean(g_teleopMode, true);
-	
+	this->mode_name = g_teleopMode;
+	ModeStart(true);
 	cRIO->insight.pauseDisplay();
-	alliance = ds->GetAlliance();
-	startLocation = ds->GetLocation();
+	this->cRIO->watchdog.SetEnabled(true);
+	
 	
 	
 	// This is (more than?) a test.
@@ -29,7 +25,8 @@ void Robot::OperatorControl()
 		using namespace math;
 		
 		// Zero-ing in case something goes wrong.
-		// Might use the watchdog instead.
+		// An extra layer of protection in addition
+		// to the watchdog (which is only on during teleop).
 		angle = 0;
 		power = 0;
 		rotation = 0;
@@ -113,5 +110,8 @@ void Robot::OperatorControl()
 		Wait(g_teleopLoopInterval);
 	}
 	
+	
+	
+	this->cRIO->watchdog.SetEnabled(false);
 	ModeEnd();
 }

@@ -3,7 +3,9 @@
 
 
 
-wiring::wiring():	
+wiring::wiring():
+	watchdog(),
+
 	positionStick(1),
 	rotateStick(2),
 	launcherStick(3),
@@ -27,6 +29,9 @@ wiring::wiring():
 
 // This zero-ing is just to be safe.
 {
+	watchdog.SetEnabled(false);	//only turn on if needed
+	watchdog.SetExpiration(g_expiration);
+	
 	driveFrontLMotor.Set(0);
 	driveFrontRMotor.Set(0);
 	driveRearLMotor.Set(0);

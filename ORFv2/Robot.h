@@ -24,7 +24,7 @@ public:
 
 private:
 	void ClearModeLEDs();
-	void ModeStart();
+	void ModeStart(bool useSmartDashboard);
 	void ModeEnd();
 	// Runs as task.
 	static void MonitorBattery(int dsPointer);

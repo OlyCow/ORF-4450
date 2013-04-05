@@ -10,7 +10,7 @@ Robot::Robot():
 	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
 {
 	this->mode_name = "Constructor";
-	ModeStart();
+	ModeStart(false);
 	
 	static DriveBase driveBase(this);
 	static Launcher launcher(this);
@@ -21,8 +21,7 @@ Robot::Robot():
 void Robot::RobotInit()
 {
 	this->mode_name = "RobotInit";
-	ModeStart();
-	ClearModeLEDs();
+	ModeStart(false);
 	
 	
 	SmartDashboard::PutNumber(	"Launch Speed",
@@ -49,10 +48,8 @@ void Robot::RobotInit()
 
 void Robot::Disabled()
 {
-	this->mode_name = "Disabled";
-	ModeStart();
-	ClearModeLEDs();
-	SmartDashboard::PutBoolean(g_disabledMode, true);
+	this->mode_name = g_disabledMode;
+	ModeStart(true);
 
 
 	SmartDashboard::PutNumber(	"Launch Speed",
@@ -79,7 +76,7 @@ void Robot::ClearModeLEDs()
 	SmartDashboard::PutBoolean(g_testMode, false);
 }
 
-void Robot::ModeStart()
+void Robot::ModeStart(bool useSmartDashboard)
 {
 	string console = "Start: ";
 	console.append(this->mode_name);
@@ -90,6 +87,15 @@ void Robot::ModeStart()
 	LCD.append(" -- Mode: ");
 	LCD.append(this->mode_name);
 	LCD::PrintLine(LINE_MODE, LCD.c_str());
+	
+	ClearModeLEDs();
+	if (useSmartDashboard == true)
+	{
+		SmartDashboard::PutBoolean(mode_name, true);
+	}
+	
+	alliance = ds->GetAlliance();
+	startLocation = ds->GetLocation();
 }
 void Robot::ModeEnd()
 {

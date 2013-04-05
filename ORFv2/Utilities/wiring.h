@@ -8,6 +8,8 @@
 class wiring
 {
 public:	
+	Watchdog		watchdog;
+	
 	Joystick		positionStick,
 					rotateStick,
 					launcherStick;

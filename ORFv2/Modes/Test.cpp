@@ -4,23 +4,18 @@
 
 void Robot::Test()
 {
-	this->mode_name = "Test";
-	ModeStart();
+	this->mode_name = g_testMode;
+	ModeStart(true);
 	
-	ClearModeLEDs();
-	SmartDashboard::PutBoolean(g_testMode, true);
 	
-	// This is a test.
-	driveBase.drive(1.0, 1.0, 0.0, 0.0);
-	driveBase.drive(1.0, 0.0, 0.0, 1.0);
-	driveBase.drive(1.0, 0.0, 0.0, -1.0);
-	launcher.maxHeight(0.8);
-	launcher.shoot(1.0, 4);
-	launcher.setRampMotor(0.5);
-	Wait(1.0);
-	launcher.setRampMotor(0.0);
-	Wait(1.0);
+	
+	// Should add actual testing code here.
+	// Would include testing for as many
+	// motors and switches as possible.
+	
 	this->OperatorControl();
+	
+	
 	
 	ModeEnd();
 }
