@@ -21,6 +21,8 @@ void Robot::OperatorControl()
 	float heightPower = 0;
 	float rampPower = 0;
 	
+	HeightMode heightMode = HEIGHT_JOYSTICK;
+	
 	while (this->IsOperatorControl())
 	{
 		using namespace math;
@@ -70,20 +72,27 @@ void Robot::OperatorControl()
 		heightPower =
 			prune(	cRIO->launcherStick.GetY(),
 					g_joystickDeadZone	);
-		
+		if (heightPower!=0)
+			heightMode = HEIGHT_JOYSTICK;
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_RIGHT_FRONT)
+				==true	)
+			heightMode = HEIGHT_MAX;
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_RIGHT_REAR)
+				==true	)
+			heightMode = HEIGHT_MIN;
+		switch(heightMode)
+		{
+		case HEIGHT_MAX:
+			heightPower = g_maxPower;
+			break;
+		case HEIGHT_MIN:
+			heightPower = -g_maxPower;
+			break;
+		}
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_CENTER)
 				==true	)
 			heightPower /= 2;
-		
 		cRIO->heightMotor.Set(heightPower);
-		
-		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT)
-				==true	)
-			launcher.minHeight(g_halfPower);
-		
-		if (	cRIO->launcherStick.GetRawButton(BUTTON_RIGHT)
-				==true	)
-			launcher.maxHeight(g_halfPower);
 		
 		rampPower = 0;
 		rampPower =

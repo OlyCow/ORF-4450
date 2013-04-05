@@ -36,6 +36,13 @@ enum LineNumber
 	LINE_EASTER_EGG	= 6,
 };
 
+enum HeightMode
+{
+	HEIGHT_JOYSTICK	= 0,
+	HEIGHT_MAX		= 1,
+	HEIGHT_MIN		= 2,
+};
+
 
 
 #endif // _ENUMS_H_
