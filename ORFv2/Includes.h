@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <cstdio>
 #include <ctime>
+#include <typeinfo>
 #include <sstream>
 #include <fstream>
 #include <vector>

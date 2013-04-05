@@ -12,6 +12,21 @@ LCD::~LCD()
 {
 }
 
+template <typename Type>
+void LCD::ConsoleLogVariable(Type variable, string name)
+{
+	string output = "(";
+	output.append(typeid(variable).name());
+	output.append(") ");
+	
+	output.append(name);
+	output.append(" = ");
+	
+	output.append(math::stringify(variable));
+	
+	LCD::ConsoleLog(output);
+}
+
 void LCD::ConsoleLog(char *message, ...)
 {
 	char messageBuf[128];
@@ -69,6 +84,11 @@ void LCD::ClearLine(int line)
 	dsLCD->UpdateLCD();
 }
 
+void LCD::ConsoleLogEasterEgg()
+{
+	string easter_egg = "";
+	LCD::ConsoleLog(easter_egg);
+}
 void LCD::PrintEasterEgg()
 {
 	string easter_egg = "";

@@ -11,12 +11,16 @@ public:
 	LCD();
 	~LCD();
 	
+	template <typename Type>
+	static void ConsoleLogVariable(Type variable, string name);
+	
 	static void ConsoleLog(char *message, ...);
 	static void ConsoleLog(string message, ...);
 	static void PrintLine(int line, const char *message, ...);
 	static void PrintLine(int line, string message, ...);
 	static void ClearLine(int line);
 	
+	static void ConsoleLogEasterEgg();
 	static void PrintEasterEgg();
 	
 	

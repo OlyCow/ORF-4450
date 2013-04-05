@@ -41,6 +41,8 @@ void Robot::RobotInit()
 	SmartDashboard::GetNumber("Test: double input");
 	
 	
+	srand(time(0));
+	
 	monitorBatteryTask.Start((UINT32) ds);
 	
 	ModeEnd();

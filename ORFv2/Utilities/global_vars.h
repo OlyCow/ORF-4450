@@ -5,9 +5,9 @@
 
 
 
-const float g_expiration = 0.10; //seconds
+const int THE_ANSWER = 42;
 
-const float g_teleopLoopInterval = 0.05; //seconds
+const float g_expiration = 0.10; //seconds
 
 const float g_joystickDeadZone = 0.01; //motor power (?)
 
