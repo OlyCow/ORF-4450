@@ -6,8 +6,7 @@
 wiring::wiring():	
 	positionStick(1),
 	rotateStick(2),
-	launcherHeightStick(3),
-	launcherPowerStick(4),
+	launcherStick(3),
 	
 	driveFrontLMotor	(1, MOTOR_NORMAL),
 	driveFrontRMotor	(2, MOTOR_INVERTED),

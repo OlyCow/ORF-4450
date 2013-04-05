@@ -10,8 +10,7 @@ class wiring
 public:	
 	Joystick		positionStick,
 					rotateStick,
-					launcherHeightStick,
-					launcherPowerStick;
+					launcherStick;
 	
 	Motor			driveFrontLMotor,
 					driveFrontRMotor,

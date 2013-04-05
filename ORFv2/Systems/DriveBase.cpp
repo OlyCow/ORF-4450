@@ -114,8 +114,7 @@ float DriveBase::getDriveAngle() //in degrees
 	float angle = 0.0;
 	float x = getDriveXMagnitude();
 	float y = getDriveYMagnitude();
-	// 355/113 is a very good approx. of pi :)
-	angle = 180*atan2(x,y)/(355/113);
+	angle = radToDeg(atan2(x,y));
 	return angle;
 }
 float DriveBase::getDrivePower()
