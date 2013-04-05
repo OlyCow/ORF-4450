@@ -11,10 +11,18 @@ Motor::Motor(UINT32 channel, bool isInverted):
 {
 	Set(0);
 }
+Motor::~Motor()
+{
+	Set(0);
+}
 
 void Motor::Invert()
 {
 	isInverted = true;
+}
+void Motor::Restore()
+{
+	isInverted = false;
 }
 
 void Motor::Set(float value, UINT8 syncGroup)
@@ -32,4 +40,9 @@ float Motor::Get()
 		return -(Talon::Get());
 	else
 		return Talon::Get();
+}
+
+bool Motor::checkIfInverted()
+{
+	return isInverted();
 }

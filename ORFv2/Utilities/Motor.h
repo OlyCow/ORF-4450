@@ -10,10 +10,14 @@ public:
 	~Motor();
 	
 	void Invert();
+	void Restore();
 	
 	void Set(float value, UINT8 syncGroup=0);
 	
 	float Get();
+	
+	bool checkIfInverted();
+	
 	
 private:
 	bool isInverted;
