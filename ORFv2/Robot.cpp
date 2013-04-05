@@ -80,13 +80,13 @@ void Robot::ModeStart(bool useSmartDashboard)
 {
 	string console = "Start: ";
 	console.append(this->mode_name);
-	LCD::ConsoleLog( (char*)console.c_str() );
+	LCD::ConsoleLog(console);
 	
 	string LCD = "Program: ";
 	LCD.append(g_programName);
 	LCD.append(" -- Mode: ");
 	LCD.append(this->mode_name);
-	LCD::PrintLine(LINE_MODE, LCD.c_str());
+	LCD::PrintLine(LINE_MODE, LCD);
 	
 	ClearModeLEDs();
 	if (useSmartDashboard == true)
@@ -106,7 +106,7 @@ void Robot::ModeEnd()
 	
 	string console = "End: ";
 	console.append(this->mode_name);
-	LCD::ConsoleLog( (char*)console.c_str() );
+	LCD::ConsoleLog(console);
 	
 	LCD::ClearLine(LINE_MODE);
 }
@@ -135,7 +135,7 @@ void Robot::MonitorBattery(int dsPointer)
 			batteryOK = false;
 		message.append(math::stringify(voltage));
 		
-		LCD::PrintLine(LINE_BATTERY, message.c_str());
+		LCD::PrintLine(LINE_BATTERY, message);
 		Wait(5.0);
 	}
 	

@@ -22,6 +22,15 @@ void LCD::ConsoleLog(char *message, ...)
 	vsprintf(messageBuf, message, vl);	
 	printf("Robot: %s\n", messageBuf);
 }
+void LCD::ConsoleLog(string message, ...)
+{
+	// This stuff is just to pass into the next function.
+	// Kicking the proverbial ball down the road.
+	va_list vl;
+	va_start(vl, message);
+	
+	LCD::ConsoleLog((char *)message.c_str(), vl);
+}
 void LCD::PrintLine(int line, const char *message, ...)
 {
 	DriverStationLCD::Line lcdLine = SwitchLine(line);
@@ -37,6 +46,15 @@ void LCD::PrintLine(int line, const char *message, ...)
 
 	dsLCD->VPrintfLine(lcdLine, message, vl);
 	dsLCD->UpdateLCD();
+}
+void LCD::PrintLine(int line, string message, ...)
+{
+	// This stuff is just to pass into the next function.
+	// Kicking the proverbial ball down the road.
+	va_list vl;
+	va_start(vl, message);
+	
+	LCD::PrintLine(line, message.c_str(), vl);
 }
 void LCD::ClearLine(int line)
 {
@@ -54,7 +72,7 @@ void LCD::ClearLine(int line)
 void LCD::PrintEasterEgg()
 {
 	string easter_egg = "";
-	LCD::PrintLine(LINE_EASTER_EGG, easter_egg.c_str());
+	LCD::PrintLine(LINE_EASTER_EGG, easter_egg);
 }
 
 void LCD::InitLCD()

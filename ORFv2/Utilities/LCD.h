@@ -12,7 +12,9 @@ public:
 	~LCD();
 	
 	static void ConsoleLog(char *message, ...);
+	static void ConsoleLog(string message, ...);
 	static void PrintLine(int line, const char *message, ...);
+	static void PrintLine(int line, string message, ...);
 	static void ClearLine(int line);
 	
 	static void PrintEasterEgg();

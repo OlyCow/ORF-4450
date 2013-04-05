@@ -44,5 +44,5 @@ float Motor::Get()
 
 bool Motor::checkIfInverted()
 {
-	return isInverted();
+	return isInverted;
 }
