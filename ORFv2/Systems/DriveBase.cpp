@@ -67,7 +67,7 @@ void DriveBase::rectangularSetDriveBase(	float x,
 	setRearLMotor(powerRL);
 	setRearRMotor(powerRR);
 }
-void DriveBase::polarSetDriveBase(	float angle,
+void DriveBase::polarSetDriveBase(	float angle, //in degrees!
 									float power,
 									float rotation,
 									float heading	)
@@ -75,8 +75,8 @@ void DriveBase::polarSetDriveBase(	float angle,
 	float x = 0;
 	float y = 0;
 	
-	x = power*cos(angle);
-	y = power*sin(angle);
+	x = power*degToRad(cos(angle));
+	y = power*degToRad(sin(angle));
 	
 	rectangularSetDriveBase(x, y, rotation, heading);
 }

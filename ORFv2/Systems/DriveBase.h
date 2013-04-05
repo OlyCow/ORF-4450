@@ -20,7 +20,7 @@ public:
 									float y,
 									float rotation,
 									float heading=0	);
-	void polarSetDriveBase(	float angle,
+	void polarSetDriveBase(	float angle, //in degrees!
 							float power,
 							float rotation,
 							float heading=0	);

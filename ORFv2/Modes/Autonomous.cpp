@@ -8,11 +8,12 @@ void Robot::Autonomous()
 	ModeStart(true);
 	cRIO->insight.pauseDisplay();
 	
-	
-	
-	// CODE
-	
-	
+	LCD::ConsoleLog("Initializing launcher motor...");
+	launcher.setLaunchMotor(g_maxPower);
+	Wait(g_launchInitTime);
+	LCD::ConsoleLog("Shooting frisbees...");
+	launcher.shoot(g_maxPower, 3); // 3 frisbees
+	LCD::ConsoleLog("Awaiting teleop...");
 	
 	ModeEnd();
 }
