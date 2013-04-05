@@ -9,20 +9,20 @@ const int THE_ANSWER = 42;
 
 const float g_expiration = 0.10; //seconds
 
-const float g_joystickDeadZone = 0.01; //motor power (?)
+const float g_joystickDeadZone = 0.01; //% power
 
-const float g_rampJoystickThreshold = 0.2; //motor power (?)
+const float g_fineTuneFactor = 4;
 
-const float g_maxPower = 1.00; //motor power
-const float g_halfPower = 0.50; //motor power
-const float g_feederPower = 0.50; //motor power
+const float g_maxPower = 1.00; //% power
+const float g_halfPower = 0.50; //% power
+const float g_feederPower = 0.50; //% power
 
 const float g_shootInterval = 3.0; //seconds
 
-const float g_launchInitRequired = 0.2; //motor power
+const float g_launchInitRequired = 0.2; //% power
 const float g_launchInitTime = 1.0; //seconds
 
-const float g_lowBatteryThreshold = 10.0; //volts (?)
+const float g_lowBatteryThreshold = 10.0; //volts
 
 
 

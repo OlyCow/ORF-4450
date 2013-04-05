@@ -12,6 +12,7 @@ void Robot::OperatorControl()
 	
 	
 	const float teleopLoopInterval = 0.025; //seconds
+	const float safeRampPower = 80; //% power
 	
 	float angle = 0;
 	float power = 0;
@@ -83,26 +84,24 @@ void Robot::OperatorControl()
 		switch(heightMode)
 		{
 		case HEIGHT_MAX:
-			heightPower = g_maxPower;
+			heightPower = safeRampPower;
 			break;
 		case HEIGHT_MIN:
-			heightPower = -g_maxPower;
+			heightPower = -safeRampPower;
 			break;
 		}
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_CENTER)
 				==true	)
-			heightPower /= 2;
+			heightPower /= g_fineTuneFactor;
 		cRIO->heightMotor.Set(heightPower);
 		
 		rampPower = 0;
-		rampPower =
-			prune(	cRIO->launcherStick.GetX(),
-					g_rampJoystickThreshold	);
-		
-		if ((	cRIO->launcherStick.GetRawButton(BUTTON_CENTER)
-				==true	)&&( heightPower==0 )	)
-			rampPower /= 2;
-		
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_LEFT)
+				==true	)
+			rampPower = g_maxPower;
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_RIGHT)
+				==true	)
+			rampPower = -g_maxPower;
 		cRIO->rampMotor.Set(rampPower);
 		
 		
