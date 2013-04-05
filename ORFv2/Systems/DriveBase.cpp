@@ -8,21 +8,12 @@ using namespace math;
 DriveBase::DriveBase(Robot *robot):
 	robot(robot)
 {
-	setFrontLMotor(0.0);
-	setFrontRMotor(0.0);
-	setRearLMotor(0.0);
-	setRearRMotor(0.0);
+	zeroMotors();
 }
-
 DriveBase::~DriveBase()
 {
-	setFrontLMotor(0.0);
-	setFrontRMotor(0.0);
-	setRearLMotor(0.0);
-	setRearRMotor(0.0);
+	zeroMotors();
 }
-
-
 
 void DriveBase::drive(	float time,		float power,
 						float angle,	float rotation	)
@@ -41,42 +32,40 @@ void DriveBase::drive(	float time,		float power,
 	setRearRMotor(originalPowerRR);
 }
 
-
-
 void DriveBase::rectangularSetDriveBase(	float x,
 											float y,
 											float rotation,
 											float heading	)
 {
-//	rotateVector(x, y, heading);
-//	
-//	float powerFL = 0;
-//	float powerFR = 0;
-//	float powerRL = 0;
-//	float powerRR = 0;
-//	
-//	// Forward and backward
-//	powerFL = limitMax(powerFL+y, g_maxPower);
-//	powerFR = limitMax(powerFR+y, g_maxPower);
-//	powerRL = limitMax(powerRL+y, g_maxPower);
-//	powerRR = limitMax(powerRR+y, g_maxPower);
-//	
-//	// Left and right
-//	powerFL = limitMin(powerFL-x, -g_maxPower);
-//	powerFR = limitMax(powerFR+x, g_maxPower);
-//	powerRL = limitMax(powerRL+x, g_maxPower);
-//	powerRR = limitMin(powerRR-x, -g_maxPower);
-//	
-//	// Clockwise and counter-clockwise
-//	powerFL = limitMin(powerFL-rotation, -g_maxPower);
-//	powerFR = limitMax(powerFR+rotation, g_maxPower);
-//	powerRL = limitMin(powerRL-rotation, -g_maxPower);
-//	powerRR = limitMax(powerRR+rotation, g_maxPower);
-//	
-//	setFrontLMotor(powerFL);
-//	setFrontRMotor(powerFR);
-//	setRearLMotor(powerRL);
-//	setRearRMotor(powerRR);
+	rotateVector(x, y, heading);
+	
+	float powerFL = 0;
+	float powerFR = 0;
+	float powerRL = 0;
+	float powerRR = 0;
+	
+	// Forward and backward
+	powerFL = limitMax(powerFL+y, g_maxPower);
+	powerFR = limitMax(powerFR+y, g_maxPower);
+	powerRL = limitMax(powerRL+y, g_maxPower);
+	powerRR = limitMax(powerRR+y, g_maxPower);
+	
+	// Left and right
+	powerFL = limitMin(powerFL-x, -g_maxPower);
+	powerFR = limitMax(powerFR+x, g_maxPower);
+	powerRL = limitMax(powerRL+x, g_maxPower);
+	powerRR = limitMin(powerRR-x, -g_maxPower);
+	
+	// Clockwise and counter-clockwise
+	powerFL = limitMin(powerFL-rotation, -g_maxPower);
+	powerFR = limitMax(powerFR+rotation, g_maxPower);
+	powerRL = limitMin(powerRL-rotation, -g_maxPower);
+	powerRR = limitMax(powerRR+rotation, g_maxPower);
+	
+	setFrontLMotor(powerFL);
+	setFrontRMotor(powerFR);
+	setRearLMotor(powerRL);
+	setRearRMotor(powerRR);
 }
 void DriveBase::polarSetDriveBase(	float angle,
 									float power,
@@ -92,8 +81,6 @@ void DriveBase::polarSetDriveBase(	float angle,
 	rectangularSetDriveBase(x, y, rotation, heading);
 }
 
-
-
 void DriveBase::zeroMotors()
 {
 	setFrontLMotor(0.0);
@@ -101,8 +88,6 @@ void DriveBase::zeroMotors()
 	setRearLMotor(0.0);
 	setRearRMotor(0.0);
 }
-
-
 
 float DriveBase::getDriveXMagnitude()
 {
@@ -114,35 +99,43 @@ float DriveBase::getDriveXMagnitude()
 	xMagnitude /= 4; //there are 4 motors
 	return xMagnitude;
 }
-
 float DriveBase::getDriveYMagnitude()
 {
 	float yMagnitude = 0.0;
-	yMagnitude =	getFrontLMotor() +
+	yMagnitude =	-getFrontLMotor() +
 					getFrontRMotor() +
-					getRearLMotor() +
+					getRearLMotor() -
 					getRearRMotor();
 	yMagnitude /= 4; //there are 4 motors
 	return yMagnitude;
 }
-
-float DriveBase::getDriveAngle()
+float DriveBase::getDriveAngle() //in degrees
 {
-	return 0;
+	float angle = 0.0;
+	float x = getDriveXMagnitude();
+	float y = getDriveYMagnitude();
+	// 355/113 is a very good approx. of pi :)
+	angle = 180*atan2(x,y)/(355/113);
+	return angle;
 }
-
 float DriveBase::getDrivePower()
 {
-	return 0;
+	float power = 0.0;
+	float x = getDriveXMagnitude();
+	float y = getDriveYMagnitude();
+	power = sqrt( x*x + y*y );
+	return power;
 }
-
 float DriveBase::getDriveRotation()
 {
-	return 0;
+	float rotation = 0.0;
+	rotation =	-getFrontLMotor() +
+				getFrontRMotor() +
+				getRearLMotor() -
+				getRearRMotor();
+	rotation /= 4; //there are 4 motors
+	return rotation;
 }
-
-
-
 
 void DriveBase::setFrontLMotor(float power)
 {
@@ -160,8 +153,6 @@ void DriveBase::setRearRMotor(float power)
 {
 	robot->cRIO->driveRearRMotor.SetSpeed(power);
 }
-
-
 
 float DriveBase::getFrontLMotor()
 {

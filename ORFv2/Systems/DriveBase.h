@@ -29,7 +29,7 @@ public:
 	
 	float getDriveXMagnitude();
 	float getDriveYMagnitude();
-	float getDriveAngle();
+	float getDriveAngle();	//in degrees
 	float getDrivePower();
 	float getDriveRotation();
 
