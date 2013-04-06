@@ -119,3 +119,30 @@ string stringify(Type input)
 	//stringstream does auto-formatting :)
 	return convertStream.str();
 }
+
+string getEasterEgg()
+{
+	string easter_egg = "";
+	ifstream readStream("../Utilities/easter_egg.txt");
+	readStream.seekg(0, ios::end);
+	int fileSize = readStream.tellg();
+	
+	do
+	{
+		string incompleteLine = "";
+		readStream.seekg(rand()%fileSize, ios::beg);
+		getline(readStream, incompleteLine);
+		if (readStream.eof())
+			continue;
+		else
+		{
+			getline(readStream, easter_egg);
+			break;
+		}
+	}
+	while (readStream.eof());
+	
+	readStream.close();
+	
+	return easter_egg;
+}

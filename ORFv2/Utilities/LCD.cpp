@@ -16,6 +16,7 @@ template <typename Type>
 void LCD::ConsoleLogVariable(Type variable, string name)
 {
 	string output = "(";
+	// Not using decltype() because it doesn't return char.
 	output.append(typeid(variable).name());
 	output.append(") ");
 	
@@ -86,13 +87,11 @@ void LCD::ClearLine(int line)
 
 void LCD::ConsoleLogEasterEgg()
 {
-	string easter_egg = "";
-	LCD::ConsoleLog(easter_egg);
+	LCD::ConsoleLog(math::getEasterEgg());
 }
 void LCD::PrintEasterEgg()
 {
-	string easter_egg = "";
-	LCD::PrintLine(LINE_EASTER_EGG, easter_egg);
+	LCD::PrintLine(LINE_EASTER_EGG, math::getEasterEgg());
 }
 
 void LCD::InitLCD()

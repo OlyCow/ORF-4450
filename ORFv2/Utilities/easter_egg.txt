@@ -1,3 +1,4 @@
+﻿This line will never appear!
 As seen on TV!
 Awesome!
 100% pure!

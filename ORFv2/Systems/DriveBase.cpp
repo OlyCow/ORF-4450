@@ -75,8 +75,8 @@ void DriveBase::polarSetDriveBase(	float angle, //in degrees!
 	float x = 0;
 	float y = 0;
 	
-	x = power*degToRad(cos(angle));
-	y = power*degToRad(sin(angle));
+	x = power*cos(degToRad(angle));
+	y = power*sin(degToRad(angle));
 	
 	rectangularSetDriveBase(x, y, rotation, heading);
 }

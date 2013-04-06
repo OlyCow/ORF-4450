@@ -42,6 +42,8 @@ namespace math
 	
 	template <typename Type>
 	string stringify(Type input);
+	
+	string getEasterEgg();
 }
 
 
