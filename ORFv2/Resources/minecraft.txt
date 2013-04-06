@@ -1,4 +1,4 @@
-﻿This line will never appear!
+This line will never appear!
 As seen on TV!
 Awesome!
 100% pure!
@@ -175,7 +175,6 @@ Woo, worldofminecraft!
 Woo, reddit!
 Woo, 2pp!
 Google anlyticsed!
-Now supports åäö!
 Give us Gordon!
 Tip your waiter!
 Very fun!
@@ -187,7 +186,6 @@ Omnipotent!
 Gasp!
 ...!
 Bees, bees, bees, bees!
-Jag känner en bot!
 Haha, LOL!
 Hampsterdance!
 Switches and ores!
@@ -269,26 +267,19 @@ Does barrel rolls!
 Meeting expectations!
 PC gaming since 1873!
 Ghoughpteighbteau tchoghs!
-Déjà vu!
-Déjà vu!
+D��j�� vu!
+D��j�� vu!
 Got your nose!
 Haley loves Elan!
 Afraid of the big, black bat!
 Doesn't use the U-word!
 Child's play!
 See you next Friday or so!
-From the streets of Södermalm!
 150 bpm for 400000 minutes!
 Technologic!
 Funk soul brother!
 Pumpa kungen!
-日本ハロー！
-한국 안녕하세요!
 Helo Cymru!
-Cześć Polsko!
-你好中国！
-Привет Россия!
-Γεια σου Ελλάδα!
 My life for Aiur!
 Lennart lennart = new Lennart();
 I see your vocabulary has improved!
@@ -310,3 +301,5 @@ I have a suggestion.
 Now with extra hugs!
 Almost java 6!
 Woah.
+Teh 'Oly Cow Rulez.
+Got SWAG?

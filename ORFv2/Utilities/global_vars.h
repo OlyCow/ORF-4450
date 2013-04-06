@@ -41,6 +41,10 @@ const string g_programName = "ORFv2";
 
 const string g_cameraIP = "10.44.50.11";
 
+const string g_pathToMinecraft = "minecraft.txt";
+const string g_pathToJokes = "jokes.txt";
+const string g_pathToPuns = "puns.txt";
+
 
 
 #endif // _GLOBAL_VARS_H_

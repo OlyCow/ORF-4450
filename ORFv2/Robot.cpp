@@ -138,6 +138,8 @@ void Robot::MonitorBattery(int dsPointer)
 		message.append(math::stringify(voltage));
 		
 		LCD::PrintLine(LINE_BATTERY, message);
+		if (rand()%12==0) //12*5= once per 60 sec
+			LCD::PrintEasterEgg();
 		Wait(5.0);
 	}
 	

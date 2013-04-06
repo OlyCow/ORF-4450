@@ -123,7 +123,14 @@ string stringify(Type input)
 string getEasterEgg()
 {
 	string easter_egg = "";
-	ifstream readStream("../Utilities/easter_egg.txt");
+	string pathToEasterEgg = "";
+	if ((rand()%2) || (rand()%2) || (rand()%2))
+		pathToEasterEgg = g_pathToMinecraft;
+	else if ((rand()%2) || (rand()%2))
+		pathToEasterEgg = g_pathToJokes;
+	else
+		pathToEasterEgg = g_pathToPuns;
+	ifstream readStream(pathToEasterEgg.c_str());
 	readStream.seekg(0, ios::end);
 	int fileSize = readStream.tellg();
 	
