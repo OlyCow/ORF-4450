@@ -31,6 +31,8 @@ public:
 
 	float getFeederMotor();
 	
+	void reportLaunchPower();
+	
 	
 private:
 	Robot *robot;

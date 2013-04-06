@@ -21,7 +21,7 @@ const float g_feederPower = 0.50; //% power
 
 const float g_shootInterval = 3.0; //seconds
 
-const float g_launchInitRequired = 0.2; //% power
+const float g_launchInitRequired = 0.15; //% power
 const float g_launchInitTime = 1.0; //seconds
 
 const float g_lowBatteryThreshold = 10.0; //volts

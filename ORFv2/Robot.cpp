@@ -24,12 +24,9 @@ void Robot::RobotInit()
 	ModeStart(false);
 	
 	
-	SmartDashboard::PutNumber(	"Launch Speed",
-								launcher.getLaunchMotor() );
-	SmartDashboard::PutNumber(	"Total Power",
-								driveBase.getDrivePower() );
-	SmartDashboard::PutNumber(	"Total Rotation",
-								driveBase.getDriveRotation() );
+	launcher.reportLaunchPower();
+	driveBase.reportTotalPower();
+	driveBase.reportTotalRotation();
 	
 	bool hasFMS = ds->IsFMSAttached();
 	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
@@ -54,12 +51,9 @@ void Robot::Disabled()
 	ModeStart(true);
 
 
-	SmartDashboard::PutNumber(	"Launch Speed",
-								launcher.getLaunchMotor() );
-	SmartDashboard::PutNumber(	"Total Power",
-								driveBase.getDrivePower() );
-	SmartDashboard::PutNumber(	"Total Rotation",
-								driveBase.getDriveRotation() );
+	launcher.reportLaunchPower();
+	driveBase.reportTotalPower();
+	driveBase.reportTotalRotation();
 
 	bool hasFMS = ds->IsFMSAttached();
 	SmartDashboard::PutBoolean("FMS Connected", hasFMS);

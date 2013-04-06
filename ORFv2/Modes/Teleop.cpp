@@ -105,7 +105,13 @@ void Robot::OperatorControl()
 		
 		
 		
-		// LCD stuff. YAY?!
+		// LCD & SmartDashboard stuff. YAY?!
+		bool hasFMS = ds->IsFMSAttached();
+		SmartDashboard::PutBoolean("FMS Connected", hasFMS);
+		launcher.reportLaunchPower();
+		driveBase.reportTotalPower();
+		driveBase.reportTotalRotation();
+		
 		string LCD_netOutput = "Total Output: ";
 		float frontL = driveBase.getFrontLMotor();
 		float frontR = driveBase.getFrontRMotor();

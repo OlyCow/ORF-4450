@@ -170,3 +170,14 @@ float DriveBase::getRearRMotor()
 	return robot->cRIO->driveRearRMotor.Get();
 }
 
+void DriveBase::reportTotalPower()
+{
+	SmartDashboard::PutNumber(	"Total Power",
+								driveBase.getDrivePower() );
+}
+void DriveBase::reportTotalRotation()
+{
+	SmartDashboard::PutNumber(	"Total Rotation",
+								driveBase.getDriveRotation() );
+}
+
