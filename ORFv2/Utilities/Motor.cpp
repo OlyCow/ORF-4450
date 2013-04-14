@@ -16,6 +16,14 @@ Motor::~Motor()
 	Set(0);
 }
 
+void Motor::Flip()
+{
+	if (isInverted==true)
+		isInverted = false;
+	else
+		isInverted = true;
+}
+
 void Motor::Invert()
 {
 	isInverted = true;

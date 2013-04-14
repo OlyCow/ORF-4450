@@ -9,7 +9,13 @@ void Robot::OperatorControl()
 	cRIO->insight.pauseDisplay();
 	this->cRIO->watchdog.SetEnabled(true);
 	
-	
+	if ( SmartDashboard::GetBoolean("Invert Motors")==true )
+	{
+		this->cRIO->driveFrontLMotor.Flip();
+		this->cRIO->driveFrontRMotor.Flip();
+		this->cRIO->driveRearLMotor.Flip();
+		this->cRIO->driveRearRMotor.Flip();
+	}
 	
 	const float teleopLoopInterval = 0.025; //seconds
 	
@@ -23,7 +29,7 @@ void Robot::OperatorControl()
 	
 	HeightMode heightMode = HEIGHT_JOYSTICK;
 	
-	while (this->IsOperatorControl())
+	while (this->IsOperatorControl() && this->IsEnabled())
 	{
 		using namespace math;
 		
@@ -40,28 +46,35 @@ void Robot::OperatorControl()
 					float(g_joystickDeadZone)	);
 		rotation = 0;
 		rotation =
+			prune(	(cRIO->launcherStick.GetX())/g_fineTuneFactor,
+					float(g_joystickDeadZone_rotation)	);
+		rotation =
 			prune(	cRIO->rotateStick.GetX(),
 					float(g_joystickDeadZone)	);
 		
-		if (	cRIO->positionStick.GetRawButton(BUTTON_CENTER)
+		if (	cRIO->positionStick.GetRawButton(BUTTON_TRIGGER)
 				==true	)
-			power /= 2;
+			power /= g_fineTuneFactor;
 		
-		if (	cRIO->rotateStick.GetRawButton(BUTTON_CENTER)
+		if (	cRIO->rotateStick.GetRawButton(BUTTON_TRIGGER)
 				==true	)
-			rotation /= 2;
+			rotation /= g_fineTuneFactor;
 		
 		driveBase.polarSetDriveBase(angle, power, rotation);
 		
 		
 		
 		launcherPower = 0;
-		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT_FRONT)
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_LEFT)
 				==true )
-			launcherPower = g_maxPower;
+			launcherPower = g_pyramidLauncherPower;
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_RIGHT)
+				==true )
+			launcherPower = g_crossCourtLauncherPower;
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT_REAR)
 				==true )
 			launcherPower = 0;
+		launcherPower += SmartDashboard::GetNumber("Set Launcher")/100;
 		cRIO->launchMotor.Set(launcherPower);
 		
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_TRIGGER)
@@ -83,10 +96,16 @@ void Robot::OperatorControl()
 		switch(heightMode)
 		{
 		case HEIGHT_MAX:
+			SmartDashboard::PutBoolean("Max Height", true);
 			heightPower = g_maxPower;
 			break;
 		case HEIGHT_MIN:
+			SmartDashboard::PutBoolean("Min Height", true);
 			heightPower = -g_maxPower;
+			break;
+		case HEIGHT_JOYSTICK:
+			SmartDashboard::PutBoolean("Min Height", false);
+			SmartDashboard::PutBoolean("Min Height", false);
 			break;
 		}
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_CENTER)
@@ -95,10 +114,10 @@ void Robot::OperatorControl()
 		cRIO->heightMotor.Set(heightPower);
 		
 		rampPower = 0;
-		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_LEFT)
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT)
 				==true	)
 			rampPower = g_rampPower;
-		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_RIGHT)
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_RIGHT)
 				==true	)
 			rampPower = -g_rampPower;
 		cRIO->rampMotor.Set(rampPower);

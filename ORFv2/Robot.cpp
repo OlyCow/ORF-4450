@@ -32,6 +32,9 @@ void Robot::RobotInit()
 	SmartDashboard::PutBoolean("FMS", hasFMS);
 	SmartDashboard::PutBoolean("Feed Disc", false);
 	
+	SmartDashboard::PutString("Program:", g_programName);
+	SmartDashboard::PutString("Robot IP:", g_robotIP);
+	
 	
 	srand(time(0));
 	

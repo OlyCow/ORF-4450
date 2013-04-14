@@ -9,6 +9,8 @@ public:
 	Motor(UINT32 channel, bool isInverted=false);
 	~Motor();
 	
+	void Flip();
+	
 	void Invert();
 	void Restore();
 	

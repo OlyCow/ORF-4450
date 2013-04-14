@@ -9,7 +9,8 @@ const int THE_ANSWER = 42;
 
 const float g_expiration = 0.10; //seconds
 
-const float g_joystickDeadZone = 0.01; //% power
+const float g_joystickDeadZone = 0.05; //% power
+const float g_joystickDeadZone_rotation = 0.1; //% power
 
 const float g_fineTuneFactor = 4;
 
@@ -17,6 +18,9 @@ const float g_maxPower = 1.00; //% power
 const float g_halfPower = 0.50; //% power
 const float g_rampPower = 0.80; //% power
 const float g_feederPower = 0.50; //% power
+
+const float g_pyramidLauncherPower = 0.75; //% power
+const float g_crossCourtLauncherPower = 1.00; //% power
 
 
 const float g_shootInterval = 3.0; //seconds
@@ -39,6 +43,7 @@ const string g_batteryHeader = "Battery: ";
 
 const string g_programName = "ORFv2";
 
+const string g_robotIP = "10.44.50.2";
 const string g_cameraIP = "10.44.50.11";
 
 const string g_pathToMinecraft = "minecraft.txt";
