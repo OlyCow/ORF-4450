@@ -113,17 +113,17 @@ void Launcher::feedDiscs(int discNumber, float interval)
 
 	for (int i=1; i<=discNumber; i++)
 	{
-		SmartDashboard::PutBoolean("Feeding Disc", true);
+		SmartDashboard::PutBoolean("Feed Disc", true);
 		while(getFeederLimitSwitch()==0)
 			setFeederMotor(g_feederPower);
 		Wait(interval);
 		setFeederMotor(0);
-		SmartDashboard::PutBoolean("Feeding Disc", false);
+		SmartDashboard::PutBoolean("Feed Disc", false);
 	}
 }
 
 void Launcher::reportLaunchPower()
 {
-	SmartDashboard::PutNumber(	"Launch Speed",
+	SmartDashboard::PutNumber(	"Launcher Power",
 								launcher.getLaunchMotor() );
 }

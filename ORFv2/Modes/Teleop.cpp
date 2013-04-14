@@ -107,7 +107,7 @@ void Robot::OperatorControl()
 		
 		// LCD & SmartDashboard stuff. YAY?!
 		bool hasFMS = ds->IsFMSAttached();
-		SmartDashboard::PutBoolean("FMS Connected", hasFMS);
+		SmartDashboard::PutBoolean("FMS", hasFMS);
 		launcher.reportLaunchPower();
 		driveBase.reportTotalPower();
 		driveBase.reportTotalRotation();

@@ -172,12 +172,12 @@ float DriveBase::getRearRMotor()
 
 void DriveBase::reportTotalPower()
 {
-	SmartDashboard::PutNumber(	"Total Power",
+	SmartDashboard::PutNumber(	"Linear Output",
 								driveBase.getDrivePower() );
 }
 void DriveBase::reportTotalRotation()
 {
-	SmartDashboard::PutNumber(	"Total Rotation",
+	SmartDashboard::PutNumber(	"Rotation Output",
 								driveBase.getDriveRotation() );
 }
 

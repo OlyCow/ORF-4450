@@ -29,10 +29,10 @@ const float g_lowBatteryThreshold = 10.0; //volts
 
 
 // For the Smart Dashboard "LEDs".
-const string g_disabledMode		= " Disabled ";
-const string g_autonomousMode	= "Autonomous";
-const string g_teleopMode		= "  Teleop  ";
-const string g_testMode			= "   Test   ";
+const string g_disabledMode		= "Disabled";
+const string g_autonomousMode	= "Auto";
+const string g_teleopMode		= "Teleop";
+const string g_testMode			= "Test";
 
 const string g_programHeader = "Program: ";
 const string g_batteryHeader = "Battery: ";

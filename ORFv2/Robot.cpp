@@ -29,13 +29,8 @@ void Robot::RobotInit()
 	driveBase.reportTotalRotation();
 	
 	bool hasFMS = ds->IsFMSAttached();
-	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
-	SmartDashboard::PutBoolean("Feeding Disc", false);
-	
-	//THIS IS A TEST!
-	SmartDashboard::GetBoolean("Test: bool input");
-	SmartDashboard::GetString("Test: string input");
-	SmartDashboard::GetNumber("Test: double input");
+	SmartDashboard::PutBoolean("FMS", hasFMS);
+	SmartDashboard::PutBoolean("Feed Disc", false);
 	
 	
 	srand(time(0));
@@ -56,8 +51,8 @@ void Robot::Disabled()
 	driveBase.reportTotalRotation();
 
 	bool hasFMS = ds->IsFMSAttached();
-	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
-	SmartDashboard::PutBoolean("Feeding Disc", false);
+	SmartDashboard::PutBoolean("FMS", hasFMS);
+	SmartDashboard::PutBoolean("Feed Disc", false);
 	
 	
 	cRIO->insightBattery.setData(ds->GetBatteryVoltage());

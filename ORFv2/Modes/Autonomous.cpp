@@ -9,7 +9,7 @@ void Robot::Autonomous()
 	cRIO->insight.pauseDisplay();
 	
 	bool hasFMS = ds->IsFMSAttached();
-	SmartDashboard::PutBoolean("FMS Connected", hasFMS);
+	SmartDashboard::PutBoolean("FMS", hasFMS);
 	launcher.reportLaunchPower();
 	
 	LCD::ConsoleLog("Initializing launcher motor...");
