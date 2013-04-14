@@ -104,14 +104,17 @@ void Launcher::feedDiscs(int discNumber, float interval)
 
 	if (discNumber==1)
 		interval = 0;
+	else
+		interval = 2*(g_maxPower-getLaunchMotor()); //2 is arbitrary
 
-	for (int i=1; i<=discNumber; i++)
+	for (int i=0; i<discNumber; i++)
 	{
 		SmartDashboard::PutBoolean("Feed Disc", true);
 		while(getFeederLimitSwitch()==0)
 			setFeederMotor(g_feederPower);
-		Wait(interval);
 		setFeederMotor(0);
+		if (i != discNumber)
+			Wait(interval);
 		SmartDashboard::PutBoolean("Feed Disc", false);
 	}
 }
