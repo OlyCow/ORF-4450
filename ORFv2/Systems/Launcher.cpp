@@ -101,11 +101,14 @@ float Launcher::getFeederMotor()
 void Launcher::feedDiscs(int discNumber, float interval)
 {
 	setFeederMotor(0);
+	
+	float originalLaunchPower = getLaunchMotor();
 
 	if (discNumber==1)
 		interval = 0;
-	else
-		interval = 2*(g_maxPower-getLaunchMotor()); //2 is arbitrary
+	else if (	originalLaunchPower <
+				g_maxPower-g_launchInitRequired )
+		interval = 2*(g_maxPower-originalLaunchPower); //2 is arbitrary
 
 	for (int i=0; i<discNumber; i++)
 	{
@@ -114,7 +117,11 @@ void Launcher::feedDiscs(int discNumber, float interval)
 			setFeederMotor(g_feederPower);
 		setFeederMotor(0);
 		if (i != discNumber)
+		{
+			setLaunchMotor(g_maxPower);
 			Wait(interval);
+			setLaunchMotor(originalLaunchPower);
+		}
 		SmartDashboard::PutBoolean("Feed Disc", false);
 	}
 }

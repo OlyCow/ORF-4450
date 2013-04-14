@@ -31,6 +31,7 @@
 
 #include "Systems/DriveBase.h"
 #include "Systems/Launcher.h"
+#include "Systems/Decor.h"
 
 #include "Robot.h"
 

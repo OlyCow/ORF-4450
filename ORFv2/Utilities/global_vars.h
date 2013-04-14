@@ -7,6 +7,10 @@
 
 const int THE_ANSWER = 42;
 
+const int g_decorNumber = 25; //number on the Dashboard
+
+
+
 const float g_expiration = 0.10; //seconds
 
 const float g_teleopLoopInterval = 0.025; //seconds
@@ -21,7 +25,7 @@ const float g_halfPower = 0.50; //% power
 const float g_rampPower = 0.80; //% power
 const float g_feederPower = 0.50; //% power
 
-const float g_pyramidLauncherPower = 0.75; //% power
+const float g_pyramidLauncherPower = 0.5; //% power
 const float g_crossCourtLauncherPower = 1.00; //% power
 
 

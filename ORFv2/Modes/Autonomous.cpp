@@ -8,22 +8,13 @@ void Robot::Autonomous()
 	ModeStart(true);
 	cRIO->insight.pauseDisplay();
 	
-	bool hasFMS = ds->IsFMSAttached();
-	SmartDashboard::PutBoolean("FMS", hasFMS);
-	launcher.reportLaunchPower();
-	
 	LCD::ConsoleLog("Initializing launcher motor...");
 	launcher.setLaunchMotor(g_maxPower);
-	launcher.reportLaunchPower();
 	
 	Wait(g_launchInitTime);
 	LCD::ConsoleLog("Shooting frisbees...");
-	launcher.reportLaunchPower();
-	
-	launcher.shoot(g_maxPower, 3); // 3 frisbees
-	launcher.reportLaunchPower();
+	launcher.shoot(g_pyramidLauncherPower, 3); // 3 frisbees
 	
 	LCD::ConsoleLog("Awaiting teleop...");
-	
 	ModeEnd();
 }

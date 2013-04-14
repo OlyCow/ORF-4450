@@ -15,6 +15,7 @@ Robot::Robot():
 	
 	static DriveBase driveBase(this);
 	static Launcher launcher(this);
+	static Decor decor(this);
 	
 	ModeEnd();
 }
