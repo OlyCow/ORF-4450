@@ -7,7 +7,8 @@ Robot::Robot():
 	ds(DriverStation::GetInstance()),
 	camera(AxisCamera::GetInstance(g_cameraIP.c_str())),
 	cRIO(),
-	monitorBatteryTask("MonitorBattery", (FUNCPTR) MonitorBattery)
+	monitorBattery("MonitorBattery", (FUNCPTR) MonitorBattery),
+	monitorStatus("MonitorStatus", (FUNCPTR) MonitorStatus)
 {
 	this->mode_name = "Constructor";
 	ModeStart(false);
@@ -24,10 +25,6 @@ void Robot::RobotInit()
 	ModeStart(false);
 	
 	
-	launcher.reportLaunchPower();
-	driveBase.reportTotalPower();
-	driveBase.reportTotalRotation();
-	
 	bool hasFMS = ds->IsFMSAttached();
 	SmartDashboard::PutBoolean("FMS", hasFMS);
 	SmartDashboard::PutBoolean("Feed Disc", false);
@@ -35,10 +32,11 @@ void Robot::RobotInit()
 	SmartDashboard::PutString("Program:", g_programName);
 	SmartDashboard::PutString("Robot IP:", g_robotIP);
 	
+	monitorBattery.Start((UINT32) ds);
+	monitorStatus.Start((UINT32) ds);
 	
 	srand(time(0));
 	
-	monitorBatteryTask.Start((UINT32) ds);
 	
 	ModeEnd();
 }
@@ -47,11 +45,6 @@ void Robot::Disabled()
 {
 	this->mode_name = g_disabledMode;
 	ModeStart(true);
-
-
-	launcher.reportLaunchPower();
-	driveBase.reportTotalPower();
-	driveBase.reportTotalRotation();
 
 	bool hasFMS = ds->IsFMSAttached();
 	SmartDashboard::PutBoolean("FMS", hasFMS);
@@ -113,16 +106,13 @@ void Robot::MonitorBattery(int dsPointer)
 	ds = (DriverStation*) dsPointer;
 	
 	bool batteryOK		= true;
-	bool isAlarmLEDOn	= false;
 	float voltage		= ds->GetBatteryVoltage();
 	string message		= "Voltage: ";
 	
 	SmartDashboard::PutBoolean("Low Battery", !(batteryOK));
 	
 	
-	// Checks battery voltage every 5 seconds.
-	// Drops out when battery goes below the threshold.
-	while (batteryOK)
+	while (true)
 	{
 		voltage = ds->GetBatteryVoltage();
 		if (voltage < g_lowBatteryThreshold)
@@ -132,18 +122,36 @@ void Robot::MonitorBattery(int dsPointer)
 		LCD::PrintLine(LINE_BATTERY, message);
 		if (rand()%12==0) //12*5= once per 60 sec
 			LCD::PrintEasterEgg();
-		Wait(5.0);
+		
+		if (batteryOK == false)
+		{
+			LCD::ConsoleLog("***WARNING***: LOW BATTERY!!!");
+			SmartDashboard::PutBoolean("Low Battery", true);
+			Wait(g_LEDFlashDuration);
+			SmartDashboard::PutBoolean("Low Battery", false);
+			Wait(g_LEDFlashDuration);
+		}
+		
+		Wait(g_teleopLoopInterval);
 	}
+}
+void Robot::MonitorStatus(int dsPointer)
+{
+	LCD::ConsoleLog("Start: MonitorStatus");
+		
+	DriverStation	*ds;
+	ds = (DriverStation*) dsPointer;
 	
 	while (true)
 	{
-		LCD::ConsoleLog("***WARNING***: LOW BATTERY!!!");
-		isAlarmLEDOn = true;
-		SmartDashboard::PutBoolean("Low Battery", isAlarmLEDOn);
-		Wait(1.0);
-		isAlarmLEDOn = false;
-		SmartDashboard::PutBoolean("Low Battery", isAlarmLEDOn);
-		Wait(1.0);
+		SmartDashboard::PutNumber(	"Launcher Power",
+									launcher.getLaunchMotor() );
+		SmartDashboard::PutNumber(	"Linear Output",
+									driveBase.getDrivePower() );
+		SmartDashboard::PutNumber(	"Rotation Output",
+									driveBase.getDriveRotation() );
+		SmartDashboard::PutBoolean("FMS", ds->IsFMSAttached());
+		Wait(g_teleopLoopInterval);
 	}
 }
 

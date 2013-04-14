@@ -131,7 +131,7 @@ void InsightLT::manualScroll(int zone, char direction)
  */
 bool InsightLT::registerData(DisplayData &data, int zoneNumber)
 {
-	if(zoneNumber < 1 || zoneNumber > m_zones.size())
+	if(zoneNumber < 1 || zoneNumber > (int)m_zones.size())
 	{
 		return false;
 	}

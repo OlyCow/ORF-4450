@@ -15,19 +15,13 @@ Launcher::~Launcher()
 
 void Launcher::shoot(float power, int shots)
 {
-	launcher.reportLaunchPower();
-	
 	float originalLaunchPower = getLaunchMotor();
 	if (power-originalLaunchPower>g_launchInitRequired)
 		Wait(g_launchInitTime);
-	launcher.reportLaunchPower();
 	
 	setLaunchMotor(power);
-	launcher.reportLaunchPower();
-	
 	feedDiscs(shots);
 	setLaunchMotor(originalLaunchPower);
-	launcher.reportLaunchPower();
 }
 void Launcher::maxHeight(float power)
 {
@@ -120,10 +114,4 @@ void Launcher::feedDiscs(int discNumber, float interval)
 		setFeederMotor(0);
 		SmartDashboard::PutBoolean("Feed Disc", false);
 	}
-}
-
-void Launcher::reportLaunchPower()
-{
-	SmartDashboard::PutNumber(	"Launcher Power",
-								launcher.getLaunchMotor() );
 }

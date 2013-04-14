@@ -17,8 +17,6 @@ void Robot::OperatorControl()
 		this->cRIO->driveRearRMotor.Flip();
 	}
 	
-	const float teleopLoopInterval = 0.025; //seconds
-	
 	float angle = 0;
 	float power = 0;
 	float rotation = 0;
@@ -125,11 +123,12 @@ void Robot::OperatorControl()
 		
 		
 		// LCD & SmartDashboard stuff. YAY?!
-		bool hasFMS = ds->IsFMSAttached();
-		SmartDashboard::PutBoolean("FMS", hasFMS);
-		launcher.reportLaunchPower();
-		driveBase.reportTotalPower();
-		driveBase.reportTotalRotation();
+		SmartDashboard::PutNumber("Height", heightPower);
+		SmartDashboard::PutNumber("Rotation", rotation*100);
+		SmartDashboard::PutNumber(	"Move X",
+									driveBase.getDriveXMagnitude());
+		SmartDashboard::PutNumber(	"Move Y",
+									driveBase.getDriveYMagnitude());
 		
 		string LCD_netOutput = "Total Output: ";
 		float frontL = driveBase.getFrontLMotor();
@@ -169,7 +168,7 @@ void Robot::OperatorControl()
 		
 		
 		
-		Wait(teleopLoopInterval);
+		Wait(g_teleopLoopInterval);
 	}
 	
 	

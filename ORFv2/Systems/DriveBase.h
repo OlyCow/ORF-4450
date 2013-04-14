@@ -42,9 +42,6 @@ public:
 	float getFrontRMotor();
 	float getRearLMotor();
 	float getRearRMotor();
-	
-	void reportTotalPower();
-	void reportTotalRotation();
 
 
 private:

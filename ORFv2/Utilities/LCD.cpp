@@ -7,9 +7,14 @@ DriverStationLCD* LCD::dsLCD = 0;
 
 LCD::LCD()
 {
+	InitLCD();
+	for (int i=0; i<6; i++)
+		ClearLine(i);
 }
 LCD::~LCD()
 {
+	for (int i=0; i<6; i++)
+		ClearLine(i);
 }
 
 template <typename Type>

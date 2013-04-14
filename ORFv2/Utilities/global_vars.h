@@ -9,6 +9,8 @@ const int THE_ANSWER = 42;
 
 const float g_expiration = 0.10; //seconds
 
+const float g_teleopLoopInterval = 0.025; //seconds
+
 const float g_joystickDeadZone = 0.05; //% power
 const float g_joystickDeadZone_rotation = 0.1; //% power
 
@@ -29,6 +31,8 @@ const float g_launchInitRequired = 0.15; //% power
 const float g_launchInitTime = 1.0; //seconds
 
 const float g_lowBatteryThreshold = 10.0; //volts
+
+const float g_LEDFlashDuration = 1.0; //seconds
 
 
 

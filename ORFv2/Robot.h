@@ -11,7 +11,8 @@ public:
 		DriverStation::Alliance		alliance;
 	AxisCamera		&camera;
 	wiring			*cRIO;
-	Task			monitorBatteryTask;
+	Task			monitorBattery,
+					monitorStatus;
 	string			mode_name;
 
 	Robot();
@@ -28,6 +29,7 @@ private:
 	void ModeEnd();
 	// Runs as task.
 	static void MonitorBattery(int dsPointer);
+	static void MonitorStatus(int dsPointer);
 };
 
 
