@@ -22,11 +22,13 @@ const float g_fineTuneFactor = 4;
 
 const float g_maxPower = 1.00; //% power
 const float g_halfPower = 0.50; //% power
-const float g_rampPower = 0.80; //% power
-const float g_feederPower = 0.50; //% power
+const float g_rampPower = 0.65; //% power
+const float g_feederPower = 1.00; //% power
 
-const float g_pyramidLauncherPower = 0.5; //% power
-const float g_crossCourtLauncherPower = 1.00; //% power
+const float g_pyramidLaunchPowerHigh = 0.79; //% power
+const float g_pyramidLaunchPowerMid = 0.75; //% power
+const float g_crossCourtLaunchPowerHigh = 1.00; //% power
+const float g_crossCourtLaunchPowerMid = 1.00; //% power
 
 
 const float g_shootInterval = 3.0; //seconds

@@ -57,6 +57,7 @@ void Robot::OperatorControl()
 		if (	cRIO->rotateStick.GetRawButton(BUTTON_TRIGGER)
 				==true	)
 			rotation /= g_fineTuneFactor;
+		rotation = limit(rotation,-g_maxPower, g_maxPower);
 		
 		driveBase.polarSetDriveBase(angle, power, rotation);
 		
@@ -65,14 +66,19 @@ void Robot::OperatorControl()
 		launcherPower = 0;
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_LEFT)
 				==true )
-			launcherPower = g_pyramidLauncherPower;
+			launcherPower = g_crossCourtLaunchPowerMid;
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_REAR_RIGHT)
 				==true )
-			launcherPower = g_crossCourtLauncherPower;
+			launcherPower = g_crossCourtLaunchPowerHigh;
+		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT_REAR)
+				==true )
+			launcherPower = g_pyramidLaunchPowerHigh;
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_LEFT_REAR)
 				==true )
 			launcherPower = 0;
 		launcherPower += SmartDashboard::GetNumber("Set Launcher")/100;
+		launcherPower += cRIO->launcherStick.GetThrottle();
+		launcherPower = limit(launcherPower,-g_maxPower, g_maxPower);
 		cRIO->launchMotor.Set(launcherPower);
 		
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_TRIGGER)
@@ -109,6 +115,7 @@ void Robot::OperatorControl()
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_CENTER)
 				==true	)
 			heightPower /= g_fineTuneFactor;
+		heightPower = limit(heightPower,-g_maxPower, g_maxPower);
 		cRIO->heightMotor.Set(heightPower);
 		
 		rampPower = 0;
@@ -118,6 +125,7 @@ void Robot::OperatorControl()
 		if (	cRIO->launcherStick.GetRawButton(BUTTON_RIGHT)
 				==true	)
 			rampPower = -g_rampPower;
+		rampPower = limit(rampPower,-g_maxPower, g_maxPower);
 		cRIO->rampMotor.Set(rampPower);
 		
 		
