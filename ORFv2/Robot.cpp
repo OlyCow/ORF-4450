@@ -133,7 +133,7 @@ void Robot::MonitorBattery(int dsPointer)
 			Wait(g_LEDFlashDuration);
 		}
 		
-		Wait(g_teleopLoopInterval);
+		Wait(100*g_teleopLoopInterval);
 	}
 }
 void Robot::MonitorStatus(int dsPointer)

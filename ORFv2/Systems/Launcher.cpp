@@ -15,6 +15,7 @@ Launcher::~Launcher()
 
 void Launcher::shoot(float power, int shots)
 {
+	robot->cRIO->watchdog.SetEnabled(false);
 	float originalLaunchPower = getLaunchMotor();
 	if (power-originalLaunchPower>g_launchInitRequired)
 		Wait(g_launchInitTime);
@@ -24,6 +25,7 @@ void Launcher::shoot(float power, int shots)
 		Wait(g_teleopLoopInterval);
 	feedDiscs(shots);
 	setLaunchMotor(originalLaunchPower);
+	robot->cRIO->watchdog.SetEnabled(true);
 }
 void Launcher::maxHeight(float power)
 {
@@ -112,6 +114,7 @@ void Launcher::feedDiscs(int discNumber, float interval)
 				g_maxPower-g_launchInitRequired )
 		interval = 2*(g_maxPower-originalLaunchPower); //2 is arbitrary
 
+	robot->cRIO->watchdog.SetEnabled(false);
 	for (int i=0; i<discNumber; i++)
 	{
 		SmartDashboard::PutBoolean("Feed Disc", true);
@@ -126,4 +129,5 @@ void Launcher::feedDiscs(int discNumber, float interval)
 		}
 		SmartDashboard::PutBoolean("Feed Disc", false);
 	}
+	robot->cRIO->watchdog.SetEnabled(true);
 }

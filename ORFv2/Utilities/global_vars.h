@@ -11,9 +11,9 @@ const int g_decorNumber = 25; //number on the Dashboard
 
 
 
-const float g_expiration = 0.10; //seconds
+const float g_expiration = 0.15; //seconds
 
-const float g_teleopLoopInterval = 0.025; //seconds
+const float g_teleopLoopInterval = 0.02; //seconds
 
 const float g_joystickDeadZone = 0.05; //% power
 const float g_joystickDeadZone_rotation = 0.1; //% power
