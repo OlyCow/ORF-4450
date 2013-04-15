@@ -20,6 +20,8 @@ void Launcher::shoot(float power, int shots)
 		Wait(g_launchInitTime);
 	
 	setLaunchMotor(power);
+	while(this->robot->ds->IsDisabled() == true)
+		Wait(g_teleopLoopInterval);
 	feedDiscs(shots);
 	setLaunchMotor(originalLaunchPower);
 }

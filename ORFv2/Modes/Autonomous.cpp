@@ -16,5 +16,10 @@ void Robot::Autonomous()
 	launcher.shoot(g_pyramidLaunchPowerHigh, 3); // 3 frisbees
 	
 	LCD::ConsoleLog("Awaiting teleop...");
+	
+	decor.flash(0.5, 0.2, 3);
+	for(int i=0; i<3; i++)
+		decor.flow(5, 0.1);
+	
 	ModeEnd();
 }
